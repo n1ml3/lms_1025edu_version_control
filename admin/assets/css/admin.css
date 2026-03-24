@@ -207,6 +207,7 @@ a:hover { color: var(--primary); }
 .sidebar-collapsed .brand-text,
 .sidebar-collapsed .sidebar-link span,
 .sidebar-collapsed .sidebar-arrow,
+.sidebar-collapsed .sidebar-section,
 .sidebar-collapsed .sidebar-submenu { display: none; }
 
 .sidebar-collapsed .brand-icon { margin: auto; }

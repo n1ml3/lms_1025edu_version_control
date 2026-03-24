@@ -122,10 +122,12 @@ function isParentActive(array $item, string $activePage): bool
 
     <div class="sidebar-nav">
         <?php foreach ($navItems as $item): ?>
-            <?php if (isset($item['section'])): ?>
-                <div class="sidebar-section"><?= $item['section'] ?></div>
-                <?php continue; ?>
-            <?php endif; ?>
+            <?php 
+            if (isset($item['section'])) {
+                echo '<div class="sidebar-section">' . htmlspecialchars($item['section']) . '</div>';
+                continue;
+            }
+            ?>
 
             <?php
             $hasChildren  = !empty($item['children']);

@@ -33,8 +33,8 @@ require_once __DIR__ . '/includes/header.php';
 require_once __DIR__ . '/includes/sidebar.php';
 ?>
 
-<div class="main-area">
-    <?php /* Topbar already rendered in header.php */ ?>
+<div class="main-area" id="mainArea">
+    <?php require_once __DIR__ . '/includes/topbar.php'; ?>
     <main class="page-content">
 
         <!-- Alert Banners -->
@@ -186,27 +186,6 @@ require_once __DIR__ . '/includes/sidebar.php';
 
 <?php
 $extraScripts = ['/lms1025edu/admin/assets/js/dashboard.js'];
-$inlineScript = <<<'JS'
-$(function () {
-    // Init revenue chart
-    initDashboardCharts();
-
-    // Filter AJAX
-    $('#btnFilter, #btnRefreshStats').on('click', function () {
-        const data = {
-            branch:   $('#filterBranch').val(),
-            source:   $('#filterSource').val(),
-            staff:    $('#filterStaff').val(),
-            dateFrom: $('#filterDateFrom').val(),
-            dateTo:   $('#filterDateTo').val(),
-        };
-        lmsAjax('/lms1025edu/admin/api/dashboard_stats.php', data, function (res) {
-            lmsToast('success', 'Đã cập nhật thống kê!');
-            // TODO: update mini stat values from res
-        });
-    });
-});
-JS;
 
 require_once __DIR__ . '/includes/footer.php';
 ?>

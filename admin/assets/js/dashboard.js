@@ -77,3 +77,22 @@ window.initDashboardCharts = function (revenueData) {
         }
     });
 };
+
+$(function () {
+    // Filter AJAX
+    $('#btnFilter, #btnRefreshStats').on('click', function () {
+        const data = {
+            branch:   $('#filterBranch').val(),
+            source:   $('#filterSource').val(),
+            staff:    $('#filterStaff').val(),
+            dateFrom: $('#filterDateFrom').val(),
+            dateTo:   $('#filterDateTo').val(),
+        };
+        if (typeof lmsAjax === 'function') {
+            lmsAjax('/lms1025edu/admin/api/dashboard_stats.php', data, function (res) {
+                if (typeof lmsToast === 'function') lmsToast('success', 'Đã cập nhật thống kê!');
+                // TODO: update mini stat values from res
+            });
+        }
+    });
+});
