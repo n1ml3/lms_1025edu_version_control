@@ -4,20 +4,6 @@ require_once __DIR__ . '/../../layouts/sidebar.php';
 
 $pageAction = <<<HTML
 <button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalClass" onclick="resetClassForm()">
-    <i class='bx bx-plus'></i> Thêm Lớp Học
-</button>
-HTML;
-?>
-
-// Fetch Programs & Teachers for Modal
-$programs = $pdo->query("SELECT id, name FROM programs ORDER BY name ASC")->fetchAll();
-$teachers = $pdo->query("SELECT id, name FROM teachers WHERE is_active = 1 ORDER BY name ASC")->fetchAll();
-
-require_once __DIR__ . '/../../layouts/header.php';
-require_once __DIR__ . '/../../layouts/sidebar.php';
-
-$pageAction = <<<HTML
-<button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalClass" onclick="resetClassForm()">
     <i class='bx bx-plus'></i> Thêm Lớp
 </button>
 HTML;

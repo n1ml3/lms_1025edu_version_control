@@ -21,12 +21,12 @@ try {
             $name = trim($input['name'] ?? '');
             $email = trim($input['email'] ?? '');
             $phone = trim($input['phone'] ?? '');
-            $subject = trim($input['subject'] ?? '');
+            $bio = trim($input['bio'] ?? '');
 
             if (!$name) throw new Exception('Tên giảng viên là bắt buộc.');
 
-            $stmt = $pdo->prepare("INSERT INTO teachers (name, email, phone, subject, created_at) VALUES (?,?,?,?, NOW())");
-            $stmt->execute([$name, $email, $phone, $subject]);
+            $stmt = $pdo->prepare("INSERT INTO teachers (name, email, phone, bio) VALUES (?,?,?,?)");
+            $stmt->execute([$name, $email, $phone, $bio]);
             echo json_encode(['success' => true, 'id' => $pdo->lastInsertId()]);
             break;
 
@@ -35,12 +35,12 @@ try {
             $name = trim($input['name'] ?? '');
             $email = trim($input['email'] ?? '');
             $phone = trim($input['phone'] ?? '');
-            $subject = trim($input['subject'] ?? '');
+            $bio = trim($input['bio'] ?? '');
 
             if (!$id || !$name) throw new Exception('Dữ liệu không hợp lệ.');
 
-            $stmt = $pdo->prepare("UPDATE teachers SET name=?, email=?, phone=?, subject=? WHERE id=?");
-            $stmt->execute([$name, $email, $phone, $subject, $id]);
+            $stmt = $pdo->prepare("UPDATE teachers SET name=?, email=?, phone=?, bio=? WHERE id=?");
+            $stmt->execute([$name, $email, $phone, $bio, $id]);
             echo json_encode(['success' => true]);
             break;
 

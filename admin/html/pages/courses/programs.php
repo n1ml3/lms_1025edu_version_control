@@ -8,13 +8,6 @@ $pageAction = <<<HTML
 </button>
 HTML;
 ?>
-
-$pageAction = <<<HTML
-<button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalProgram" onclick="resetProgramForm()">
-    <i class='bx bx-plus'></i> Thêm Chương Trình
-</button>
-HTML;
-?>
 <div class="main-area">
     <?php require_once __DIR__ . '/../../layouts/topbar.php'; ?>
     <main class="page-content">
@@ -36,7 +29,7 @@ HTML;
                             <td class="fs-13 text-muted"><?= $i+1 ?></td>
                             <td class="fw-semibold"><?= htmlspecialchars($p['name']) ?></td>
                             <td><?= htmlspecialchars($p['course_name'] ?? '—') ?></td>
-                            <td><?= $p['sort_order'] ?? 0 ?></td>
+                            <td><?= $p['order'] ?? 0 ?></td>
                             <td>
                                 <button class="btn-icon" onclick="editProgram(<?= htmlspecialchars(json_encode($p)) ?>)">
                                     <i class='bx bx-edit'></i>
@@ -81,7 +74,7 @@ HTML;
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Thứ tự hiển thị</label>
-                    <input type="number" class="form-control" name="sort_order" value="1" min="1">
+                    <input type="number" class="form-control" name="order" value="1" min="1">
                 </div>
             </div>
             <div class="modal-footer">
@@ -106,7 +99,7 @@ function editProgram(data) {
     $('#programModalTitle').text('Sửa Chương Trình');
     $('[name="course_id"]').val(data.course_id);
     $('[name="name"]').val(data.name);
-    $('[name="sort_order"]').val(data.sort_order);
+    $('[name="order"]').val(data.order);
     $('#modalProgram').modal('show');
 }
 

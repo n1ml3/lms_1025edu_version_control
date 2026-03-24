@@ -15,21 +15,21 @@ $staff   = $input['staff']    ?? '';
 $from    = $input['dateFrom'] ?? date('Y-m-01');
 $to      = $input['dateTo']   ?? date('Y-m-d');
 
-// Build WHERE conditions
-$where = "WHERE DATE(l.created_at) BETWEEN :from AND :to";
-$params = [':from' => $from, ':to' => $to];
-
-if ($branch) { $where .= " AND l.branch_id = :branch"; $params[':branch'] = $branch; }
-if ($source)  { $where .= " AND l.source_id = :source"; $params[':source'] = $source; }
-if ($staff)   { $where .= " AND l.staff_id  = :staff";  $params[':staff']  = $staff; }
-
 try {
+    // Build WHERE conditions for Leads
+    $where = "WHERE DATE(l.created_at) BETWEEN :from AND :to";
+    $params = [':from' => $from, ':to' => $to];
+    
+    if ($branch) { $where .= " AND l.branch_id = :branch"; $params[':branch'] = $branch; }
+    if ($source)  { $where .= " AND l.source_id = :source"; $params[':source'] = $source; }
+    if ($staff)   { $where .= " AND l.staff_id  = :staff";  $params[':staff']  = $staff; }
+
     // Leads count
     $stmt = $pdo->prepare("SELECT COUNT(*) FROM leads l $where");
     $stmt->execute($params);
     $leads = $stmt->fetchColumn();
 
-    // Orders & Revenue (uses order date range, not lead)
+    // Orders & Revenue
     $orderWhere  = "WHERE DATE(created_at) BETWEEN :from AND :to";
     $orderParams = [':from' => $from, ':to' => $to];
     if ($branch) { $orderWhere .= " AND branch_id = :branch"; $orderParams[':branch'] = $branch; }
@@ -54,6 +54,6 @@ try {
         'rev_expected'=> (float) $revExpected,
     ]);
 } catch (Exception $e) {
-    http_response_code(500);
-    echo json_encode(['error' => $e->getMessage()]);
+    http_response_code(400);
+    echo json_encode(['success' => false, 'error' => $e->getMessage()]);
 }

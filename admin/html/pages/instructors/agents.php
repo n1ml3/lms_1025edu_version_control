@@ -8,13 +8,6 @@ $pageAction = <<<HTML
 </button>
 HTML;
 ?>
-
-$pageAction = <<<HTML
-<button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalAgent" onclick="resetAgentForm()">
-    <i class='bx bx-plus'></i> Thêm Đại Lý
-</button>
-HTML;
-?>
 <div class="main-area">
     <?php require_once __DIR__ . '/../../layouts/topbar.php'; ?>
     <main class="page-content">

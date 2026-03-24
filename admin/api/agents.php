@@ -19,26 +19,26 @@ try {
 
         case 'create':
             $name = trim($input['name'] ?? '');
-            $type = trim($input['type'] ?? 'consultant');
-            $status = trim($input['status'] ?? 'active');
+            $phone = trim($input['phone'] ?? '');
+            $commission_rate = (float)($input['commission_rate'] ?? 10.00);
 
             if (!$name) throw new Exception('Tên Agent là bắt buộc.');
 
-            $stmt = $pdo->prepare("INSERT INTO agents (name, type, status, created_at) VALUES (?,?,?, NOW())");
-            $stmt->execute([$name, $type, $status]);
+            $stmt = $pdo->prepare("INSERT INTO agents (name, phone, commission_rate) VALUES (?,?,?)");
+            $stmt->execute([$name, $phone, $commission_rate]);
             echo json_encode(['success' => true, 'id' => $pdo->lastInsertId()]);
             break;
 
         case 'update':
             $id = (int)($input['id'] ?? 0);
             $name = trim($input['name'] ?? '');
-            $type = trim($input['type'] ?? 'consultant');
-            $status = trim($input['status'] ?? 'active');
+            $phone = trim($input['phone'] ?? '');
+            $commission_rate = (float)($input['commission_rate'] ?? 10.00);
 
             if (!$id || !$name) throw new Exception('Dữ liệu không hợp lệ.');
 
-            $stmt = $pdo->prepare("UPDATE agents SET name=?, type=?, status=? WHERE id=?");
-            $stmt->execute([$name, $type, $status, $id]);
+            $stmt = $pdo->prepare("UPDATE agents SET name=?, phone=?, commission_rate=? WHERE id=?");
+            $stmt->execute([$name, $phone, $commission_rate, $id]);
             echo json_encode(['success' => true]);
             break;
 

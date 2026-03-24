@@ -38,13 +38,21 @@ try {
 
         case 'update':
             $id = (int)($input['id'] ?? 0);
+            $code = strtoupper(trim($input['code'] ?? ''));
+            $type = $input['type'] ?? 'percent';
+            $value = (float)($input['value'] ?? 0);
             $usage_limit = !empty($input['usage_limit']) ? (int)$input['usage_limit'] : null;
             $expires_at = !empty($input['expires_at']) ? $input['expires_at'] : null;
 
-            if (!$id) throw new Exception('ID là bắt buộc');
+            if (!$id || !$code || $value <= 0) throw new Exception('Dữ liệu không hợp lệ.');
 
-            $stmt = $pdo->prepare("UPDATE coupons SET usage_limit=?, expires_at=? WHERE id=?");
-            $stmt->execute([$usage_limit, $expires_at, $id]);
+            // Check duplicate code (excluding self)
+            $chk = $pdo->prepare("SELECT id FROM coupons WHERE code = ? AND id != ?");
+            $chk->execute([$code, $id]);
+            if ($chk->fetch()) throw new Exception('Mã giảm giá này đã tồn tại.');
+
+            $stmt = $pdo->prepare("UPDATE coupons SET code=?, type=?, value=?, usage_limit=?, expires_at=? WHERE id=?");
+            $stmt->execute([$code, $type, $value, $usage_limit, $expires_at, $id]);
             echo json_encode(['success' => true]);
             break;
 

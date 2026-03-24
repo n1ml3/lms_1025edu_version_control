@@ -1,6 +1,6 @@
 <?php
 /**
- * API: Products CRUD
+ * API: Lead Sources CRUD
  */
 require_once __DIR__ . '/../../admin/includes/auth_check.php';
 require_once __DIR__ . '/../../config/db.php';
@@ -13,43 +13,33 @@ $action = $input['action'] ?? $_GET['action'] ?? 'list';
 try {
     switch ($action) {
         case 'list':
-            $stmt = $pdo->query("SELECT * FROM products ORDER BY name ASC");
+            $stmt = $pdo->query("SELECT * FROM lead_sources ORDER BY name ASC");
             echo json_encode(['success' => true, 'data' => $stmt->fetchAll()]);
             break;
 
         case 'create':
             $name = trim($input['name'] ?? '');
-            $price = (float)($input['price'] ?? 0);
-            $stock = (int)($input['stock'] ?? 0);
-            $image = trim($input['image'] ?? '');
-            $description = trim($input['description'] ?? '');
+            if (!$name) throw new Exception('Tên nguồn là bắt buộc.');
 
-            if (!$name) throw new Exception('Tên sản phẩm là bắt buộc.');
-
-            $stmt = $pdo->prepare("INSERT INTO products (name, price, stock, image, description, created_at) VALUES (?,?,?,?,?, NOW())");
-            $stmt->execute([$name, $price, $stock, $image, $description]);
+            $stmt = $pdo->prepare("INSERT INTO lead_sources (name) VALUES (?)");
+            $stmt->execute([$name]);
             echo json_encode(['success' => true, 'id' => $pdo->lastInsertId()]);
             break;
 
         case 'update':
             $id = (int)($input['id'] ?? 0);
             $name = trim($input['name'] ?? '');
-            $price = (float)($input['price'] ?? 0);
-            $stock = (int)($input['stock'] ?? 0);
-            $image = trim($input['image'] ?? '');
-            $description = trim($input['description'] ?? '');
-
             if (!$id || !$name) throw new Exception('Dữ liệu không hợp lệ.');
 
-            $stmt = $pdo->prepare("UPDATE products SET name=?, price=?, stock=?, image=?, description=? WHERE id=?");
-            $stmt->execute([$name, $price, $stock, $image, $description, $id]);
+            $stmt = $pdo->prepare("UPDATE lead_sources SET name=? WHERE id=?");
+            $stmt->execute([$name, $id]);
             echo json_encode(['success' => true]);
             break;
 
         case 'delete':
             $id = (int)($input['id'] ?? 0);
             if (!$id) throw new Exception('ID là bắt buộc');
-            $pdo->prepare("DELETE FROM products WHERE id=?")->execute([$id]);
+            $pdo->prepare("DELETE FROM lead_sources WHERE id=?")->execute([$id]);
             echo json_encode(['success' => true]);
             break;
 
