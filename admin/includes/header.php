@@ -29,14 +29,11 @@ $pageTitle = $pageTitle ?? 'Dashboard';
     <!-- Admin CSS -->
     <link href="/lms1025edu/admin/assets/css/admin.css" rel="stylesheet">
 </head>
-<body>
+<body class="sidebar-collapsed">
 <div class="admin-wrapper">
     <!-- Topbar -->
     <header class="topbar" id="topbar">
         <div class="topbar-left">
-            <button class="sidebar-toggle-btn" id="sidebarToggle" title="Toggle Sidebar">
-                <i class='bx bx-menu'></i>
-            </button>
             <nav aria-label="breadcrumb" class="d-none d-md-block">
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="/lms1025edu/admin/index.php">Dashboard</a></li>

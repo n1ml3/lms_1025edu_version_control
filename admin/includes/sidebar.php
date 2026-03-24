@@ -101,8 +101,8 @@ function isParentActive(array $item, string $activePage): bool
 <aside class="sidebar" id="sidebar">
     <!-- Logo -->
     <div class="sidebar-brand">
-        <div class="brand-icon">
-            <i class='bx bx-graduation'></i>
+        <div class="brand-icon" style="background: transparent;">
+            <img src="/lms1025edu/admin/assets/images/logo-2.png" alt="Logo" style="width: 100%; height: 100%; object-fit: contain;">
         </div>
         <div class="brand-text">
             <span class="brand-name">LMS Admin</span>

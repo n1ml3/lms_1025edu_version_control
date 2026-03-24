@@ -61,49 +61,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             background: #f1f5f9;
         }
 
-        /* Left panel */
-        .login-left {
+        /* Image panel (Right side) */
+        .login-image {
             display: none;
             flex: 1;
-            background: linear-gradient(145deg, var(--primary) 0%, var(--primary-dark) 100%);
+            background: url('/lms1025edu/admin/assets/images/Group-45936.png') center no-repeat;
             position: relative;
-            overflow: hidden;
         }
 
-        @media (min-width: 992px) { .login-left { display: flex; align-items: center; justify-content: center; } }
-
-        .login-left-content {
-            text-align: center;
-            color: #fff;
-            padding: 40px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .login-left-icon {
-            width: 80px;
-            height: 80px;
-            background: rgba(255,255,255,.18);
-            border-radius: 24px;
-            margin: 0 auto 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 42px;
-        }
-
-        .login-left h1 { font-size: 28px; font-weight: 700; margin: 0 0 10px; }
-        .login-left p  { font-size: 15px; opacity: .75; margin: 0; max-width: 280px; }
-
-        /* Decorative circles */
-        .circle-deco {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255,255,255,.06);
-        }
-
-        .circle-deco.c1 { width: 300px; height: 300px; top: -80px; right: -80px; }
-        .circle-deco.c2 { width: 200px; height: 200px; bottom: -60px; left: -60px; }
+        @media (min-width: 992px) { .login-image { display: block; } }
 
         /* Right panel */
         .login-right {
@@ -123,34 +89,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .login-logo {
             display: flex;
             align-items: center;
-            gap: 10px;
             margin-bottom: 32px;
         }
 
-        .login-logo-icon {
-            width: 44px;
-            height: 44px;
-            background: var(--primary);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 26px;
-        }
-
-        .login-logo-text span:first-child {
-            display: block;
-            font-size: 17px;
-            font-weight: 700;
-            color: #1e293b;
-        }
-
-        .login-logo-text span:last-child {
-            display: block;
-            font-size: 12px;
-            color: #64748b;
-        }
 
         .login-box h2 {
             font-size: 22px;
@@ -261,26 +202,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 </head>
 <body>
-    <!-- Left decorative panel -->
-    <div class="login-left">
-        <div class="circle-deco c1"></div>
-        <div class="circle-deco c2"></div>
-        <div class="login-left-content">
-            <div class="login-left-icon"><i class='bx bx-graduation'></i></div>
-            <h1>LMS Admin Panel</h1>
-            <p>Hệ thống quản lý đào tạo toàn diện — Quản lý học viên, khóa học, giảng viên và doanh thu.</p>
-        </div>
-    </div>
-
-    <!-- Right login panel -->
+    <!-- Form login panel (Left) -->
     <div class="login-right">
         <div class="login-box">
             <div class="login-logo">
-                <div class="login-logo-icon"><i class='bx bx-graduation'></i></div>
-                <div class="login-logo-text">
-                    <span>LMS Admin</span>
-                    <span>Education Platform</span>
-                </div>
+                <img src="/lms1025edu/admin/assets/images/logo-2.png" alt="LMS Admin Logo" style="max-height: 48px; border-radius: 12px; object-fit: contain;">
             </div>
 
             <h2>Chào mừng trở lại!</h2>
@@ -300,7 +226,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <i class='bx bx-envelope'></i>
                         <input type="email" name="email" id="email"
                                value="<?= htmlspecialchars($_POST['email'] ?? '') ?>"
-                               placeholder="admin@example.com"
+                               placeholder=""
                                required>
                     </div>
                 </div>
@@ -310,7 +236,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="input-wrap">
                         <i class='bx bx-lock-alt'></i>
                         <input type="password" name="password" id="password"
-                               placeholder="••••••••"
+                               placeholder=""
                                required>
                         <button type="button" class="toggle-pw" id="togglePw" title="Hiện/ẩn mật khẩu">
                             <i class='bx bx-show' id="pwIcon"></i>
@@ -328,6 +254,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
     </div>
+
+    <!-- Image decorative panel (Right) -->
+    <div class="login-image"></div>
 
     <script>
         // Toggle password visibility
