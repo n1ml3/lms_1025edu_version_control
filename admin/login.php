@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .login-image {
             display: none;
             flex: 1;
-            background: url('/lms1025edu/admin/assets/images/Group-45936.png') center no-repeat;
+            background: url('/lms1025edu/admin/images/Group-45936.png') center no-repeat;
             position: relative;
         }
 
@@ -206,7 +206,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="login-right">
         <div class="login-box">
             <div class="login-logo">
-                <img src="/lms1025edu/admin/assets/images/logo-2.png" alt="LMS Admin Logo" style="max-height: 48px; border-radius: 12px; object-fit: contain;">
+                <img src="/lms1025edu/admin/images/logo-2.png" alt="LMS Admin Logo" style="max-height: 48px; border-radius: 12px; object-fit: contain;">
             </div>
 
             <h2>Chào mừng trở lại!</h2>

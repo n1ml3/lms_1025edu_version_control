@@ -38,7 +38,7 @@
                     <!-- Item 1 -->
                     <div class="notif-item unread">
                         <div class="notif-icon">
-                            <img src="/lms1025edu/admin/assets/images/logo-2.png" alt="Icon">
+                            <img src="/lms1025edu/admin/images/logo-2.png" alt="Icon">
                         </div>
                         <div class="notif-content">
                             <a href="#" class="notif-title">Bạn có lịch hỗ trợ học viên</a>
@@ -53,7 +53,7 @@
                     <!-- Item 2 -->
                     <div class="notif-item unread">
                         <div class="notif-icon">
-                            <img src="/lms1025edu/admin/assets/images/logo-2.png" alt="Icon">
+                            <img src="/lms1025edu/admin/images/logo-2.png" alt="Icon">
                         </div>
                         <div class="notif-content">
                             <a href="#" class="notif-title">Bạn có lịch hỗ trợ học viên</a>
@@ -68,7 +68,7 @@
                     <!-- Item 3 -->
                     <div class="notif-item unread">
                         <div class="notif-icon">
-                            <img src="/lms1025edu/admin/assets/images/logo-2.png" alt="Icon">
+                            <img src="/lms1025edu/admin/images/logo-2.png" alt="Icon">
                         </div>
                         <div class="notif-content">
                             <a href="#" class="notif-title">Bạn có lịch hỗ trợ học viên</a>
@@ -88,7 +88,7 @@
         </div>
         <div class="dropdown">
             <button class="topbar-avatar dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="background: transparent; border: none; padding: 0;">
-                <img src="/lms1025edu/admin/assets/images/person.png" alt="Avatar" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
+                <img src="/lms1025edu/admin/images/person.png" alt="Avatar" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
                 <div class="d-none d-sm-block text-start ms-2">
                     <span class="d-block fw-semibold" style="font-size: 13px; color: var(--text-dark); line-height: 1.2;"><?= htmlspecialchars($adminName) ?></span>
                     <span class="d-block text-muted" style="font-size: 11px;"><?= htmlspecialchars($adminRole) ?></span>

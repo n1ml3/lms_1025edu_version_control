@@ -32,7 +32,7 @@ $adminRole = $adminVars['role'] ?? 'Admin';
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js" defer></script>
 
     <!-- Admin CSS -->
-    <link href="/lms1025edu/admin/assets/css/admin.css" rel="stylesheet">
+    <link href="/lms1025edu/admin/css/admin.css" rel="stylesheet">
 </head>
 <body>
 <div class="admin-wrapper">

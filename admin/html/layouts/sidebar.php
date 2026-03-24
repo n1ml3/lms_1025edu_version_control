@@ -112,7 +112,7 @@ function isParentActive(array $item, string $activePage): bool
     <!-- Logo -->
     <div class="sidebar-brand">
         <a href="/lms1025edu/admin/index.php" class="d-block text-center w-100">
-            <img src="/lms1025edu/admin/assets/images/logo-2.png" alt="Logo" class="sidebar-logo-img w-100" style="max-height: 45px; object-fit: contain;">
+            <img src="/lms1025edu/admin/images/logo-2.png" alt="Logo" class="sidebar-logo-img w-100" style="max-height: 45px; object-fit: contain;">
         </a>
     </div>
 
