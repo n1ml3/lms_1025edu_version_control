@@ -65,12 +65,20 @@ a:hover { color: var(--primary); }
     transition: var(--transition);
     overflow-y: auto;
     overflow-x: hidden;
+    padding-bottom: 2rem;
     scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
     border-right: 1px solid var(--border);
 }
 
-.sidebar::-webkit-scrollbar { width: 4px; }
-.sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+.sidebar:hover {
+    scrollbar-color: #94a3b8 transparent;
+}
+.sidebar::-webkit-scrollbar { width: 5px; }
+.sidebar::-webkit-scrollbar-track { background: transparent; }
+.sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; transition: background-color 0.2s ease; }
+.sidebar:hover::-webkit-scrollbar-thumb { background: #94a3b8; }
+.sidebar::-webkit-scrollbar-thumb:hover { background: #64748b; }
 
 /* Sidebar Brand */
 .sidebar-brand {
@@ -113,7 +121,7 @@ a:hover { color: var(--primary); }
 }
 
 .sidebar-section {
-    padding: 12px 20px 6px;
+    padding: 16px 20px 8px;
     font-size: 11px;
     font-weight: 700;
     color: #adb5bd;
@@ -125,32 +133,41 @@ a:hover { color: var(--primary); }
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 10px 20px;
-    color: var(--text-dark);
-    font-size: 14.5px;
+    padding: 12px 20px;
+    color: #495057;
+    font-size: 14px;
     font-weight: 400;
     cursor: pointer;
     border: none;
-    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
     background: transparent;
     width: 100%;
     text-align: left;
     transition: var(--transition);
     white-space: nowrap;
+    position: relative;
 }
 
-.sidebar-link i { font-size: 20px; flex-shrink: 0; color: var(--accent); }
+.sidebar-link i { font-size: 20px; flex-shrink: 0; color: #adb5bd; }
 
 .sidebar-link:hover {
     background: #f8f9fa;
-    color: var(--accent-dark);
+    color: #0dcaf0;
+}
+
+.sidebar-link:hover i {
+    color: #0dcaf0;
 }
 
 .sidebar-link.active {
-    background: #e6fcf5;
-    color: var(--accent-dark);
+    background: #ffffff !important;
+    color: #0dcaf0 !important;
     font-weight: 500;
-    border-left-color: var(--accent);
+    border-right-color: #0dcaf0 !important;
+}
+
+.sidebar-link.active i {
+    color: #0dcaf0 !important;
 }
 
 .sidebar-arrow {

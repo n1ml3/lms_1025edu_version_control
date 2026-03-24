@@ -147,10 +147,7 @@
             </div>
         </div>
 
-        <!-- FAB -->
-        <div class="fab-fixed" title="Cài đặt">
-            <i class='bx bx-cog'></i>
-        </div>
+
 
     </main>
 </div><!-- /.main-area -->

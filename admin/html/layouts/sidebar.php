@@ -119,6 +119,12 @@ $navItems = [
         'key'   => 'settings_storage',
         'url'   => ($baseUrl ?? '/lms1025edu/admin') . '/pages/settings/storage.php',
     ],
+    [
+        'label' => 'Kiểm tra Database',
+        'icon'  => 'bx-data',
+        'key'   => 'settings_dbcheck',
+        'url'   => ($baseUrl ?? '/lms1025edu/admin') . '/pages/settings/db_check.php',
+    ],
 ];
 ?>
 
@@ -131,57 +137,7 @@ $navItems = [
         </a>
     </div>
 
-    <!-- We inject custom CSS here to override the existing active styles -->
-    <style>
-        .sidebar {
-            background-color: #ffffff;
-            border-right: 1px solid #dee2e6;
-        }
-        .sidebar-section {
-            padding: 16px 20px 8px;
-            font-size: 11px;
-            font-weight: 700;
-            color: #adb5bd;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .sidebar-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 20px;
-            color: #495057;
-            font-size: 14px;
-            font-weight: 400;
-            border: none;
-            background: transparent;
-            width: 100%;
-            text-align: left;
-            transition: all 0.2s ease;
-            position: relative;
-        }
-        .sidebar-link i {
-            font-size: 20px;
-            color: #adb5bd;
-        }
-        .sidebar-link:hover {
-            color: #0dcaf0;
-            background-color: #f8f9fa;
-        }
-        .sidebar-link:hover i {
-            color: #0dcaf0;
-        }
-        .sidebar-link.active {
-            color: #0dcaf0 !important;
-            background: #ffffff !important;
-            font-weight: 500;
-            border-left: none !important;
-            border-right: 3px solid #0dcaf0 !important;
-        }
-        .sidebar-link.active i {
-            color: #0dcaf0 !important;
-        }
-    </style>
+
 
     <div class="sidebar-nav">
         <?php foreach ($navItems as $item): ?>
