@@ -14,6 +14,13 @@ try {
         $role_id = (int)($_POST['role_id'] ?? 0);
         $is_active = isset($_POST['is_active']) ? 1 : 0;
         
+        $phone = trim($_POST['phone'] ?? '');
+        $department = trim($_POST['department'] ?? '');
+        $position = trim($_POST['position'] ?? '');
+        $dob = !empty($_POST['dob']) ? $_POST['dob'] : null;
+        $start_date = !empty($_POST['start_date']) ? $_POST['start_date'] : null;
+        $hotline = trim($_POST['hotline'] ?? '');
+        
         if (!$name || !$email || !$password || !$role_id) {
             throw new Exception('Vui lòng điền đầy đủ các thông tin bắt buộc.');
         }
@@ -25,8 +32,8 @@ try {
         
         $hash = password_hash($password, PASSWORD_DEFAULT);
         
-        $stmt = $pdo->prepare("INSERT INTO admins (name, email, password_hash, role_id, is_active, created_at) VALUES (?, ?, ?, ?, ?, NOW())");
-        $stmt->execute([$name, $email, $hash, $role_id, $is_active]);
+        $stmt = $pdo->prepare("INSERT INTO admins (name, email, password_hash, role_id, is_active, created_at, phone, department, position, dob, start_date, hotline) VALUES (?, ?, ?, ?, ?, NOW(), ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$name, $email, $hash, $role_id, $is_active, $phone, $department, $position, $dob, $start_date, $hotline]);
         
         echo json_encode(['success' => true]);
         exit;
@@ -39,6 +46,13 @@ try {
         $password = $_POST['password'] ?? '';
         $role_id = (int)($_POST['role_id'] ?? 0);
         $is_active = isset($_POST['is_active']) ? 1 : 0;
+
+        $phone = trim($_POST['phone'] ?? '');
+        $department = trim($_POST['department'] ?? '');
+        $position = trim($_POST['position'] ?? '');
+        $dob = !empty($_POST['dob']) ? $_POST['dob'] : null;
+        $start_date = !empty($_POST['start_date']) ? $_POST['start_date'] : null;
+        $hotline = trim($_POST['hotline'] ?? '');
         
         if (!$id || !$name || !$email || !$role_id) {
             throw new Exception('Dữ liệu không hợp lệ.');
@@ -51,11 +65,11 @@ try {
         
         if ($password !== '') {
             $hash = password_hash($password, PASSWORD_DEFAULT);
-            $stmt = $pdo->prepare("UPDATE admins SET name = ?, email = ?, password_hash = ?, role_id = ?, is_active = ? WHERE id = ?");
-            $stmt->execute([$name, $email, $hash, $role_id, $is_active, $id]);
+            $stmt = $pdo->prepare("UPDATE admins SET name = ?, email = ?, password_hash = ?, role_id = ?, is_active = ?, phone = ?, department = ?, position = ?, dob = ?, start_date = ?, hotline = ? WHERE id = ?");
+            $stmt->execute([$name, $email, $hash, $role_id, $is_active, $phone, $department, $position, $dob, $start_date, $hotline, $id]);
         } else {
-            $stmt = $pdo->prepare("UPDATE admins SET name = ?, email = ?, role_id = ?, is_active = ? WHERE id = ?");
-            $stmt->execute([$name, $email, $role_id, $is_active, $id]);
+            $stmt = $pdo->prepare("UPDATE admins SET name = ?, email = ?, role_id = ?, is_active = ?, phone = ?, department = ?, position = ?, dob = ?, start_date = ?, hotline = ? WHERE id = ?");
+            $stmt->execute([$name, $email, $role_id, $is_active, $phone, $department, $position, $dob, $start_date, $hotline, $id]);
         }
         
         echo json_encode(['success' => true]);
@@ -74,6 +88,21 @@ try {
         $stmt = $pdo->prepare("DELETE FROM admins WHERE id = ?");
         $stmt->execute([$id]);
         
+        echo json_encode(['success' => true]);
+        exit;
+    }
+
+    if ($action === 'toggle_status') {
+        $id = (int)($_POST['id'] ?? 0);
+        $status = (int)($_POST['status'] ?? 0);
+        
+        if ($id == $adminId) {
+            throw new Exception('Bạn không thể tự khóa tài khoản của chính mình.');
+        }
+
+        $stmt = $pdo->prepare("UPDATE admins SET is_active = ? WHERE id = ?");
+        $stmt->execute([$status, $id]);
+
         echo json_encode(['success' => true]);
         exit;
     }

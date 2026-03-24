@@ -13,21 +13,7 @@ require_once __DIR__ . '/../../layouts/sidebar.php';
         </button>
     </div>
     <div class="row g-4">
-<?php
-require_once __DIR__ . '/../../layouts/header.php';
-require_once __DIR__ . '/../../layouts/sidebar.php';
-?>
-<div class="main-area"><main class="page-content">
-    <div class="page-header d-flex align-items-center justify-content-between">
-        <div>
-            <h1 class="page-title">Phân Quyền</h1>
-            <p class="page-subtitle">Quản lý vai trò và quyền hạn trong hệ thống</p>
-        </div>
-        <button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalRole">
-            <i class='bx bx-plus'></i> Thêm Vai Trò
-        </button>
-    </div>
-    <div class="row g-4">
+
         <?php if ($roles): foreach ($roles as $role):
             $perms = is_string($role['permissions']) ? json_decode($role['permissions'], true) : ($role['permissions'] ?? []);
         ?>
