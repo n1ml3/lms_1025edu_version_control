@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['media'])) {
         if (move_uploaded_file($file['tmp_name'], $uploadDir . $filename)) {
             try {
                 $stmt = $pdo->prepare("INSERT INTO media (filename, path, size, uploaded_at) VALUES (?, ?, ?, NOW())");
-                $stmt->execute([$filename, '/lms1025edu/admin/images/uploads/' . $filename, $file['size']]);
+                $stmt->execute([$filename, '/lms1025edu/admin/assets/img/uploads/' . $filename, $file['size']]);
             } catch (Exception $e) {}
             $success = 'Đã tải lên thành công: ' . htmlspecialchars($filename);
         } else {

@@ -1,13 +1,24 @@
 <?php
 /**
- * Products — Thêm sản phẩm
+ * Products — Thêm & Sửa sản phẩm
  */
 require_once __DIR__ . '/../../includes/auth_check.php';
 require_once __DIR__ . '/../../../config/db.php';
 
-$pageTitle  = 'Thêm Sản Phẩm';
-$activePage = 'products_add';
-$breadcrumb = [['label'=>'Sản Phẩm'],['label'=>'Thêm mới']];
+$id = $_GET['id'] ?? null;
+$product = null;
+
+if ($id) {
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM products WHERE id = ?");
+        $stmt->execute([$id]);
+        $product = $stmt->fetch();
+    } catch (Exception $e) { $product = null; }
+}
+
+$pageTitle  = $product ? 'Sửa Sản Phẩm' : 'Thêm Sản Phẩm';
+$activePage = 'products_list';
+$breadcrumb = [['label'=>'Sản Phẩm'],['label'=> $product ? 'Sửa sản phẩm' : 'Thêm mới']];
 
 $success = $error = '';
 
@@ -19,9 +30,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($name && $price >= 0) {
         try {
-            $stmt = $pdo->prepare("INSERT INTO products (name, description, price, stock, image) VALUES (?, ?, ?, ?, ?)");
-            $stmt->execute([$name, $desc, $price, $stock, '']);
-            $success = 'Đã thêm sản phẩm thành công!';
+            if ($id && $product) {
+                $stmt = $pdo->prepare("UPDATE products SET name=?, description=?, price=?, stock=? WHERE id=?");
+                $stmt->execute([$name, $desc, $price, $stock, $id]);
+                $success = 'Đã cập nhật sản phẩm thành công!';
+                // Refresh product data
+                $stmt = $pdo->prepare("SELECT * FROM products WHERE id = ?");
+                $stmt->execute([$id]);
+                $product = $stmt->fetch();
+            } else {
+                $stmt = $pdo->prepare("INSERT INTO products (name, description, price, stock, image) VALUES (?, ?, ?, ?, ?)");
+                $stmt->execute([$name, $desc, $price, $stock, '']);
+                $success = 'Đã thêm sản phẩm thành công!';
+            }
         } catch (Exception $e) {
             $error = $e->getMessage();
         }

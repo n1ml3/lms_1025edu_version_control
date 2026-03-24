@@ -10,7 +10,21 @@ $activePage = 'courses_classes';
 $breadcrumb = [['label'=>'Khóa Học'],['label'=>'Lớp học']];
 
 try {
-    $classes = $pdo->query("SELECT cl.*, t.name AS teacher_name, p.name AS program_name FROM classes cl LEFT JOIN teachers t ON t.id = cl.teacher_id LEFT JOIN programs p ON p.id = cl.program_id ORDER BY cl.id DESC LIMIT 50")->fetchAll();
-} catch (Exception $e) { $classes = []; }
+    $classes = $pdo->query("
+        SELECT c.*, p.name AS program_name, t.name AS teacher_name 
+        FROM classes c 
+        LEFT JOIN programs p ON p.id = c.program_id 
+        LEFT JOIN teachers t ON t.id = c.teacher_id 
+        ORDER BY c.created_at DESC
+        LIMIT 100
+    ")->fetchAll();
+
+    // Fetch Secondary Data for Modal
+    $programs = $pdo->query("SELECT id, name FROM programs ORDER BY name ASC")->fetchAll();
+    $teachers = $pdo->query("SELECT id, name FROM teachers WHERE is_active = 1 ORDER BY name ASC")->fetchAll();
+
+} catch (Exception $e) {
+    $classes = []; $programs = []; $teachers = [];
+}
 
 require_once __DIR__ . '/../../html/pages/courses/classes.php';

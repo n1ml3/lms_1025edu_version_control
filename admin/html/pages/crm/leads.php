@@ -1,19 +1,4 @@
 <?php
-require_once __DIR__ . '/../../admin/includes/auth_check.php';
-require_once __DIR__ . '/../../config/db.php';
-
-// Fetch Leads
-$stmt = $pdo->query("SELECT l.*, ls.name AS source_name, b.name AS branch_name 
-                    FROM leads l 
-                    LEFT JOIN lead_sources ls ON ls.id=l.source_id 
-                    LEFT JOIN branches b ON b.id=l.branch_id 
-                    ORDER BY l.created_at DESC");
-$leads = $stmt->fetchAll();
-
-// Fetch Sources & Branches for Modal
-$sources = $pdo->query("SELECT * FROM lead_sources ORDER BY name ASC")->fetchAll();
-$branches = $pdo->query("SELECT * FROM branches ORDER BY name ASC")->fetchAll();
-
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
 

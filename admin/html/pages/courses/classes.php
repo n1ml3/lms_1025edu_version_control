@@ -1,14 +1,13 @@
 <?php
-require_once __DIR__ . '/../../admin/includes/auth_check.php';
-require_once __DIR__ . '/../../config/db.php';
+require_once __DIR__ . '/../../layouts/header.php';
+require_once __DIR__ . '/../../layouts/sidebar.php';
 
-// Fetch Classes
-$stmt = $pdo->query("SELECT c.*, p.name AS program_name, t.name AS teacher_name 
-                    FROM classes c 
-                    LEFT JOIN programs p ON p.id = c.program_id 
-                    LEFT JOIN teachers t ON t.id = c.teacher_id 
-                    ORDER BY c.created_at DESC");
-$classes = $stmt->fetchAll();
+$pageAction = <<<HTML
+<button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalClass" onclick="resetClassForm()">
+    <i class='bx bx-plus'></i> Thêm Lớp Học
+</button>
+HTML;
+?>
 
 // Fetch Programs & Teachers for Modal
 $programs = $pdo->query("SELECT id, name FROM programs ORDER BY name ASC")->fetchAll();

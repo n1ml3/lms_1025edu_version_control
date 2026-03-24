@@ -1,20 +1,4 @@
 <?php
-require_once __DIR__ . '/../../admin/includes/auth_check.php';
-require_once __DIR__ . '/../../config/db.php';
-
-$product = null;
-$id = $_GET['id'] ?? null;
-
-if ($id) {
-    $stmt = $pdo->prepare("SELECT * FROM products WHERE id = ? AND is_active = 1");
-    $stmt->execute([$id]);
-    $product = $stmt->fetch();
-    if (!$product) {
-        header("Location: /lms1025edu/admin/pages/products/list.php");
-        exit;
-    }
-}
-
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
 

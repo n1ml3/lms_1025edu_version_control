@@ -19,10 +19,15 @@ try {
         LEFT JOIN lead_sources ls ON ls.id = l.source_id
         LEFT JOIN branches b ON b.id = l.branch_id
         ORDER BY l.created_at DESC
-        LIMIT 50
+        LIMIT 100
     ")->fetchAll();
+
+    // Fetch Sources & Branches for Modal
+    $sources  = $pdo->query("SELECT id, name FROM lead_sources ORDER BY name ASC")->fetchAll();
+    $branches = $pdo->query("SELECT id, name FROM branches WHERE is_active = 1 ORDER BY name ASC")->fetchAll();
+
 } catch (Exception $e) {
-    $leads = [];
+    $leads = []; $sources = []; $branches = [];
 }
 
 require_once __DIR__ . '/../../html/pages/crm/leads.php';

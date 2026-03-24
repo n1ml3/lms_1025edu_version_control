@@ -10,7 +10,7 @@ $activePage = 'inst_agents';
 $breadcrumb = [['label'=>'Giảng Viên'],['label'=>'Đại lý']];
 
 try {
-    $agents = $pdo->query("SELECT * FROM agents ORDER BY name")->fetchAll();
+    $agents = $pdo->query("SELECT * FROM agents WHERE is_active = 1 ORDER BY created_at DESC")->fetchAll();
 } catch (Exception $e) { $agents = []; }
 
 require_once __DIR__ . '/../../html/pages/instructors/agents.php';

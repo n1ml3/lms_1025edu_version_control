@@ -1,13 +1,13 @@
 <?php
-require_once __DIR__ . '/../../admin/includes/auth_check.php';
-require_once __DIR__ . '/../../config/db.php';
-
-// Fetch Agents
-$stmt = $pdo->query("SELECT * FROM agents WHERE is_active = 1 ORDER BY created_at DESC");
-$agents = $stmt->fetchAll();
-
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
+
+$pageAction = <<<HTML
+<button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalAgent" onclick="resetAgentForm()">
+    <i class='bx bx-plus'></i> Thêm Đại Lý
+</button>
+HTML;
+?>
 
 $pageAction = <<<HTML
 <button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalAgent" onclick="resetAgentForm()">

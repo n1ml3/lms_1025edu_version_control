@@ -1,17 +1,10 @@
 <?php
-require_once __DIR__ . '/../../admin/includes/auth_check.php';
-require_once __DIR__ . '/../../config/db.php';
-
-// Fetch Coupons
-$stmt = $pdo->query("SELECT * FROM coupons WHERE is_active = 1 ORDER BY created_at DESC");
-$coupons = $stmt->fetchAll();
-
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
 
 $pageAction = <<<HTML
 <button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalCoupon" onclick="resetCouponForm()">
-    <i class='bx bx-plus'></i> Tạo Mã Giảm
+    <i class='bx bx-plus'></i> Thêm Mã Giảm Giá
 </button>
 HTML;
 ?>

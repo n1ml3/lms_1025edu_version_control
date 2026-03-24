@@ -1,16 +1,13 @@
 <?php
-require_once __DIR__ . '/../../admin/includes/auth_check.php';
-require_once __DIR__ . '/../../config/db.php';
-
-// Fetch Programs
-$stmt = $pdo->query("SELECT p.*, c.name AS course_name FROM programs p LEFT JOIN courses c ON c.id = p.course_id ORDER BY c.name ASC, p.sort_order ASC");
-$programs = $stmt->fetchAll();
-
-// Fetch Courses for Modal
-$courses = $pdo->query("SELECT id, name FROM courses ORDER BY name ASC")->fetchAll();
-
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
+
+$pageAction = <<<HTML
+<button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalProgram" onclick="resetProgramForm()">
+    <i class='bx bx-plus'></i> Thêm Chương Trình
+</button>
+HTML;
+?>
 
 $pageAction = <<<HTML
 <button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalProgram" onclick="resetProgramForm()">
