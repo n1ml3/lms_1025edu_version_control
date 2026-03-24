@@ -1,17 +1,16 @@
 <?php
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
+
+$pageAction = <<<HTML
+<button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalNotif">
+    <i class='bx bx-send'></i> Gửi Thông Báo
+</button>
+HTML;
 ?>
-<div class="main-area"><main class="page-content">
-    <div class="page-header d-flex align-items-center justify-content-between">
-        <div>
-            <h1 class="page-title">Thông Báo Chung</h1>
-            <p class="page-subtitle">Gửi thông báo đến toàn bộ học viên</p>
-        </div>
-        <button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalNotif">
-            <i class='bx bx-send'></i> Gửi Thông Báo
-        </button>
-    </div>
+<div class="main-area">
+    <?php require_once __DIR__ . '/../../layouts/topbar.php'; ?>
+    <main class="page-content">
     <div class="content-card">
         <div class="table-responsive">
             <table class="table table-custom">

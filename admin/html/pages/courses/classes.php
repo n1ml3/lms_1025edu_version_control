@@ -1,17 +1,16 @@
 <?php
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
+
+$pageAction = <<<HTML
+<button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalClass">
+    <i class='bx bx-plus'></i> Thêm Lớp
+</button>
+HTML;
 ?>
-<div class="main-area"><main class="page-content">
-    <div class="page-header d-flex align-items-center justify-content-between">
-        <div>
-            <h1 class="page-title">Lớp Học</h1>
-            <p class="page-subtitle">Danh sách lớp học đang hoạt động</p>
-        </div>
-        <button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalClass">
-            <i class='bx bx-plus'></i> Thêm Lớp
-        </button>
-    </div>
+<div class="main-area">
+    <?php require_once __DIR__ . '/../../layouts/topbar.php'; ?>
+    <main class="page-content">
     <div class="content-card">
         <div class="table-responsive">
             <table class="table table-custom">

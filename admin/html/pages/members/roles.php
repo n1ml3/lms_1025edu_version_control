@@ -1,17 +1,16 @@
 <?php
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
+
+$pageAction = <<<HTML
+<button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalRole">
+    <i class='bx bx-plus'></i> Thêm Vai Trò
+</button>
+HTML;
 ?>
-<div class="main-area"><main class="page-content">
-    <div class="page-header d-flex align-items-center justify-content-between">
-        <div>
-            <h1 class="page-title">Phân Quyền</h1>
-            <p class="page-subtitle">Quản lý vai trò và quyền hạn trong hệ thống</p>
-        </div>
-        <button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalRole">
-            <i class='bx bx-plus'></i> Thêm Vai Trò
-        </button>
-    </div>
+<div class="main-area">
+    <?php require_once __DIR__ . '/../../layouts/topbar.php'; ?>
+    <main class="page-content">
     <div class="row g-4">
 
         <?php if ($roles): foreach ($roles as $role):

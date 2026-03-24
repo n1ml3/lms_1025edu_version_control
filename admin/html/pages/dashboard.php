@@ -1,19 +1,18 @@
-<?php require_once __DIR__ . '/../layouts/header.php'; ?>
-<?php require_once __DIR__ . '/../layouts/sidebar.php'; ?>
+<?php
+require_once __DIR__ . '/../layouts/header.php';
+require_once __DIR__ . '/../layouts/sidebar.php';
 
+$pageAction = <<<HTML
+<div class="d-flex gap-2">
+    <button class="btn btn-outline-custom btn-sm" onclick="location.reload()">
+        <i class='bx bx-refresh'></i> Làm mới
+    </button>
+</div>
+HTML;
+?>
 <div class="main-area" id="mainArea">
     <?php require_once __DIR__ . '/../layouts/topbar.php'; ?>
     <main class="page-content">
-
-        <!-- Alert Banners
-        <div class="alert alert-success d-flex align-items-center mb-3 px-3 py-2" style="background:#e6fcf5; color:#00a786; border:none; border-radius:6px;">
-            <i class='bx bx-check-circle me-2' style="font-size:18px;"></i>
-            <span style="font-size:13.5px; font-weight:500;">Bạn đã được kết nối với tổng đài.</span>
-        </div>
-        <div class="alert alert-danger d-flex align-items-center mb-4 px-3 py-2" style="background:#fff0f6; color:#e64980; border:none; border-radius:6px;">
-            <i class='bx bx-error-circle me-2' style="font-size:18px;"></i>
-            <span style="font-size:13.5px; font-weight:500;">Bạn chưa chia ca cho tuần sau.</span>
-        </div> -->
 
         <!-- Top 4 Stat Cards -->
         <div class="row g-4 mb-4">
@@ -146,8 +145,6 @@
                 </div>
             </div>
         </div>
-
-
 
     </main>
 </div><!-- /.main-area -->

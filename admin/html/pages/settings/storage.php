@@ -1,12 +1,16 @@
 <?php
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
+
+$pageAction = <<<HTML
+<a href="/lms1025edu/admin/pages/settings/media.php" class="btn-primary-custom">
+    <i class='bx bx-images'></i> Media
+</a>
+HTML;
 ?>
-<div class="main-area"><main class="page-content">
-    <div class="page-header">
-        <h1 class="page-title">Lưu Trữ</h1>
-        <p class="page-subtitle">Thông tin dung lượng và quản lý file</p>
-    </div>
+<div class="main-area">
+    <?php require_once __DIR__ . '/../../layouts/topbar.php'; ?>
+    <main class="page-content">
     <div class="row g-4">
         <div class="col-md-6">
             <div class="content-card">

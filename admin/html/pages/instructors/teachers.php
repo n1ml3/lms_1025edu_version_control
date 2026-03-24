@@ -1,17 +1,16 @@
 <?php
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
+
+$pageAction = <<<HTML
+<button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalTeacher">
+    <i class='bx bx-plus'></i> Thêm Giáo Viên
+</button>
+HTML;
 ?>
-<div class="main-area"><main class="page-content">
-    <div class="page-header d-flex align-items-center justify-content-between">
-        <div>
-            <h1 class="page-title">Giáo Viên</h1>
-            <p class="page-subtitle">Danh sách giảng viên của hệ thống</p>
-        </div>
-        <button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalTeacher">
-            <i class='bx bx-plus'></i> Thêm Giáo Viên
-        </button>
-    </div>
+<div class="main-area">
+    <?php require_once __DIR__ . '/../../layouts/topbar.php'; ?>
+    <main class="page-content">
     <div class="row g-3">
         <?php if ($teachers): foreach ($teachers as $t): ?>
         <div class="col-sm-6 col-xl-4">

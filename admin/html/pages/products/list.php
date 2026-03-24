@@ -1,17 +1,16 @@
 <?php
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
+
+$pageAction = <<<HTML
+<a href="/lms1025edu/admin/pages/products/add.php" class="btn-primary-custom">
+    <i class='bx bx-plus'></i> Thêm Sản Phẩm
+</a>
+HTML;
 ?>
-<div class="main-area"><main class="page-content">
-    <div class="page-header d-flex align-items-center justify-content-between">
-        <div>
-            <h1 class="page-title">Sản Phẩm</h1>
-            <p class="page-subtitle">Quản lý danh sách sản phẩm bán hàng</p>
-        </div>
-        <a href="/lms1025edu/admin/pages/products/add.php" class="btn-primary-custom">
-            <i class='bx bx-plus'></i> Thêm Sản Phẩm
-        </a>
-    </div>
+<div class="main-area">
+    <?php require_once __DIR__ . '/../../layouts/topbar.php'; ?>
+    <main class="page-content">
     <div class="content-card">
         <div class="table-responsive">
             <table class="table table-custom">

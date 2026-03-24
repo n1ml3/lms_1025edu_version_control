@@ -1,13 +1,16 @@
 <?php
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
-?>
-<div class="main-area"><main class="page-content">
-    <div class="page-header">
-        <h1 class="page-title">Quản Lý Media</h1>
-        <p class="page-subtitle">Tải lên và quản lý hình ảnh của hệ thống</p>
-    </div>
 
+$pageAction = <<<HTML
+<button class="btn-primary-custom" onclick="$('#fileInput').click()">
+    <i class='bx bx-upload'></i> Tải Lên Media
+</button>
+HTML;
+?>
+<div class="main-area">
+    <?php require_once __DIR__ . '/../../layouts/topbar.php'; ?>
+    <main class="page-content">
     <?php if ($success): ?><div class="alert alert-success border-0 rounded-3 mb-4"><?= $success ?></div><?php endif; ?>
     <?php if ($error):   ?><div class="alert alert-danger  border-0 rounded-3 mb-4"><?= htmlspecialchars($error) ?></div><?php endif; ?>
 

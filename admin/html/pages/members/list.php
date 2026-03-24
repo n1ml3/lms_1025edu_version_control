@@ -1,16 +1,16 @@
 <?php
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
+
+$pageAction = <<<HTML
+<button class="btn btn-info text-white px-4 py-2" style="background-color:#0dcaf0; border:none; border-radius:6px; font-weight:500;" data-bs-toggle="modal" data-bs-target="#modalAdmin">
+    Thêm tài khảo
+</button>
+HTML;
 ?>
-<div class="main-area"><main class="page-content bg-white">
-    <div class="page-header d-flex align-items-center justify-content-between mb-4 border-bottom pb-3">
-        <div>
-            <h1 class="page-title fs-4 mb-0 text-dark">Danh sách user</h1>
-        </div>
-        <button class="btn btn-info text-white px-4 py-2" style="background-color:#0dcaf0; border:none; border-radius:6px; font-weight:500;" data-bs-toggle="modal" data-bs-target="#modalAdmin">
-            Thêm tài khoản
-        </button>
-    </div>
+<div class="main-area">
+    <?php require_once __DIR__ . '/../../layouts/topbar.php'; ?>
+    <main class="page-content bg-white">
 
     <!-- Toolbar -->
     <div class="d-flex justify-content-between align-items-center mb-3">

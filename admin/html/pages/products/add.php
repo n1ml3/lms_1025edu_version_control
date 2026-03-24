@@ -1,15 +1,18 @@
 <?php
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
-?>
-<div class="main-area"><main class="page-content">
-    <div class="page-header">
-        <h1 class="page-title">Thêm Sản Phẩm</h1>
-        <p class="page-subtitle"><a href="/lms1025edu/admin/pages/products/list.php">← Quay lại danh sách</a></p>
-    </div>
 
-    <?php if ($success): ?><div class="alert alert-success border-0 rounded-3"><?= $success ?></div><?php endif; ?>
-    <?php if ($error): ?><div class="alert alert-danger border-0 rounded-3"><?= htmlspecialchars($error) ?></div><?php endif; ?>
+$pageAction = <<<HTML
+<a href="/lms1025edu/admin/pages/products/list.php" class="btn-outline-custom">
+    <i class='bx bx-arrow-back'></i> Quay lại
+</a>
+HTML;
+?>
+<div class="main-area">
+    <?php require_once __DIR__ . '/../../layouts/topbar.php'; ?>
+    <main class="page-content">
+    <?php if ($success): ?><div class="alert alert-success border-0 rounded-3 mb-4"><?= $success ?></div><?php endif; ?>
+    <?php if ($error): ?><div class="alert alert-danger border-0 rounded-3 mb-4"><?= htmlspecialchars($error) ?></div><?php endif; ?>
 
     <div class="content-card">
         <div class="content-card-header"><h3 class="content-card-title">Thông tin sản phẩm</h3></div>

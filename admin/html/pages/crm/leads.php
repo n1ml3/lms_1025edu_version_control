@@ -1,19 +1,16 @@
 <?php
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
+
+$pageAction = <<<HTML
+<button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalLead">
+    <i class='bx bx-plus'></i> Thêm Lead
+</button>
+HTML;
 ?>
 <div class="main-area">
-<main class="page-content">
-    <div class="page-header d-flex align-items-center justify-content-between">
-        <div>
-            <h1 class="page-title">Danh Sách Lead</h1>
-            <p class="page-subtitle">Quản lý khách hàng tiềm năng</p>
-        </div>
-        <button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalLead">
-            <i class='bx bx-plus'></i> Thêm Lead
-        </button>
-    </div>
-
+    <?php require_once __DIR__ . '/../../layouts/topbar.php'; ?>
+    <main class="page-content">
     <div class="content-card">
         <div class="content-card-header">
             <h3 class="content-card-title">Tất cả Lead <span class="badge bg-primary ms-2"><?= count($leads) ?></span></h3>

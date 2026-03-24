@@ -1,20 +1,19 @@
 <?php
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
+
+$pageAction = <<<HTML
+<button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalQuiz">
+    <i class='bx bx-plus'></i> Thêm Câu Hỏi
+</button>
+HTML;
 ?>
-<div class="main-area"><main class="page-content">
-    <div class="page-header d-flex align-items-center justify-content-between">
-        <div>
-            <h1 class="page-title">Bài Kiểm Tra</h1>
-            <p class="page-subtitle">Quản lý câu hỏi và đề thi</p>
-        </div>
-        <button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalQuiz">
-            <i class='bx bx-plus'></i> Thêm Câu Hỏi
-        </button>
-    </div>
+<div class="main-area">
+    <?php require_once __DIR__ . '/../../layouts/topbar.php'; ?>
+    <main class="page-content">
     <div class="content-card content-card-body text-center py-5 text-muted">
         <i class='bx bx-question-mark d-block mb-2' style="font-size:48px;color:var(--primary)"></i>
-        <p class="mb-0 fw-semibold">Chức năng Quiz đang phát triển</p>
+        <p class="mb-0 fw-semibold">Chức năng Bài Kiểm Tra đang phát triển</p>
         <p class="fs-13">CRUD câu hỏi & đề thi sẽ được cập nhật sớm.</p>
     </div>
 </main></div>

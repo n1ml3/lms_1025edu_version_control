@@ -105,22 +105,27 @@
 </header>
 
 <!-- Dashboard Toolbar -->
-<div class="dashboard-toolbar">
-    <h2 class="toolbar-title"><?= htmlspecialchars($pageTitle) ?></h2>
-    <nav aria-label="breadcrumb" class="d-none d-md-block">
-        <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"><a href="/lms1025edu/admin/index.php">CRM</a></li>
-            <?php if (!empty($breadcrumb)): ?>
-                <?php foreach ($breadcrumb as $b): ?>
-                    <?php if (!empty($b['url'])): ?>
-                        <li class="breadcrumb-item"><a href="<?= $b['url'] ?>"><?= htmlspecialchars($b['label']) ?></a></li>
-                    <?php else: ?>
-                        <li class="breadcrumb-item active" aria-current="page"><?= htmlspecialchars($b['label']) ?></li>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-            <?php endif; ?>
-        </ol>
-    </nav>
+<div class="dashboard-toolbar d-flex align-items-center justify-content-between">
+    <div>
+        <h2 class="toolbar-title"><?= htmlspecialchars($pageTitle) ?></h2>
+        <nav aria-label="breadcrumb" class="d-none d-md-block">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="/lms1025edu/admin/index.php">CRM</a></li>
+                <?php if (!empty($breadcrumb)): ?>
+                    <?php foreach ($breadcrumb as $b): ?>
+                        <?php if (!empty($b['url'])): ?>
+                            <li class="breadcrumb-item"><a href="<?= $b['url'] ?>"><?= htmlspecialchars($b['label']) ?></a></li>
+                        <?php else: ?>
+                            <li class="breadcrumb-item active" aria-current="page"><?= htmlspecialchars($b['label']) ?></li>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                <?php endif; ?>
+            </ol>
+        </nav>
+    </div>
+    <div class="toolbar-actions">
+        <?php if (isset($pageAction)) echo $pageAction; ?>
+    </div>
 </div>
