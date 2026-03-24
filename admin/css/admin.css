@@ -54,7 +54,7 @@ a:hover { color: var(--primary); }
 /* ── Sidebar ───────────────────────────────────────────── */
 .sidebar {
     width: var(--sidebar-w);
-    min-height: 100vh;
+    height: 100vh;
     background: #ffffff;
     display: flex;
     flex-direction: column;
@@ -67,18 +67,31 @@ a:hover { color: var(--primary); }
     overflow-x: hidden;
     padding-bottom: 2rem;
     scrollbar-width: thin;
-    scrollbar-color: #cbd5e1 transparent;
+    scrollbar-color: #adb5bd #f1f5f9;
     border-right: 1px solid var(--border);
 }
 
-.sidebar:hover {
-    scrollbar-color: #94a3b8 transparent;
+/* Webkit Scrollbar Styling */
+.sidebar::-webkit-scrollbar {
+    width: 6px;
 }
-.sidebar::-webkit-scrollbar { width: 5px; }
-.sidebar::-webkit-scrollbar-track { background: transparent; }
-.sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; transition: background-color 0.2s ease; }
-.sidebar:hover::-webkit-scrollbar-thumb { background: #94a3b8; }
-.sidebar::-webkit-scrollbar-thumb:hover { background: #64748b; }
+
+.sidebar::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+.sidebar:hover::-webkit-scrollbar-thumb {
+    background: #adb5bd;
+}
 
 /* Sidebar Brand */
 .sidebar-brand {
