@@ -91,6 +91,7 @@ $navItems = [
         'icon'     => 'bx-cog',
         'key'      => 'settings',
         'children' => [
+            ['label' => 'Cơ sở',  'url' => ($baseUrl ?? '/lms1025edu/admin') . '/pages/settings/branches.php', 'key' => 'settings_branches'],
             ['label' => 'Media',  'url' => ($baseUrl ?? '/lms1025edu/admin') . '/pages/settings/media.php',   'key' => 'settings_media'],
             ['label' => 'Lưu trữ','url' => ($baseUrl ?? '/lms1025edu/admin') . '/pages/settings/storage.php', 'key' => 'settings_storage'],
         ],
