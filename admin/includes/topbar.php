@@ -8,7 +8,8 @@
 <header class="topbar" id="topbar">
     <div class="topbar-left">
         <button class="sidebar-toggle-btn" id="sidebarToggle" title="Toggle Sidebar">
-            <i class='bx bx-menu'></i>
+            <i class='bx bx-menu toggle-icon-expanded'></i>
+            <i class='bx bx-right-arrow-alt toggle-icon-collapsed d-none'></i>
         </button>
     </div>
     <div class="topbar-right">
@@ -18,10 +19,73 @@
         <button class="topbar-icon-btn" id="darkModeToggle" title="Chế độ tối">
             <i class='bx bx-moon'></i>
         </button>
-        <button class="topbar-icon-btn" title="Thông báo">
-            <i class='bx bx-bell'></i>
-            <span class="notif-badge">0</span>
-        </button>
+        
+        <!-- Notification Dropdown -->
+        <div class="dropdown">
+            <button class="topbar-icon-btn notif-btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                <i class='bx bx-bell'></i>
+                <span class="notif-badge">3</span>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end shadow-sm notif-dropdown">
+                <div class="notif-header">
+                    <h6 class="mb-0 fw-bold">Thông báo của tôi</h6>
+                    <button class="btn-close-notif" data-bs-toggle="dropdown"><i class='bx bx-x'></i></button>
+                </div>
+                <div class="notif-actions">
+                    <a href="#" class="notif-mark-read">Đánh dấu tất cả là đã đọc</a>
+                </div>
+                <div class="notif-body">
+                    <!-- Item 1 -->
+                    <div class="notif-item unread">
+                        <div class="notif-icon">
+                            <img src="/lms1025edu/admin/assets/images/logo-2.png" alt="Icon">
+                        </div>
+                        <div class="notif-content">
+                            <a href="#" class="notif-title">Bạn có lịch hỗ trợ học viên</a>
+                            <p class="notif-desc">HV - HVG test - 0900000020 - - Thời gian: 2025-10-30 15:35</p>
+                            <div class="notif-meta">
+                                <span class="notif-time">15:35 30/10</span>
+                                <span class="notif-sep">|</span>
+                                <a href="#" class="notif-action-link">Đánh dấu chưa đọc</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="notif-item unread">
+                        <div class="notif-icon">
+                            <img src="/lms1025edu/admin/assets/images/logo-2.png" alt="Icon">
+                        </div>
+                        <div class="notif-content">
+                            <a href="#" class="notif-title">Bạn có lịch hỗ trợ học viên</a>
+                            <p class="notif-desc">HV - Trịnh Thị Kim Ngọc - 0967565434 - - Thời gian: 2025-10-30 15:24</p>
+                            <div class="notif-meta">
+                                <span class="notif-time">15:24 30/10</span>
+                                <span class="notif-sep">|</span>
+                                <a href="#" class="notif-action-link">Đánh dấu chưa đọc</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="notif-item unread">
+                        <div class="notif-icon">
+                            <img src="/lms1025edu/admin/assets/images/logo-2.png" alt="Icon">
+                        </div>
+                        <div class="notif-content">
+                            <a href="#" class="notif-title">Bạn có lịch hỗ trợ học viên</a>
+                            <p class="notif-desc">HV - Nguyễn Tuyết Nhung - 0962867598 - - Thời gian: 2025-08-20 10:00</p>
+                            <div class="notif-meta">
+                                <span class="notif-time">22:36 19/08</span>
+                                <span class="notif-sep">|</span>
+                                <a href="#" class="notif-action-link">Đánh dấu chưa đọc</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="notif-footer">
+                    <a href="#">Xem tất cả</a>
+                </div>
+            </div>
+        </div>
         <div class="dropdown">
             <button class="topbar-avatar dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="background: transparent; border: none; padding: 0;">
                 <img src="/lms1025edu/admin/assets/images/person.png" alt="Avatar" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">

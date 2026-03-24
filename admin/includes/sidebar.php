@@ -111,13 +111,9 @@ function isParentActive(array $item, string $activePage): bool
 <aside class="sidebar" id="sidebar">
     <!-- Logo -->
     <div class="sidebar-brand">
-        <div class="brand-icon" style="background: transparent;">
-            <img src="/lms1025edu/admin/assets/images/logo-2.png" alt="Logo" style="width: 100%; height: 100%; object-fit: contain;">
-        </div>
-        <div class="brand-text">
-            <span class="brand-name">HVEducation</span>
-            <span class="brand-sub">Online learning solution</span>
-        </div>
+        <a href="/lms1025edu/admin/index.php" class="d-block text-center w-100">
+            <img src="/lms1025edu/admin/assets/images/logo-2.png" alt="Logo" class="sidebar-logo-img w-100" style="max-height: 45px; object-fit: contain;">
+        </a>
     </div>
 
     <div class="sidebar-nav">
