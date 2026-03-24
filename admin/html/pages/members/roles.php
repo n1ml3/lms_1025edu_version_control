@@ -13,6 +13,7 @@ require_once __DIR__ . '/../../layouts/sidebar.php';
         </button>
     </div>
     <div class="row g-4">
+<?php
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
 ?>
