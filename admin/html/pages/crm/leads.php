@@ -1,9 +1,24 @@
 <?php
+require_once __DIR__ . '/../../admin/includes/auth_check.php';
+require_once __DIR__ . '/../../config/db.php';
+
+// Fetch Leads
+$stmt = $pdo->query("SELECT l.*, ls.name AS source_name, b.name AS branch_name 
+                    FROM leads l 
+                    LEFT JOIN lead_sources ls ON ls.id=l.source_id 
+                    LEFT JOIN branches b ON b.id=l.branch_id 
+                    ORDER BY l.created_at DESC");
+$leads = $stmt->fetchAll();
+
+// Fetch Sources & Branches for Modal
+$sources = $pdo->query("SELECT * FROM lead_sources ORDER BY name ASC")->fetchAll();
+$branches = $pdo->query("SELECT * FROM branches ORDER BY name ASC")->fetchAll();
+
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
 
 $pageAction = <<<HTML
-<button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalLead">
+<button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalLead" onclick="resetLeadForm()">
     <i class='bx bx-plus'></i> Thêm Lead
 </button>
 HTML;
@@ -11,14 +26,6 @@ HTML;
 <div class="main-area">
     <?php require_once __DIR__ . '/../../layouts/topbar.php'; ?>
     <main class="page-content">
-    <div class="content-card">
-        <div class="content-card-header">
-            <h3 class="content-card-title">Tất cả Lead <span class="badge bg-primary ms-2"><?= count($leads) ?></span></h3>
-            <input type="search" class="form-control" id="searchLead" placeholder="Tìm kiếm..." style="width:220px">
-        </div>
-        <div class="table-responsive">
-            <table class="table table-custom" id="leadsTable">
-                <thead>
                     <tr>
                         <th>#</th>
                         <th>Họ tên</th>

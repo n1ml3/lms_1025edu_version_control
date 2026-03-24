@@ -1,15 +1,16 @@
 <?php
-require_once __DIR__ . '/../../includes/auth_check.php';
-require_once __DIR__ . '/../../../config/db.php';
+require_once __DIR__ . '/../../admin/includes/auth_check.php';
+require_once __DIR__ . '/../../config/db.php';
 
 header('Content-Type: application/json');
 
-$action = $_POST['action'] ?? '';
+$input  = json_decode(file_get_contents('php://input'), true) ?? [];
+$action = $input['action'] ?? $_GET['action'] ?? '';
 
 try {
     if ($action === 'create') {
-        $name = trim($_POST['name'] ?? '');
-        $perms = $_POST['permissions'] ?? [];
+        $name = trim($input['name'] ?? '');
+        $perms = $input['permissions'] ?? [];
         if (!$name) throw new Exception('Tên vai trò không được để trống.');
         
         $permsJson = json_encode(array_values($perms));
@@ -22,9 +23,9 @@ try {
     }
     
     if ($action === 'update') {
-        $id = (int)($_POST['id'] ?? 0);
-        $name = trim($_POST['name'] ?? '');
-        $perms = $_POST['permissions'] ?? [];
+        $id = (int)($input['id'] ?? 0);
+        $name = trim($input['name'] ?? '');
+        $perms = $input['permissions'] ?? [];
         if (!$id || !$name) throw new Exception('Dữ liệu không hợp lệ.');
         
         $permsJson = json_encode(array_values($perms));
@@ -37,7 +38,7 @@ try {
     }
     
     if ($action === 'delete') {
-        $id = (int)($_POST['id'] ?? 0);
+        $id = (int)($input['id'] ?? 0);
         if (!$id) throw new Exception('ID không hợp lệ.');
         
         // Prevent deleting roles currently assigned to admins
@@ -56,5 +57,7 @@ try {
 
     throw new Exception('Action không hợp lệ.');
 } catch (Exception $e) {
+    http_response_code(400);
     echo json_encode(['success' => false, 'error' => $e->getMessage()]);
 }
+
