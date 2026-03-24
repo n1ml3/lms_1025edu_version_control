@@ -7,7 +7,7 @@ $activePage = $activePage ?? '';
 
 $navItems = [
     [
-        'label' => 'Tổng Quan',
+        'label' => 'Dashboards',
         'icon'  => 'bx-home-alt-2',
         'key'   => 'dashboard',
         'url'   => '/lms1025edu/admin/index.php',
@@ -17,8 +17,9 @@ $navItems = [
         'icon'     => 'bx-target-lock',
         'key'      => 'crm',
         'children' => [
-            ['label' => 'Danh sách Lead',   'url' => '/lms1025edu/admin/pages/crm/leads.php',        'key' => 'crm_leads'],
-            ['label' => 'Lịch Hẹn',         'url' => '/lms1025edu/admin/pages/crm/appointments.php', 'key' => 'crm_appointments'],
+            ['label' => 'Lead liên hệ',   'url' => '/lms1025edu/admin/pages/crm/leads.php',        'key' => 'crm_leads', 'badge' => '1'],
+            ['label' => 'Lịch Hẹn',         'url' => '/lms1025edu/admin/pages/crm/appointments.php', 'key' => 'crm_appointments', 'badge' => '0'],
+            ['label' => 'Đơn hàng',         'url' => '#', 'key' => 'crm_orders', 'badge' => '0'],
         ],
     ],
     [
@@ -68,6 +69,15 @@ $navItems = [
             ['label' => 'Nhân viên',  'url' => '/lms1025edu/admin/pages/notifications/staff.php',   'key' => 'notif_staff'],
         ],
     ],
+    [ 'section' => 'PAGE' ],
+    [
+        'label'    => 'Kế toán',
+        'icon'     => 'bx-pie-chart-alt',
+        'key'      => 'accounting',
+        'children' => [
+            ['label' => 'Doanh thu', 'url' => '#', 'key' => 'acc_revenue'],
+        ],
+    ],
     [
         'label'    => 'Khuyến Mãi',
         'icon'     => 'bx-purchase-tag',
@@ -105,13 +115,18 @@ function isParentActive(array $item, string $activePage): bool
             <img src="/lms1025edu/admin/assets/images/logo-2.png" alt="Logo" style="width: 100%; height: 100%; object-fit: contain;">
         </div>
         <div class="brand-text">
-            <span class="brand-name">LMS Admin</span>
-            <span class="brand-sub">Education Platform</span>
+            <span class="brand-name">HVEducation</span>
+            <span class="brand-sub">Online learning solution</span>
         </div>
     </div>
 
     <div class="sidebar-nav">
         <?php foreach ($navItems as $item): ?>
+            <?php if (isset($item['section'])): ?>
+                <div class="sidebar-section"><?= $item['section'] ?></div>
+                <?php continue; ?>
+            <?php endif; ?>
+
             <?php
             $hasChildren  = !empty($item['children']);
             $isActive     = ($activePage === $item['key']) || isParentActive($item, $activePage);
@@ -122,6 +137,9 @@ function isParentActive(array $item, string $activePage): bool
                 <a href="<?= $item['url'] ?>" class="sidebar-link <?= $isActive ? 'active' : '' ?>">
                     <i class='bx <?= $item['icon'] ?>'></i>
                     <span><?= $item['label'] ?></span>
+                    <?php if (isset($item['badge'])): ?>
+                        <span class="sidebar-badge"><?= $item['badge'] ?></span>
+                    <?php endif; ?>
                 </a>
             <?php else: ?>
                 <button class="sidebar-link sidebar-link-toggle <?= $isActive ? 'active' : '' ?>"
@@ -130,6 +148,9 @@ function isParentActive(array $item, string $activePage): bool
                         aria-expanded="<?= $isActive ? 'true' : 'false' ?>">
                     <i class='bx <?= $item['icon'] ?>'></i>
                     <span><?= $item['label'] ?></span>
+                    <?php if (isset($item['badge'])): ?>
+                        <span class="sidebar-badge"><?= $item['badge'] ?></span>
+                    <?php endif; ?>
                     <i class='bx bx-chevron-right sidebar-arrow ms-auto'></i>
                 </button>
                 <div class="collapse <?= $isActive ? 'show' : '' ?>" id="<?= $collapseId ?>">
@@ -139,6 +160,9 @@ function isParentActive(array $item, string $activePage): bool
                                class="sidebar-sublink <?= ($activePage === $child['key']) ? 'active' : '' ?>">
                                 <i class='bx bx-circle'></i>
                                 <?= $child['label'] ?>
+                                <?php if (isset($child['badge'])): ?>
+                                    <span class="sidebar-badge" style="margin-left:auto; transform: scale(0.9);"><?= $child['badge'] ?></span>
+                                <?php endif; ?>
                             </a>
                         <?php endforeach; ?>
                     </div>

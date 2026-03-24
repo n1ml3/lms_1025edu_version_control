@@ -238,9 +238,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <input type="password" name="password" id="password"
                                placeholder=""
                                required>
-                        <button type="button" class="toggle-pw" id="togglePw" title="Hiện/ẩn mật khẩu">
+                        <!-- <button type="button" class="toggle-pw" id="togglePw" title="Hiện/ẩn mật khẩu">
                             <i class='bx bx-show' id="pwIcon"></i>
-                        </button>
+                        </button> -->
                     </div>
                 </div>
 

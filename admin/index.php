@@ -37,184 +37,148 @@ require_once __DIR__ . '/includes/sidebar.php';
     <?php /* Topbar already rendered in header.php */ ?>
     <main class="page-content">
 
-        <!-- Page Header -->
-        <div class="page-header d-flex align-items-center justify-content-between">
-            <div>
-                <h1 class="page-title">Tổng Quan</h1>
-                <p class="page-subtitle">Chào buổi sáng, <strong><?= htmlspecialchars($adminName) ?></strong> — Hôm nay là <?= date('d/m/Y') ?></p>
-            </div>
-            <button class="btn-primary-custom" id="btnRefreshStats">
-                <i class='bx bx-refresh'></i> Làm mới
-            </button>
+        <!-- Alert Banners -->
+        <div class="alert alert-success d-flex align-items-center mb-3 px-3 py-2" style="background:#e6fcf5; color:#00a786; border:none; border-radius:6px;">
+            <i class='bx bx-check-circle me-2' style="font-size:18px;"></i>
+            <span style="font-size:13.5px; font-weight:500;">Bạn đã được kết nối với tổng đài.</span>
+        </div>
+        <div class="alert alert-danger d-flex align-items-center mb-4 px-3 py-2" style="background:#fff0f6; color:#e64980; border:none; border-radius:6px;">
+            <i class='bx bx-error-circle me-2' style="font-size:18px;"></i>
+            <span style="font-size:13.5px; font-weight:500;">Bạn chưa chia ca cho tuần sau.</span>
         </div>
 
         <!-- Top 4 Stat Cards -->
         <div class="row g-4 mb-4">
             <div class="col-sm-6 col-xl-3">
                 <div class="stat-card">
-                    <div class="stat-icon indigo"><i class='bx bx-building-house'></i></div>
                     <div class="stat-info">
-                        <p class="stat-label">Cơ sở</p>
                         <div class="stat-value"><?= number_format($statBranches) ?></div>
-                        <p class="stat-change up"><i class='bx bx-trending-up'></i> Hoạt động</p>
+                        <p class="stat-label">Cơ sở</p>
                     </div>
+                    <div class="stat-icon" style="background:#00bfa5; color:#fff;"><i class='bx bx-building-house'></i></div>
                 </div>
             </div>
             <div class="col-sm-6 col-xl-3">
                 <div class="stat-card">
-                    <div class="stat-icon cyan"><i class='bx bx-globe'></i></div>
                     <div class="stat-info">
-                        <p class="stat-label">Nguồn Lead</p>
                         <div class="stat-value"><?= number_format($statSources) ?></div>
-                        <p class="stat-change up"><i class='bx bx-trending-up'></i> Nguồn đang theo dõi</p>
+                        <p class="stat-label">Nguồn Lead</p>
                     </div>
+                    <div class="stat-icon" style="background:#3b82f6; color:#fff;"><i class='bx bx-globe'></i></div>
                 </div>
             </div>
             <div class="col-sm-6 col-xl-3">
                 <div class="stat-card">
-                    <div class="stat-icon green"><i class='bx bx-book-open'></i></div>
                     <div class="stat-info">
-                        <p class="stat-label">Khóa học</p>
                         <div class="stat-value"><?= number_format($statCourses) ?></div>
-                        <p class="stat-change up"><i class='bx bx-trending-up'></i> Đang mở</p>
+                        <p class="stat-label">Khóa học</p>
                     </div>
+                    <div class="stat-icon" style="background:#f59e0b; color:#fff;"><i class='bx bx-book-open'></i></div>
                 </div>
             </div>
             <div class="col-sm-6 col-xl-3">
                 <div class="stat-card">
-                    <div class="stat-icon orange"><i class='bx bx-chalkboard'></i></div>
                     <div class="stat-info">
-                        <p class="stat-label">Giảng viên</p>
                         <div class="stat-value"><?= number_format($statTeachers) ?></div>
-                        <p class="stat-change up"><i class='bx bx-trending-up'></i> Đang giảng dạy</p>
+                        <p class="stat-label">Giảng viên</p>
                     </div>
+                    <div class="stat-icon" style="background:#8b5cf6; color:#fff;"><i class='bx bx-chalkboard'></i></div>
                 </div>
             </div>
         </div>
 
-        <!-- Filter Bar -->
-        <div class="filter-bar mb-4" id="filterBar">
-            <div>
-                <div class="form-label">Cơ sở</div>
-                <select class="form-select" id="filterBranch" style="min-width:150px">
-                    <option value="">Tất cả cơ sở</option>
-                </select>
-            </div>
-            <div>
-                <div class="form-label">Nguồn</div>
-                <select class="form-select" id="filterSource" style="min-width:140px">
-                    <option value="">Tất cả nguồn</option>
-                </select>
-            </div>
-            <div>
-                <div class="form-label">Nhân viên</div>
-                <select class="form-select" id="filterStaff" style="min-width:150px">
-                    <option value="">Tất cả nhân viên</option>
-                </select>
-            </div>
-            <div>
-                <div class="form-label">Từ ngày</div>
-                <input type="date" class="form-control" id="filterDateFrom" style="min-width:145px"
-                       value="<?= date('Y-m-01') ?>">
-            </div>
-            <div>
-                <div class="form-label">Đến ngày</div>
-                <input type="date" class="form-control" id="filterDateTo" style="min-width:145px"
-                       value="<?= date('Y-m-d') ?>">
-            </div>
-            <div class="ms-auto">
-                <button class="btn-primary-custom" id="btnFilter">
+        <!-- Thống kê Card -->
+        <div class="content-card mb-4" id="statsFilterCard">
+            <div class="content-card-header d-flex align-items-center justify-content-between flex-wrap gap-3">
+                <div class="d-flex align-items-center gap-3 flex-wrap">
+                    <span class="fw-bold text-dark" style="font-size: 15px;">Thống kê</span>
+                    <select class="form-select form-select-sm" id="filterBranch" style="width: auto; min-width: 140px; font-size:13px;">
+                        <option value="">Chọn cơ sở</option>
+                    </select>
+                    <select class="form-select form-select-sm" id="filterSource" style="width: auto; min-width: 140px; font-size:13px;">
+                        <option value="">Chọn nguồn</option>
+                    </select>
+                    <select class="form-select form-select-sm" id="filterStaff" style="width: auto; min-width: 140px; font-size:13px;">
+                        <option value="">Chọn nhân viên</option>
+                    </select>
+                    <div class="input-group input-group-sm" style="width: auto; min-width: 240px;">
+                        <input type="date" class="form-control" id="filterDateFrom" value="<?= date('Y-m-01') ?>" style="font-size:13px;">
+                        <span class="input-group-text bg-light border-start-0 border-end-0 text-muted">-</span>
+                        <input type="date" class="form-control" id="filterDateTo" value="<?= date('Y-m-d') ?>" style="font-size:13px;">
+                    </div>
+                </div>
+                <button class="btn-primary-custom" id="btnFilter" style="background: #00bfa5; padding: 6px 16px; font-size:13px;">
                     <i class='bx bx-filter-alt'></i> Lọc
                 </button>
             </div>
-        </div>
-
-        <!-- Mini Stats 6 cards -->
-        <div class="row g-3 mb-4" id="miniStats">
-            <?php
-            $miniStats = [
-                ['icon'=>'bx-phone-call',  'color'=>'indigo', 'label'=>'Lead liên hệ',  'val'=> number_format($statLeads)],
-                ['icon'=>'bx-user-check',  'color'=>'cyan',   'label'=>'Học viên',       'val'=> number_format($statStudents)],
-                ['icon'=>'bx-calendar',    'color'=>'green',  'label'=>'Lịch hẹn HN',   'val'=> number_format($statAppts)],
-                ['icon'=>'bx-receipt',     'color'=>'orange', 'label'=>'Đơn hàng HN',   'val'=> number_format($statOrders)],
-                ['icon'=>'bx-dollar-circle','color'=>'purple','label'=>'Dự thu (tháng)','val'=> number_format($statRevExpected/1000000,1).'M đ'],
-                ['icon'=>'bx-check-circle','color'=>'green',  'label'=>'Đã thu (tháng)', 'val'=> number_format($statRevActual/1000000,1).'M đ'],
-            ];
-            foreach ($miniStats as $ms): ?>
-            <div class="col-sm-6 col-md-4 col-xl-2">
-                <div class="content-card p-3 text-center" style="cursor:default">
-                    <div class="stat-icon <?= $ms['color'] ?> mx-auto mb-2" style="width:44px;height:44px;font-size:22px">
-                        <i class='bx <?= $ms['icon'] ?>'></i>
+            <div class="content-card-body p-4">
+                <div class="row g-4" id="miniStats">
+                    <?php
+                    $miniStats = [
+                        ['icon'=>'bx-phone-call',  'color'=>'#4f46e5', 'bg'=>'#e0e7ff', 'label'=>'Lead liên hệ',  'val'=> number_format($statLeads)],
+                        ['icon'=>'bx-user',        'color'=>'#0891b2', 'bg'=>'#cffafe', 'label'=>'Khách hàng',    'val'=> number_format($statStudents)],
+                        ['icon'=>'bx-time-five',   'color'=>'#059669', 'bg'=>'#d1fae5', 'label'=>'Lịch hẹn',      'val'=> number_format($statAppts)],
+                        ['icon'=>'bx-cart',        'color'=>'#d97706', 'bg'=>'#fef3c7', 'label'=>'Đơn hàng',      'val'=> number_format($statOrders)],
+                        ['icon'=>'bx-money',       'color'=>'#7c3aed', 'bg'=>'#ede9fe', 'label'=>'Dự thu',        'val'=> number_format($statRevExpected)],
+                        ['icon'=>'bx-check-shield','color'=>'#059669', 'bg'=>'#d1fae5', 'label'=>'Đã thu',        'val'=> number_format($statRevActual)],
+                    ];
+                    foreach ($miniStats as $ms): ?>
+                    <div class="col-6 col-md-3">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="stat-icon-mini" style="width:48px; height:48px; border-radius:12px; background:<?= $ms['bg'] ?>; color:<?= $ms['color'] ?>; display:flex; align-items:center; justify-content:center; font-size:24px; flex-shrink:0;">
+                                <i class='bx <?= $ms['icon'] ?>'></i>
+                            </div>
+                            <div>
+                                <div style="font-size:20px; font-weight:700; color:var(--text-dark); line-height:1.2;"><?= $ms['val'] ?></div>
+                                <div style="font-size:13px; color:var(--text-muted); font-weight:500; margin-top:2px;"><?= $ms['label'] ?></div>
+                            </div>
+                        </div>
                     </div>
-                    <div style="font-size:20px;font-weight:700;color:var(--text-dark)"><?= $ms['val'] ?></div>
-                    <div style="font-size:12px;color:var(--text-muted);font-weight:500;margin-top:2px"><?= $ms['label'] ?></div>
+                    <?php endforeach; ?>
                 </div>
             </div>
-            <?php endforeach; ?>
         </div>
 
-        <!-- Chart + Schedule Row -->
-        <div class="row g-4 mb-4">
-            <!-- Revenue Chart -->
-            <div class="col-xl-7">
-                <div class="content-card">
-                    <div class="content-card-header">
-                        <h3 class="content-card-title">Doanh Thu Theo Tuần</h3>
-                        <select class="form-select form-select-sm" id="chartPeriod" style="width:120px">
-                            <option value="week">Tuần này</option>
-                            <option value="month">Tháng này</option>
-                            <option value="quarter">Quý này</option>
-                        </select>
+        <!-- Schedule Row -->
+        <div class="content-card mb-5">
+            <div class="content-card-body p-4">
+                <ul class="nav schedule-tabs" id="scheduleTabs">
+                    <li class="nav-item">
+                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tabShift">Lịch trực tuần</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabAppt">Lịch hẹn</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabClass">Lịch học trực tiếp</button>
+                    </li>
+                </ul>
+                <div class="tab-content mt-4">
+                    <div class="tab-pane fade show active" id="tabShift">
+                        <div class="empty-state text-center py-5">
+                            <i class='bx bx-calendar-x d-block mx-auto' style="font-size:64px; color:#cbd5e1; margin-bottom:16px;"></i>
+                            <p style="color:var(--text-muted); font-size:14.5px;">Không tìm thấy bản ghi nào!</p>
+                        </div>
                     </div>
-                    <div class="content-card-body">
-                        <div style="height:280px;position:relative">
-                            <canvas id="revenueChart"></canvas>
+                    <div class="tab-pane fade" id="tabAppt">
+                        <div class="empty-state text-center py-5">
+                            <i class='bx bx-calendar-x d-block mx-auto' style="font-size:64px; color:#cbd5e1; margin-bottom:16px;"></i>
+                            <p style="color:var(--text-muted); font-size:14.5px;">Không tìm thấy bản ghi nào!</p>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tabClass">
+                        <div class="empty-state text-center py-5">
+                            <i class='bx bx-calendar-x d-block mx-auto' style="font-size:64px; color:#cbd5e1; margin-bottom:16px;"></i>
+                            <p style="color:var(--text-muted); font-size:14.5px;">Không tìm thấy bản ghi nào!</p>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Schedule Tabs -->
-            <div class="col-xl-5">
-                <div class="content-card h-100">
-                    <div class="content-card-header">
-                        <h3 class="content-card-title">Lịch</h3>
-                    </div>
-                    <div class="content-card-body">
-                        <ul class="nav schedule-tabs gap-2 mb-3" id="scheduleTabs">
-                            <li class="nav-item">
-                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tabShift">Trực tuần</button>
-                            </li>
-                            <li class="nav-item">
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabAppt">Lịch hẹn</button>
-                            </li>
-                            <li class="nav-item">
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabClass">Học trực tiếp</button>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane fade show active" id="tabShift">
-                                <p class="text-muted fs-13 text-center py-4">
-                                    <i class='bx bx-calendar-check d-block mb-2' style="font-size:32px"></i>
-                                    Không có lịch trực hôm nay
-                                </p>
-                            </div>
-                            <div class="tab-pane fade" id="tabAppt">
-                                <p class="text-muted fs-13 text-center py-4">
-                                    <i class='bx bx-phone d-block mb-2' style="font-size:32px"></i>
-                                    Không có lịch hẹn hôm nay
-                                </p>
-                            </div>
-                            <div class="tab-pane fade" id="tabClass">
-                                <p class="text-muted fs-13 text-center py-4">
-                                    <i class='bx bx-chalkboard d-block mb-2' style="font-size:32px"></i>
-                                    Không có lớp học hôm nay
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- FAB -->
+        <div class="fab-fixed" title="Cài đặt">
+            <i class='bx bx-cog'></i>
         </div>
 
     </main>
