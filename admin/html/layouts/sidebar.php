@@ -10,15 +10,15 @@ $navItems = [
         'label' => 'Dashboards',
         'icon'  => 'bx-home-alt-2',
         'key'   => 'dashboard',
-        'url'   => '/lms1025edu/admin/index.php',
+        'url'   => ($baseUrl ?? '/lms1025edu/admin') . '/index.php',
     ],
     [
         'label'    => 'CRM',
         'icon'     => 'bx-target-lock',
         'key'      => 'crm',
         'children' => [
-            ['label' => 'Lead liên hệ',   'url' => '/lms1025edu/admin/pages/crm/leads.php',        'key' => 'crm_leads', 'badge' => '1'],
-            ['label' => 'Lịch Hẹn',         'url' => '/lms1025edu/admin/pages/crm/appointments.php', 'key' => 'crm_appointments', 'badge' => '0'],
+            ['label' => 'Lead liên hệ',   'url' => ($baseUrl ?? '/lms1025edu/admin') . '/pages/crm/leads.php',        'key' => 'crm_leads', 'badge' => '1'],
+            ['label' => 'Lịch Hẹn',         'url' => ($baseUrl ?? '/lms1025edu/admin') . '/pages/crm/appointments.php', 'key' => 'crm_appointments', 'badge' => '0'],
             ['label' => 'Đơn hàng',         'url' => '#', 'key' => 'crm_orders', 'badge' => '0'],
         ],
     ],
@@ -27,8 +27,8 @@ $navItems = [
         'icon'     => 'bx-group',
         'key'      => 'members',
         'children' => [
-            ['label' => 'Quản trị viên', 'url' => '/lms1025edu/admin/pages/members/list.php',  'key' => 'members_list'],
-            ['label' => 'Phân quyền',    'url' => '/lms1025edu/admin/pages/members/roles.php', 'key' => 'members_roles'],
+            ['label' => 'Quản trị viên', 'url' => ($baseUrl ?? '/lms1025edu/admin') . '/pages/members/list.php',  'key' => 'members_list'],
+            ['label' => 'Phân quyền',    'url' => ($baseUrl ?? '/lms1025edu/admin') . '/pages/members/roles.php', 'key' => 'members_roles'],
         ],
     ],
     [
@@ -36,9 +36,9 @@ $navItems = [
         'icon'     => 'bx-book-open',
         'key'      => 'courses',
         'children' => [
-            ['label' => 'Chương trình học', 'url' => '/lms1025edu/admin/pages/courses/programs.php', 'key' => 'courses_programs'],
-            ['label' => 'Lớp học',          'url' => '/lms1025edu/admin/pages/courses/classes.php',  'key' => 'courses_classes'],
-            ['label' => 'Bài kiểm tra',     'url' => '/lms1025edu/admin/pages/courses/quiz.php',     'key' => 'courses_quiz'],
+            ['label' => 'Chương trình học', 'url' => ($baseUrl ?? '/lms1025edu/admin') . '/pages/courses/programs.php', 'key' => 'courses_programs'],
+            ['label' => 'Lớp học',          'url' => ($baseUrl ?? '/lms1025edu/admin') . '/pages/courses/classes.php',  'key' => 'courses_classes'],
+            ['label' => 'Bài kiểm tra',     'url' => ($baseUrl ?? '/lms1025edu/admin') . '/pages/courses/quiz.php',     'key' => 'courses_quiz'],
         ],
     ],
     [
@@ -46,8 +46,8 @@ $navItems = [
         'icon'     => 'bx-package',
         'key'      => 'products',
         'children' => [
-            ['label' => 'Danh sách', 'url' => '/lms1025edu/admin/pages/products/list.php', 'key' => 'products_list'],
-            ['label' => 'Thêm mới',  'url' => '/lms1025edu/admin/pages/products/add.php',  'key' => 'products_add'],
+            ['label' => 'Danh sách', 'url' => ($baseUrl ?? '/lms1025edu/admin') . '/pages/products/list.php', 'key' => 'products_list'],
+            ['label' => 'Thêm mới',  'url' => ($baseUrl ?? '/lms1025edu/admin') . '/pages/products/add.php',  'key' => 'products_add'],
         ],
     ],
     [
@@ -55,9 +55,9 @@ $navItems = [
         'icon'     => 'bx-chalkboard',
         'key'      => 'instructors',
         'children' => [
-            ['label' => 'Giáo viên',    'url' => '/lms1025edu/admin/pages/instructors/teachers.php',     'key' => 'inst_teachers'],
-            ['label' => 'Đại lý',       'url' => '/lms1025edu/admin/pages/instructors/agents.php',       'key' => 'inst_agents'],
-            ['label' => 'Nguồn dữ liệu','url' => '/lms1025edu/admin/pages/instructors/data-sources.php','key' => 'inst_sources'],
+            ['label' => 'Giáo viên',    'url' => ($baseUrl ?? '/lms1025edu/admin') . '/pages/instructors/teachers.php',     'key' => 'inst_teachers'],
+            ['label' => 'Đại lý',       'url' => ($baseUrl ?? '/lms1025edu/admin') . '/pages/instructors/agents.php',       'key' => 'inst_agents'],
+            ['label' => 'Nguồn dữ liệu','url' => ($baseUrl ?? '/lms1025edu/admin') . '/pages/instructors/data-sources.php','key' => 'inst_sources'],
         ],
     ],
     [
@@ -65,8 +65,8 @@ $navItems = [
         'icon'     => 'bx-bell',
         'key'      => 'notifications',
         'children' => [
-            ['label' => 'Chung',      'url' => '/lms1025edu/admin/pages/notifications/general.php', 'key' => 'notif_general'],
-            ['label' => 'Nhân viên',  'url' => '/lms1025edu/admin/pages/notifications/staff.php',   'key' => 'notif_staff'],
+            ['label' => 'Chung',      'url' => ($baseUrl ?? '/lms1025edu/admin') . '/pages/notifications/general.php', 'key' => 'notif_general'],
+            ['label' => 'Nhân viên',  'url' => ($baseUrl ?? '/lms1025edu/admin') . '/pages/notifications/staff.php',   'key' => 'notif_staff'],
         ],
     ],
     [ 'section' => 'PAGE' ],
@@ -83,7 +83,7 @@ $navItems = [
         'icon'     => 'bx-purchase-tag',
         'key'      => 'promotions',
         'children' => [
-            ['label' => 'Mã giảm giá', 'url' => '/lms1025edu/admin/pages/promotions/coupons.php', 'key' => 'promo_coupons'],
+            ['label' => 'Mã giảm giá', 'url' => ($baseUrl ?? '/lms1025edu/admin') . '/pages/promotions/coupons.php', 'key' => 'promo_coupons'],
         ],
     ],
     [
@@ -91,8 +91,8 @@ $navItems = [
         'icon'     => 'bx-cog',
         'key'      => 'settings',
         'children' => [
-            ['label' => 'Media',  'url' => '/lms1025edu/admin/pages/settings/media.php',   'key' => 'settings_media'],
-            ['label' => 'Lưu trữ','url' => '/lms1025edu/admin/pages/settings/storage.php', 'key' => 'settings_storage'],
+            ['label' => 'Media',  'url' => ($baseUrl ?? '/lms1025edu/admin') . '/pages/settings/media.php',   'key' => 'settings_media'],
+            ['label' => 'Lưu trữ','url' => ($baseUrl ?? '/lms1025edu/admin') . '/pages/settings/storage.php', 'key' => 'settings_storage'],
         ],
     ],
 ];
@@ -111,8 +111,9 @@ function isParentActive(array $item, string $activePage): bool
 <aside class="sidebar" id="sidebar">
     <!-- Logo -->
     <div class="sidebar-brand">
-        <a href="/lms1025edu/admin/index.php" class="d-block text-center w-100">
-            <img src="/lms1025edu/admin/images/logo-2.png" alt="Logo" class="sidebar-logo-img w-100" style="max-height: 45px; object-fit: contain;">
+        <a href="<?= $baseUrl ?? '/lms1025edu/admin' ?>/index.php" class="d-block text-center w-100">
+            <img src="<?= $baseUrl ?? '/lms1025edu/admin' ?>/images/logo-2.png" alt="Logo" class="sidebar-logo-img w-100" style="max-height: 45px; object-fit: contain;">
+            <img src="<?= $baseUrl ?? '/lms1025edu/admin' ?>/images/favicon.png" alt="Icon" class="sidebar-logo-icon" style="max-height: 32px; object-fit: contain; display: none;">
         </a>
     </div>
 

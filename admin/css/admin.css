@@ -210,6 +210,10 @@ a:hover { color: var(--primary); }
 .sidebar-collapsed .sidebar-section,
 .sidebar-collapsed .sidebar-submenu { display: none; }
 
+/* Toggle small/large logo */
+.sidebar-collapsed .sidebar-logo-img { display: none !important; }
+.sidebar-collapsed .sidebar-logo-icon { display: block !important; margin: 0 auto; }
+
 .sidebar-collapsed .brand-icon { margin: auto; }
 .sidebar-collapsed .sidebar-brand { padding: 20px 10px; justify-content: center; }
 .sidebar-collapsed .sidebar-link { padding: 12px; justify-content: center; }

@@ -9,6 +9,16 @@ $pageTitle = $pageTitle ?? 'DASHBOARD';
 $adminVars = isset($_SESSION['admin']) ? $_SESSION['admin'] : [];
 $adminName = $adminVars['name'] ?? 'HVG Admin';
 $adminRole = $adminVars['role'] ?? 'Admin';
+
+// Calculate base URL dynamically to prevent CSS / JS 404s
+$baseUrl = '/lms1025edu/admin';
+if (isset($_SERVER['SCRIPT_NAME'])) {
+    $scriptPath = $_SERVER['SCRIPT_NAME'];
+    $adminPos = strpos($scriptPath, '/admin/');
+    if ($adminPos !== false) {
+        $baseUrl = substr($scriptPath, 0, $adminPos) . '/admin';
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -32,7 +42,7 @@ $adminRole = $adminVars['role'] ?? 'Admin';
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js" defer></script>
 
     <!-- Admin CSS -->
-    <link href="/lms1025edu/admin/css/admin.css" rel="stylesheet">
+    <link href="<?= $baseUrl ?>/css/admin.css" rel="stylesheet">
 </head>
 <body>
 <div class="admin-wrapper">

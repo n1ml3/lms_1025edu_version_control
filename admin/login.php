@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             display: none;
             flex: 1;
             background: url('/lms1025edu/admin/images/Group-45936.png') center no-repeat;
-            position: relative;
+            position: center;
         }
 
         @media (min-width: 992px) { .login-image { display: block; } }

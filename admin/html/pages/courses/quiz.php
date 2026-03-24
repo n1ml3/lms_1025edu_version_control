@@ -1,5 +1,6 @@
-require_once __DIR__ . '/../../html/layouts/header.php';
-require_once __DIR__ . '/../../html/layouts/sidebar.php';
+<?php
+require_once __DIR__ . '/../../layouts/header.php';
+require_once __DIR__ . '/../../layouts/sidebar.php';
 ?>
 <div class="main-area"><main class="page-content">
     <div class="page-header d-flex align-items-center justify-content-between">
@@ -33,4 +34,4 @@ require_once __DIR__ . '/../../html/layouts/sidebar.php';
         <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button><button class="btn-primary-custom">Lưu</button></div>
     </div></div>
 </div>
-<?php require_once __DIR__ . '/../../html/layouts/footer.php'; ?>
+<?php require_once __DIR__ . '/../../layouts/footer.php'; ?>

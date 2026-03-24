@@ -1,5 +1,6 @@
-require_once __DIR__ . '/../../html/layouts/header.php';
-require_once __DIR__ . '/../../html/layouts/sidebar.php';
+<?php
+require_once __DIR__ . '/../../layouts/header.php';
+require_once __DIR__ . '/../../layouts/sidebar.php';
 ?>
 <div class="main-area">
 <main class="page-content">
@@ -132,5 +133,5 @@ $('#btnSaveLead').on('click', function () {
     });
 });
 JS;
-require_once __DIR__ . '/../../html/layouts/footer.php';
+require_once __DIR__ . '/../../layouts/footer.php';
 ?>

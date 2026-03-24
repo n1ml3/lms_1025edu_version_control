@@ -1,5 +1,6 @@
-require_once __DIR__ . '/../../html/layouts/header.php';
-require_once __DIR__ . '/../../html/layouts/sidebar.php';
+<?php
+require_once __DIR__ . '/../../layouts/header.php';
+require_once __DIR__ . '/../../layouts/sidebar.php';
 ?>
 <div class="main-area"><main class="page-content">
     <div class="page-header">
@@ -53,4 +54,4 @@ require_once __DIR__ . '/../../html/layouts/sidebar.php';
         </div>
     </div>
 </main></div>
-<?php require_once __DIR__ . '/../../html/layouts/footer.php'; ?>
+<?php require_once __DIR__ . '/../../layouts/footer.php'; ?>

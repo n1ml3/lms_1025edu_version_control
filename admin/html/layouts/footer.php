@@ -12,7 +12,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
     <!-- Admin Global JS -->
-    <script src="/lms1025edu/admin/js/admin.js"></script>
+    <script src="<?= $baseUrl ?? '/lms1025edu/admin' ?>/js/admin.js"></script>
 
     <?php if (!empty($extraScripts)):
         foreach ($extraScripts as $script): ?>

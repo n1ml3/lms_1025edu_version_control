@@ -62,6 +62,9 @@
                     <span class="fw-bold text-dark" style="font-size: 15px;">Thống kê</span>
                     <select class="form-select form-select-sm" id="filterBranch" style="width: auto; min-width: 140px; font-size:13px;">
                         <option value="">Chọn cơ sở</option>
+                        <?php foreach ($branches as $branch): ?>
+                            <option value="<?= $branch['id'] ?>"><?= $branch['name'] ?></option>
+                        <?php endforeach; ?>
                     </select>
                     <select class="form-select form-select-sm" id="filterSource" style="width: auto; min-width: 140px; font-size:13px;">
                         <option value="">Chọn nguồn</option>
