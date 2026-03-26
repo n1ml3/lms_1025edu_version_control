@@ -1,26 +1,13 @@
 <?php
-require_once __DIR__ . '/../../../../config/db.php';
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
 
-// Fetch Appointments with Joins
-$stmt = $pdo->query("SELECT a.*, DATE(a.datetime) AS appt_date, TIME(a.datetime) AS appt_time, 
-                    l.name AS lead_name, l.phone AS lead_phone, b.name AS branch_name, adm.name AS staff_name 
-                    FROM appointments a
-                    LEFT JOIN leads l ON l.id = a.lead_id
-                    LEFT JOIN branches b ON b.id = l.branch_id
-                    LEFT JOIN admins adm ON adm.id = l.staff_id
-                    ORDER BY a.datetime DESC");
-$appts = $stmt->fetchAll();
-
-// Fetch Leads for Select
-$leads = $pdo->query("SELECT id, name, phone FROM leads ORDER BY name ASC")->fetchAll();
-
-// Fetch Branches for Select
-$branches = $pdo->query("SELECT id, name FROM branches ORDER BY name ASC")->fetchAll();
-
-// Fetch Admins for Select
-$admins = $pdo->query("SELECT id, name FROM admins ORDER BY name ASC")->fetchAll();
+$pageAction = <<<HTML
+<button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalAppt">
+    <i class='bx bx-plus'></i> Tạo Lịch Hẹn
+</button>
+HTML;
+?>
 
 $pageAction = <<<HTML
 <button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalAppt" onclick="resetApptForm()">

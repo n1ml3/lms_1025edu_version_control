@@ -1,22 +1,13 @@
 <?php
-require_once __DIR__ . '/../../../../config/db.php';
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
 
-// Fetch Classes with Joins
-$stmt = $pdo->query("SELECT c.*, p.name AS program_name, t.name AS teacher_name, 
-                    (SELECT COUNT(*) FROM students s WHERE s.class_id = c.id) AS current_students 
-                    FROM classes c
-                    LEFT JOIN programs p ON p.id = c.program_id
-                    LEFT JOIN teachers t ON t.id = c.teacher_id
-                    ORDER BY c.id DESC");
-$classes = $stmt->fetchAll();
-
-// Fetch Programs for Select
-$programs = $pdo->query("SELECT id, name FROM programs ORDER BY name ASC")->fetchAll();
-
-// Fetch Teachers for Select
-$teachers = $pdo->query("SELECT id, name FROM teachers ORDER BY name ASC")->fetchAll();
+$pageAction = <<<HTML
+<button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalClass">
+    <i class='bx bx-plus'></i> Thêm Lớp Học
+</button>
+HTML;
+?>
 
 $pageAction = <<<HTML
 <button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalClass" onclick="resetClassForm()">

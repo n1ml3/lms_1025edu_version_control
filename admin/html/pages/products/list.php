@@ -2,12 +2,8 @@
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
 
-// Fetch Products
-$stmt = $pdo->query("SELECT * FROM products WHERE is_active = 1 ORDER BY created_at DESC");
-$products = $stmt->fetchAll();
-
 $pageAction = <<<HTML
-<a href="pages/products/add.php" class="btn-primary-custom text-decoration-none">
+<a href="/lms1025edu/admin/pages/products/add.php" class="btn-primary-custom text-decoration-none">
     <i class='bx bx-plus'></i> Thêm Sản Phẩm
 </a>
 HTML;

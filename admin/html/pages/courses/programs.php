@@ -1,17 +1,13 @@
 <?php
-require_once __DIR__ . '/../../../../config/db.php';
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
 
-// Fetch Programs with Joins
-$stmt = $pdo->query("SELECT p.*, c.name AS course_name 
-                    FROM programs p 
-                    LEFT JOIN courses c ON c.id = p.course_id 
-                    ORDER BY c.name ASC, p.order ASC");
-$programs = $stmt->fetchAll();
-
-// Fetch Courses for Select
-$courses = $pdo->query("SELECT id, name FROM courses ORDER BY name ASC")->fetchAll();
+$pageAction = <<<HTML
+<button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalProgram">
+    <i class='bx bx-plus'></i> Thêm Chương Trình
+</button>
+HTML;
+?>
 
 $pageAction = <<<HTML
 <button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalProgram" onclick="resetProgramForm()">

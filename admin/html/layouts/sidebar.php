@@ -55,12 +55,6 @@ $navItems = [
         'key'   => 'courses_classes',
         'url'   => ($baseUrl ?? '/lms1025edu/admin') . '/pages/courses/classes.php',
     ],
-    [
-        'label' => 'Bài test',
-        'icon'  => 'bx-task',
-        'key'   => 'courses_quiz',
-        'url'   => ($baseUrl ?? '/lms1025edu/admin') . '/pages/courses/quiz.php',
-    ],
     [ 'section' => 'SẢN PHẨM' ],
     [
         'label' => 'Sản phẩm',

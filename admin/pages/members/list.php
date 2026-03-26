@@ -10,8 +10,9 @@ $activePage = 'members_list';
 $breadcrumb = [['label'=>'Thành Viên'],['label'=>'Quản trị viên']];
 
 try {
+    $adminId = $_SESSION['admin']['id'] ?? 0;
     $admins = $pdo->query("SELECT a.*, r.name AS role_name FROM admins a LEFT JOIN roles r ON r.id = a.role_id ORDER BY a.created_at DESC")->fetchAll();
     $roles = $pdo->query("SELECT id, name FROM roles ORDER BY name")->fetchAll();
-} catch (Exception $e) { $admins = []; $roles = []; }
+} catch (Exception $e) { $admins = []; $roles = []; $adminId = 0; }
 
 require_once __DIR__ . '/../../html/pages/members/list.php';

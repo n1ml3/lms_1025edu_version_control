@@ -24,7 +24,7 @@ try {
 
     // Fetch Sources & Branches for Modal
     $sources  = $pdo->query("SELECT id, name FROM lead_sources ORDER BY name ASC")->fetchAll();
-    $branches = $pdo->query("SELECT id, name FROM branches WHERE is_active = 1 ORDER BY name ASC")->fetchAll();
+    $branches = $pdo->query("SELECT id, name FROM branches ORDER BY name ASC")->fetchAll();
 
 } catch (Exception $e) {
     $leads = []; $sources = []; $branches = [];
