@@ -3,13 +3,6 @@ require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
 
 $pageAction = <<<HTML
-<button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalAppt">
-    <i class='bx bx-plus'></i> Tạo Lịch Hẹn
-</button>
-HTML;
-?>
-
-$pageAction = <<<HTML
 <button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalAppt" onclick="resetApptForm()">
     <i class='bx bx-plus'></i> Thêm Lịch Hẹn
 </button>

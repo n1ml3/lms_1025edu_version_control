@@ -3,13 +3,6 @@ require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
 
 $pageAction = <<<HTML
-<button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalAdmin">
-    <i class='bx bx-plus'></i> Thêm Thành Viên
-</button>
-HTML;
-?>
-
-$pageAction = <<<HTML
 <button class="btn btn-info text-white px-4 py-2" style="background-color:#0dcaf0; border:none; border-radius:6px; font-weight:500;" data-bs-toggle="modal" data-bs-target="#modalAdmin" onclick="resetAdminForm()">
     Thêm tài khoản
 </button>

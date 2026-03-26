@@ -3,13 +3,6 @@ require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
 
 $pageAction = <<<HTML
-<button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalClass">
-    <i class='bx bx-plus'></i> Thêm Lớp Học
-</button>
-HTML;
-?>
-
-$pageAction = <<<HTML
 <button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalClass" onclick="resetClassForm()">
     <i class='bx bx-plus'></i> Thêm Lớp
 </button>
