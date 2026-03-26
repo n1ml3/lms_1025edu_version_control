@@ -1,6 +1,17 @@
 <?php
+require_once __DIR__ . '/../../../../config/db.php';
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
+
+// Fetch Quizzes with Joins
+$stmt = $pdo->query("SELECT q.*, p.name AS program_name 
+                    FROM quizzes q
+                    LEFT JOIN programs p ON p.id = q.program_id
+                    ORDER BY q.name ASC");
+$quizzes = $stmt->fetchAll();
+
+// Fetch Programs for Select
+$programs = $pdo->query("SELECT id, name FROM programs ORDER BY name ASC")->fetchAll();
 
 $pageAction = <<<HTML
 <button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalQuiz" onclick="resetQuizForm()">

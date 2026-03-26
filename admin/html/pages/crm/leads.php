@@ -1,6 +1,21 @@
 <?php
+require_once __DIR__ . '/../../../../config/db.php';
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
+
+// Fetch Leads with Joins
+$stmt = $pdo->query("SELECT l.*, ls.name AS source_name, b.name AS branch_name 
+                    FROM leads l 
+                    LEFT JOIN lead_sources ls ON ls.id = l.source_id 
+                    LEFT JOIN branches b ON b.id = l.branch_id 
+                    ORDER BY l.created_at DESC");
+$leads = $stmt->fetchAll();
+
+// Fetch Sources for Select
+$sources = $pdo->query("SELECT id, name FROM lead_sources ORDER BY name ASC")->fetchAll();
+
+// Fetch Branches for Select
+$branches = $pdo->query("SELECT id, name FROM branches ORDER BY name ASC")->fetchAll();
 
 $pageAction = <<<HTML
 <button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalLead" onclick="resetLeadForm()">

@@ -1,6 +1,20 @@
 <?php
+require_once __DIR__ . '/../../../../config/db.php';
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
+
+// Fetch current admin ID from session
+$adminId = $_SESSION['admin']['id'] ?? 0;
+
+// Fetch Admins with Joins
+$stmt = $pdo->query("SELECT a.*, r.name AS role_name 
+                    FROM admins a 
+                    LEFT JOIN roles r ON r.id = a.role_id 
+                    ORDER BY a.created_at DESC");
+$admins = $stmt->fetchAll();
+
+// Fetch Roles for Select
+$roles = $pdo->query("SELECT id, name FROM roles ORDER BY name ASC")->fetchAll();
 
 $pageAction = <<<HTML
 <button class="btn btn-info text-white px-4 py-2" style="background-color:#0dcaf0; border:none; border-radius:6px; font-weight:500;" data-bs-toggle="modal" data-bs-target="#modalAdmin" onclick="resetAdminForm()">
