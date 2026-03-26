@@ -11,7 +11,15 @@ HTML;
 <div class="main-area">
     <?php require_once __DIR__ . '/../../layouts/topbar.php'; ?>
     <main class="page-content">
-        <div class="row g-3">
+        <!-- Toolbar -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="d-flex align-items-center gap-2 text-muted fs-14">
+                <span>Tìm kiếm:</span>
+                <input type="text" class="form-control form-control-sm" style="width:200px;" id="cardSearch" placeholder="Tên, email, SĐT...">
+            </div>
+        </div>
+
+        <div class="row g-3" id="teachersContainer">
             <?php if ($teachers): foreach ($teachers as $t): ?>
             <div class="col-sm-6 col-xl-4">
                 <div class="content-card">
@@ -121,6 +129,13 @@ function deleteTeacher(id) {
         }
     });
 }
+
+$('#cardSearch').on('keyup', function() {
+    const val = $(this).val().toLowerCase();
+    $('#teachersContainer > div').filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(val) > -1);
+    });
+});
 JS;
 require_once __DIR__ . '/../../layouts/footer.php'; 
 ?>

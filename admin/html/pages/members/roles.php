@@ -11,7 +11,15 @@ HTML;
 <div class="main-area">
     <?php require_once __DIR__ . '/../../layouts/topbar.php'; ?>
     <main class="page-content">
-    <div class="row g-4">
+        <!-- Toolbar -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="d-flex align-items-center gap-2 text-muted fs-14">
+                <span>Tìm kiếm:</span>
+                <input type="text" class="form-control form-control-sm" style="width:200px;" id="cardSearch" placeholder="Tên vai trò, quyền...">
+            </div>
+        </div>
+
+        <div class="row g-4" id="rolesContainer">
 
         <?php if ($roles): foreach ($roles as $role):
             $perms = is_string($role['permissions']) ? json_decode($role['permissions'], true) : ($role['permissions'] ?? []);
@@ -135,6 +143,13 @@ $('.btn-delete-role').on('click', function() {
         } else {
             lmsToast('danger', res.error || 'Lỗi khi xóa!');
         }
+    });
+});
+
+$('#cardSearch').on('keyup', function() {
+    const val = $(this).val().toLowerCase();
+    $('#rolesContainer > div').filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(val) > -1);
     });
 });
 JS;

@@ -11,9 +11,26 @@ HTML;
 <div class="main-area">
     <?php require_once __DIR__ . '/../../layouts/topbar.php'; ?>
     <main class="page-content">
+        <!-- Toolbar -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="d-flex align-items-center gap-2 text-muted fs-14">
+                <span>Hiển thị</span>
+                <select class="form-select form-select-sm" style="width:70px; display:inline-block;">
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+                <span>dòng</span>
+            </div>
+            <div class="d-flex align-items-center gap-2 text-muted fs-14">
+                <span>Tìm kiếm:</span>
+                <input type="text" class="form-control form-control-sm" style="width:200px;" id="tableSearch">
+            </div>
+        </div>
+
         <div class="content-card">
             <div class="table-responsive">
-                <table class="table table-custom">
+                <table class="table table-custom" id="notificationsTable">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -68,16 +85,27 @@ HTML;
 
 <?php
 $inlineScript = <<<'JS'
+function resetNotifForm() {
+    $('#formNotif')[0].reset();
+}
+
 $('#formNotif').on('submit', function(e) {
     e.preventDefault();
     const data = {};
     $(this).serializeArray().forEach(item => data[item.name] = item.value);
     
-    lmsAjax('/lms1025edu/admin/api/notifications.php', { action: 'create', ...data }, function(res) {
+    lmsAjax('/lms1025edu/admin/api/notifications.php', { action: 'create', type: 'general', ...data }, function(res) {
         if(res.success) {
             lmsToast('success', 'Đã gửi thông báo thành công!');
             setTimeout(() => location.reload(), 1000);
         }
+    });
+});
+
+$('#tableSearch').on('keyup', function() {
+    const val = $(this).val().toLowerCase();
+    $('#notificationsTable tbody tr').filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(val) > -1);
     });
 });
 JS;

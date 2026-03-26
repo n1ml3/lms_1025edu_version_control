@@ -11,9 +11,26 @@ HTML;
 <div class="main-area">
     <?php require_once __DIR__ . '/../../layouts/topbar.php'; ?>
     <main class="page-content">
+        <!-- Toolbar -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="d-flex align-items-center gap-2 text-muted fs-14">
+                <span>Hiển thị</span>
+                <select class="form-select form-select-sm" style="width:70px; display:inline-block;">
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+                <span>dòng</span>
+            </div>
+            <div class="d-flex align-items-center gap-2 text-muted fs-14">
+                <span>Tìm kiếm:</span>
+                <input type="text" class="form-control form-control-sm" style="width:200px;" id="tableSearch">
+            </div>
+        </div>
+
         <div class="content-card">
             <div class="table-responsive">
-                <table class="table table-custom">
+                <table class="table table-custom" id="agentsTable">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -121,6 +138,13 @@ function deleteAgent(id) {
         }
     });
 }
+
+$('#tableSearch').on('keyup', function() {
+    const val = $(this).val().toLowerCase();
+    $('#agentsTable tbody tr').filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(val) > -1);
+    });
+});
 JS;
 require_once __DIR__ . '/../../layouts/footer.php'; 
 ?>

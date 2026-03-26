@@ -19,40 +19,30 @@ try {
 
         case 'create':
             $code = strtoupper(trim($input['code'] ?? ''));
-            $type = $input['type'] ?? 'percent';
+            $type = trim($input['type'] ?? 'percent');
             $value = (float)($input['value'] ?? 0);
-            $usage_limit = !empty($input['usage_limit']) ? (int)$input['usage_limit'] : null;
             $expires_at = !empty($input['expires_at']) ? $input['expires_at'] : null;
+            $usage_limit = !empty($input['usage_limit']) ? (int)$input['usage_limit'] : null;
 
-            if (!$code || $value <= 0) throw new Exception('Mã code và giá trị hợp lệ là bắt buộc.');
+            if (!$code || $value <= 0) throw new Exception('Mã code và giá trị là bắt buộc.');
 
-            // Check duplicate code
-            $chk = $pdo->prepare("SELECT id FROM coupons WHERE code = ?");
-            $chk->execute([$code]);
-            if ($chk->fetch()) throw new Exception('Mã giảm giá này đã tồn tại.');
-
-            $stmt = $pdo->prepare("INSERT INTO coupons (code, type, value, usage_limit, expires_at, created_at) VALUES (?,?,?,?,?, NOW())");
-            $stmt->execute([$code, $type, $value, $usage_limit, $expires_at]);
+            $stmt = $pdo->prepare("INSERT INTO coupons (code, type, value, expires_at, usage_limit, created_at) VALUES (?, ?, ?, ?, ?, NOW())");
+            $stmt->execute([$code, $type, $value, $expires_at, $usage_limit]);
             echo json_encode(['success' => true, 'id' => $pdo->lastInsertId()]);
             break;
 
         case 'update':
             $id = (int)($input['id'] ?? 0);
             $code = strtoupper(trim($input['code'] ?? ''));
-            $type = $input['type'] ?? 'percent';
-            $value = (float)($input['value'] ?? 0);
-            $usage_limit = !empty($input['usage_limit']) ? (int)$input['usage_limit'] : null;
+            $type = trim($input['type'] ?? 'percent');
+            $value = (float)($input['value'] ?? 10);
             $expires_at = !empty($input['expires_at']) ? $input['expires_at'] : null;
+            $usage_limit = !empty($input['usage_limit']) ? (int)$input['usage_limit'] : null;
 
-            if (!$id || !$code || $value <= 0) throw new Exception('Dữ liệu không hợp lệ.');
+            if (!$id || !$code) throw new Exception('Dữ liệu không hợp lệ.');
 
-            // Check duplicate code (excluding self)
-            $chk = $pdo->prepare("SELECT id FROM coupons WHERE code = ? AND id != ?");
-            $chk->execute([$code, $id]);
-            if ($chk->fetch()) throw new Exception('Mã giảm giá này đã tồn tại.');
-
-            $stmt = $pdo->prepare("UPDATE coupons SET code=?, type=?, value=?, usage_limit=?, expires_at=? WHERE id=?");
-            $stmt->execute([$code, $type, $value, $usage_limit, $expires_at, $id]);
+            $stmt = $pdo->prepare("UPDATE coupons SET code=?, type=?, value=?, expires_at=?, usage_limit=? WHERE id=?");
+            $stmt->execute([$code, $type, $value, $expires_at, $usage_limit, $id]);
             echo json_encode(['success' => true]);
             break;
 
