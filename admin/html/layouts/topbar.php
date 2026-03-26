@@ -110,7 +110,6 @@
         <h2 class="toolbar-title"><?= htmlspecialchars($pageTitle) ?></h2>
         <nav aria-label="breadcrumb" class="d-none d-md-block">
             <ol class="breadcrumb mb-0">
-                <li class="breadcrumb-item"><a href="/lms1025edu/admin/index.php">CRM</a></li>
                 <?php if (!empty($breadcrumb)): ?>
                     <?php foreach ($breadcrumb as $b): ?>
                         <?php if (!empty($b['url'])): ?>
