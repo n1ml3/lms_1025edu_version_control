@@ -1,4 +1,20 @@
 <?php
+require_once __DIR__ . '/../../../includes/auth_check.php';
+require_once __DIR__ . '/../../../../config/db.php';
+
+$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$product = null;
+
+if ($id > 0) {
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM products WHERE id = ?");
+        $stmt->execute([$id]);
+        $product = $stmt->fetch();
+    } catch (PDOException $e) {
+        die("Lỗi truy vấn: " . $e->getMessage());
+    }
+}
+
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
 

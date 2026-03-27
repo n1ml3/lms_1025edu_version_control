@@ -1,4 +1,23 @@
 <?php
+require_once __DIR__ . '/../../../includes/auth_check.php';
+require_once __DIR__ . '/../../../../config/db.php';
+
+try {
+    // Fetch all classes with program and teacher names
+    $classes = $pdo->query("SELECT cl.*, p.name AS program_name, t.name AS teacher_name,
+                          (SELECT COUNT(*) FROM students s WHERE s.class_id = cl.id) as current_students
+                          FROM classes cl
+                          LEFT JOIN programs p ON p.id = cl.program_id
+                          LEFT JOIN teachers t ON t.id = cl.teacher_id
+                          ORDER BY cl.id DESC")->fetchAll();
+    
+    // Fetch programs and teachers for the modal dropdowns
+    $programs = $pdo->query("SELECT id, name FROM programs ORDER BY name ASC")->fetchAll();
+    $teachers = $pdo->query("SELECT id, name FROM teachers ORDER BY name ASC")->fetchAll();
+} catch (PDOException $e) {
+    die("Lỗi truy vấn: " . $e->getMessage());
+}
+
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
 

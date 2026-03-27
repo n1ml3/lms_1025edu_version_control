@@ -1,4 +1,13 @@
 <?php
+require_once __DIR__ . '/../../../includes/auth_check.php';
+require_once __DIR__ . '/../../../../config/db.php';
+
+try {
+    $products = $pdo->query("SELECT * FROM products ORDER BY created_at DESC")->fetchAll();
+} catch (PDOException $e) {
+    die("Lỗi truy vấn: " . $e->getMessage());
+}
+
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
 

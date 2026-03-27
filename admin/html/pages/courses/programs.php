@@ -1,4 +1,20 @@
 <?php
+require_once __DIR__ . '/../../../includes/auth_check.php';
+require_once __DIR__ . '/../../../../config/db.php';
+
+try {
+    // Fetch all programs with course names
+    $programs = $pdo->query("SELECT p.*, c.name AS course_name 
+                           FROM programs p 
+                           LEFT JOIN courses c ON c.id = p.course_id 
+                           ORDER BY p.order ASC, p.name ASC")->fetchAll();
+    
+    // Fetch all courses for the modal dropdown
+    $courses = $pdo->query("SELECT id, name FROM courses ORDER BY name ASC")->fetchAll();
+} catch (PDOException $e) {
+    die("Lỗi truy vấn: " . $e->getMessage());
+}
+
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
 

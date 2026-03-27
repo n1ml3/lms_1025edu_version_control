@@ -1,4 +1,13 @@
 <?php
+require_once __DIR__ . '/../../../includes/auth_check.php';
+require_once __DIR__ . '/../../../../config/db.php';
+
+try {
+    $teachers = $pdo->query("SELECT * FROM teachers ORDER BY name ASC")->fetchAll();
+} catch (PDOException $e) {
+    die("Lỗi truy vấn: " . $e->getMessage());
+}
+
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
 
