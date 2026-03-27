@@ -1,4 +1,25 @@
 <?php
+require_once __DIR__ . '/../../../includes/auth_check.php';
+require_once __DIR__ . '/../../../../config/db.php';
+
+$pageTitle = 'Quản Lý Lead';
+$activePage = 'crm_leads';
+
+try {
+    // Fetch Sources
+    $sources = $pdo->query("SELECT id, name FROM lead_sources ORDER BY name ASC")->fetchAll();
+    // Fetch Branches
+    $branches = $pdo->query("SELECT id, name FROM branches ORDER BY name ASC")->fetchAll();
+    // Fetch Leads
+    $leads = $pdo->query("SELECT l.*, ls.name AS source_name, b.name AS branch_name 
+                        FROM leads l 
+                        LEFT JOIN lead_sources ls ON ls.id = l.source_id 
+                        LEFT JOIN branches b ON b.id = l.branch_id 
+                        ORDER BY l.created_at DESC")->fetchAll();
+} catch (PDOException $e) {
+    die("Lỗi truy vấn: " . $e->getMessage());
+}
+
 require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
 
