@@ -95,8 +95,8 @@
                 </div>
             </button>
             <ul class="dropdown-menu dropdown-menu-end shadow-sm">
-                <li><a class="dropdown-item" href="/lms1025edu/admin/pages/profile.php"><i class='bx bx-user me-2'></i>Hồ sơ</a></li>
-                <li><a class="dropdown-item" href="/lms1025edu/admin/pages/settings/branches.php"><i class='bx bx-cog me-2'></i>Cài đặt</a></li>
+                <li><a class="dropdown-item" href="#"><i class='bx bx-user me-2'></i>Hồ sơ</a></li>
+                <li><a class="dropdown-item" href="#"><i class='bx bx-cog me-2'></i>Cài đặt</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item text-danger" href="/lms1025edu/admin/logout.php"><i class='bx bx-log-out me-2'></i>Đăng xuất</a></li>
             </ul>
