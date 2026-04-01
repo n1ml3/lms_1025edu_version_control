@@ -131,27 +131,25 @@ $navItems = [
         </a>
     </div>
 
-
-
-    <div class="sidebar-nav">
+    <div class="sidebar-nav" id="sidebarNav">
         <?php foreach ($navItems as $item): ?>
-            <?php 
+            <?php
             if (isset($item['section'])) {
                 echo '<div class="sidebar-section">' . htmlspecialchars($item['section']) . '</div>';
                 continue;
             }
-            
+
             $isActive = ($activePage === $item['key']);
             ?>
-            
-            <a href="<?= $item['url'] ?>" class="sidebar-link <?= $isActive ? 'active' : '' ?>">
+
+            <a href="<?= $item['url'] ?>" class="sidebar-link <?= $isActive ? 'active' : '' ?>" data-page-key="<?= $item['key'] ?>">
                 <i class='bx <?= $item['icon'] ?>'></i>
                 <span><?= $item['label'] ?></span>
                 <?php if (isset($item['badge'])): ?>
                     <span class="sidebar-badge text-white bg-danger rounded-pill" style="font-size: 10px; padding: 2px 6px; position: absolute; right: 15px;"><?= $item['badge'] ?></span>
                 <?php endif; ?>
             </a>
-            
+
         <?php endforeach; ?>
     </div>
 </aside>

@@ -7,6 +7,7 @@ $(function () {
     /* ── Sidebar Toggle ─────────────────────────────────── */
     const $body    = $('body');
     const $toggle  = $('#sidebarToggle');
+    const $sidebar = $('#sidebar');
 
     $toggle.on('click', function () {
         if (window.innerWidth < 992) {
@@ -26,6 +27,50 @@ $(function () {
     $(document).on('click', '.sidebar-overlay', function () {
         $body.removeClass('sidebar-open');
     });
+
+    /* ── Sidebar Scroll Position Preservation ───────────── */
+    // Save sidebar scroll position before leaving page
+    $(document).on('click', '.sidebar-link:not(.sidebar-link-toggle)', function () {
+        const scrollTop = $sidebar.scrollTop();
+        localStorage.setItem('sidebar-scroll-position', scrollTop);
+        
+        // Close mobile sidebar if open
+        if (window.innerWidth < 992) {
+            $body.removeClass('sidebar-open');
+        }
+    });
+
+    // Restore sidebar scroll position on page load
+    const savedScrollPosition = localStorage.getItem('sidebar-scroll-position');
+    if (savedScrollPosition !== null) {
+        // Wait for DOM to be fully ready
+        setTimeout(function() {
+            $sidebar.scrollTop(parseInt(savedScrollPosition, 10));
+        }, 100);
+        
+        // Clear the saved position after restoring (one-time use)
+        localStorage.removeItem('sidebar-scroll-position');
+    }
+
+    // Keep active link in view - scroll sidebar to show active item
+    const $activeLink = $('.sidebar-link.active');
+    if ($activeLink.length > 0) {
+        setTimeout(function() {
+            const sidebarHeight = $sidebar.outerHeight();
+            const linkTop = $activeLink.position().top + $sidebar.scrollTop();
+            const linkBottom = linkTop + $activeLink.outerHeight();
+            const currentScroll = $sidebar.scrollTop();
+            
+            // Only scroll if active link is not visible
+            if (linkTop < currentScroll || linkBottom > currentScroll + sidebarHeight) {
+                // Center the active link in the sidebar view
+                const scrollTo = linkTop - (sidebarHeight / 2) + ($activeLink.outerHeight() / 2);
+                $sidebar.animate({
+                    scrollTop: scrollTo
+                }, 300);
+            }
+        }, 200);
+    }
 
     /* ── AJAX Helper ────────────────────────────────────── */
     window.lmsAjax = function (url, data, onSuccess, onError) {
@@ -81,11 +126,6 @@ $(function () {
     $(document).on('click', '[data-confirm]', function (e) {
         const msg = $(this).data('confirm') || 'Bạn chắc chắn muốn xóa?';
         if (!confirm(msg)) e.preventDefault();
-    });
-
-    /* ── Auto-close sidebar on mobile when link clicked ─── */
-    $(document).on('click', '.sidebar-link:not(.sidebar-link-toggle)', function () {
-        if (window.innerWidth < 992) $body.removeClass('sidebar-open');
     });
 
     /* ── Sidebar overlay append ─────────────────────────── */

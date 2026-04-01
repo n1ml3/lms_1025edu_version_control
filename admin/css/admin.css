@@ -79,6 +79,7 @@ a:hover {
     scrollbar-width: thin;
     scrollbar-color: #adb5bd #f1f5f9;
     border-right: 1px solid var(--border);
+    scroll-behavior: smooth;
 }
 
 /* Webkit Scrollbar Styling */
