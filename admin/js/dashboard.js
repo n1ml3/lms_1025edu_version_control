@@ -37,7 +37,7 @@ window.initDashboardCharts = function (revenueData) {
         ]
     };
 
-    new Chart(revenueCtx, {
+    window.revenueChartInstance = new Chart(revenueCtx, {
         type: 'line',
         data: defaultData,
         options: {
@@ -46,7 +46,12 @@ window.initDashboardCharts = function (revenueData) {
             plugins: {
                 legend: {
                     position: 'top',
-                    labels: { font: { family: 'Inter', size: 12 }, boxWidth: 22, padding: 16 }
+                    labels: { 
+                        font: { family: 'Inter', size: 12 }, 
+                        boxWidth: 22, 
+                        padding: 16,
+                        color: document.documentElement.getAttribute('data-theme') === 'dark' ? '#94a3b8' : '#64748b'
+                    }
                 },
                 tooltip: {
                     backgroundColor: '#1e293b',
@@ -63,17 +68,36 @@ window.initDashboardCharts = function (revenueData) {
             scales: {
                 x: {
                     grid: { display: false },
-                    ticks: { font: { family: 'Inter', size: 12 }, color: '#64748b' }
+                    ticks: { 
+                        font: { family: 'Inter', size: 12 }, 
+                        color: document.documentElement.getAttribute('data-theme') === 'dark' ? '#94a3b8' : '#64748b'
+                    }
                 },
                 y: {
-                    grid: { color: '#f1f5f9' },
+                    grid: { color: document.documentElement.getAttribute('data-theme') === 'dark' ? '#334155' : '#f1f5f9' },
                     ticks: {
                         font: { family: 'Inter', size: 12 },
-                        color: '#64748b',
+                        color: document.documentElement.getAttribute('data-theme') === 'dark' ? '#94a3b8' : '#64748b',
                         callback: v => (v / 1000000).toFixed(0) + 'M'
                     }
                 }
             }
+        }
+    });
+
+    // Listen to theme change
+    $(document).on('themeChanged', function(e, theme) {
+        if(window.revenueChartInstance) {
+            const isDark = theme === 'dark';
+            const tickColor = isDark ? '#94a3b8' : '#64748b';
+            const gridColor = isDark ? '#334155' : '#f1f5f9';
+            
+            window.revenueChartInstance.options.plugins.legend.labels.color = tickColor;
+            window.revenueChartInstance.options.scales.x.ticks.color = tickColor;
+            window.revenueChartInstance.options.scales.y.ticks.color = tickColor;
+            window.revenueChartInstance.options.scales.y.grid.color = gridColor;
+            
+            window.revenueChartInstance.update();
         }
     });
 };

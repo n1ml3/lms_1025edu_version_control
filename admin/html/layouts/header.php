@@ -23,6 +23,11 @@ if (isset($_SERVER['SCRIPT_NAME'])) {
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+    <script>
+        if (localStorage.getItem('lms_theme') === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($pageTitle) ?> — LMS Admin</title>
@@ -44,7 +49,7 @@ if (isset($_SERVER['SCRIPT_NAME'])) {
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js" defer></script>
 
     <!-- Admin CSS -->
-    <link href="<?= $baseUrl ?>/css/admin.css" rel="stylesheet">
+    <link href="<?= $baseUrl ?>/css/admin.css?v=<?= time() ?>" rel="stylesheet">
 </head>
 <body>
 <div class="admin-wrapper">

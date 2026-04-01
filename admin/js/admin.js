@@ -132,4 +132,30 @@ $(function () {
     if (!$('.sidebar-overlay').length) {
         $('<div class="sidebar-overlay"></div>').appendTo('body');
     }
+
+    /* ── Dark Mode Toggle ───────────────────────────────── */
+    const $darkModeBtn = $('#darkModeToggle');
+    const $darkModeIcon = $darkModeBtn.find('i');
+    
+    // Set initial icon
+    if (document.documentElement.getAttribute('data-theme') === 'dark') {
+        $darkModeIcon.removeClass('bx-moon').addClass('bx-sun');
+    }
+
+    $darkModeBtn.on('click', function () {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        if (isDark) {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('lms_theme', 'light');
+            $darkModeIcon.removeClass('bx-sun').addClass('bx-moon');
+        } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('lms_theme', 'dark');
+            $darkModeIcon.removeClass('bx-moon').addClass('bx-sun');
+        }
+        
+        // Custom event for charts to listen to
+        $(document).trigger('themeChanged', [isDark ? 'light' : 'dark']);
+    });
+
 });
