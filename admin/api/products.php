@@ -8,6 +8,9 @@ require_once __DIR__ . '/../../config/db.php';
 header('Content-Type: application/json');
 
 $input  = json_decode(file_get_contents('php://input'), true) ?? [];
+if (empty($input) && !empty($_POST)) {
+    $input = $_POST;
+}
 $action = $input['action'] ?? $_GET['action'] ?? 'list';
 
 try {
@@ -21,7 +24,18 @@ try {
             $name = trim($input['name'] ?? '');
             $price = (float)($input['price'] ?? 0);
             $stock = (int)($input['stock'] ?? 0);
-            $image = trim($input['image'] ?? '');
+            $image = '';
+            if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                // save uploaded file
+                $filename = time() . '_' . basename($_FILES['image']['name']);
+                $target = __DIR__ . '/../../images/products/';
+                if (!is_dir($target)) @mkdir($target, 0777, true);
+                if (move_uploaded_file($_FILES['image']['tmp_name'], $target . $filename)) {
+                    $image = '/lms1025edu/images/products/' . $filename;
+                }
+            } else {
+                $image = trim($input['image'] ?? '');
+            }
             $description = trim($input['description'] ?? '');
 
             if (!$name) throw new Exception('Tên sản phẩm là bắt buộc.');
@@ -36,13 +50,29 @@ try {
             $name = trim($input['name'] ?? '');
             $price = (float)($input['price'] ?? 0);
             $stock = (int)($input['stock'] ?? 0);
-            $image = trim($input['image'] ?? '');
+            $image = '';
+            if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                // save uploaded file
+                $filename = time() . '_' . basename($_FILES['image']['name']);
+                $target = __DIR__ . '/../../images/products/';
+                if (!is_dir($target)) @mkdir($target, 0777, true);
+                if (move_uploaded_file($_FILES['image']['tmp_name'], $target . $filename)) {
+                    $image = '/lms1025edu/images/products/' . $filename;
+                }
+            } else {
+                $image = trim($input['image'] ?? '');
+            }
             $description = trim($input['description'] ?? '');
 
             if (!$id || !$name) throw new Exception('Dữ liệu không hợp lệ.');
 
-            $stmt = $pdo->prepare("UPDATE products SET name=?, price=?, stock=?, image=?, description=? WHERE id=?");
-            $stmt->execute([$name, $price, $stock, $image, $description, $id]);
+            if ($image !== '') {
+                $stmt = $pdo->prepare("UPDATE products SET name=?, price=?, stock=?, image=?, description=? WHERE id=?");
+                $stmt->execute([$name, $price, $stock, $image, $description, $id]);
+            } else {
+                $stmt = $pdo->prepare("UPDATE products SET name=?, price=?, stock=?, description=? WHERE id=?");
+                $stmt->execute([$name, $price, $stock, $description, $id]);
+            }
             echo json_encode(['success' => true]);
             break;
 
