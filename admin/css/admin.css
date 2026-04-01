@@ -45,12 +45,34 @@
 [data-theme="dark"] .sidebar-link.active,
 [data-theme="dark"] .sidebar-submenu,
 [data-theme="dark"] .notif-body,
-[data-theme="dark"] .notif-dropdown {
+[data-theme="dark"] .notif-dropdown,
+[data-theme="dark"] .content-card,
+[data-theme="dark"] .stat-card,
+[data-theme="dark"] .filter-bar,
+[data-theme="dark"] .role-card,
+[data-theme="dark"] .table {
     background: var(--bg-card) !important;
+    background-color: var(--bg-card) !important;
+    border-color: var(--border);
+}
+
+[data-theme="dark"] .content-card-title,
+[data-theme="dark"] .page-title,
+[data-theme="dark"] .stat-value,
+[data-theme="dark"] .table,
+[data-theme="dark"] .table-custom {
+    color: var(--text-dark) !important;
+}
+
+[data-theme="dark"] .stat-label,
+[data-theme="dark"] .page-subtitle,
+[data-theme="dark"] .filter-bar .form-label {
+    color: var(--text-muted) !important;
 }
 
 [data-theme="dark"] .sidebar-link:hover,
 [data-theme="dark"] .table-custom tbody tr:hover td,
+[data-theme="dark"] .table tbody tr:hover td,
 [data-theme="dark"] .notif-item:hover,
 [data-theme="dark"] .topbar-avatar:hover {
     background: #334155 !important;
@@ -86,9 +108,95 @@
 
 [data-theme="dark"] .notif-footer,
 [data-theme="dark"] .input-group-text,
-[data-theme="dark"] .table-custom thead th {
+[data-theme="dark"] .table-custom thead th,
+[data-theme="dark"] .table thead th {
     background-color: var(--bg-main) !important;
-    color: var(--text-muted);
+    color: var(--text-muted) !important;
+    border-color: var(--border) !important;
+}
+
+[data-theme="dark"] .table-custom tbody td,
+[data-theme="dark"] .table tbody td,
+[data-theme="dark"] .table tr td {
+    background-color: var(--bg-card) !important;
+    color: var(--text-dark) !important;
+    border-color: var(--border) !important;
+}
+
+/* DataTables pagination and UI in Dark Mode */
+[data-theme="dark"] .dataTables_wrapper .dataTables_length,
+[data-theme="dark"] .dataTables_wrapper .dataTables_filter,
+[data-theme="dark"] .dataTables_wrapper .dataTables_info,
+[data-theme="dark"] .dataTables_wrapper .dataTables_processing,
+[data-theme="dark"] .dataTables_wrapper .dataTables_paginate {
+    color: var(--text-dark) !important;
+}
+
+[data-theme="dark"] .dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: var(--text-dark) !important;
+}
+
+[data-theme="dark"] .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+[data-theme="dark"] .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    background: var(--primary) !important;
+    color: #fff !important;
+    border-color: var(--border) !important;
+}
+
+[data-theme="dark"] .dataTables_wrapper input,
+[data-theme="dark"] .dataTables_wrapper select {
+    background-color: var(--bg-main) !important;
+    color: var(--text-dark) !important;
+    border-color: var(--border) !important;
+}
+
+/* Global utility and sidebar class overrides in Dark Mode */
+[data-theme="dark"] .sidebar-link,
+[data-theme="dark"] .sidebar-sublink,
+[data-theme="dark"] .sidebar-section,
+[data-theme="dark"] .brand-name,
+[data-theme="dark"] .brand-sub {
+    color: var(--text-dark) !important;
+}
+
+[data-theme="dark"] .sidebar-link i,
+[data-theme="dark"] .sidebar-sublink i {
+    color: var(--text-muted) !important;
+}
+
+[data-theme="dark"] .bg-white {
+    background-color: var(--bg-main) !important;
+}
+
+[data-theme="dark"] .text-muted,
+[data-theme="dark"] .text-dark {
+    color: var(--text-muted) !important;
+}
+
+[data-theme="dark"] .sidebar-link.active,
+[data-theme="dark"] .sidebar-link.active i {
+    color: var(--primary) !important;
+    background-color: var(--bg-card) !important;
+}
+
+[data-theme="dark"] .table-light,
+[data-theme="dark"] .table-light th {
+    background-color: var(--bg-main) !important;
+    color: var(--text-muted) !important;
+    border-color: var(--border) !important;
+}
+
+/* Fix inputs overriding globally */
+[data-theme="dark"] input, 
+[data-theme="dark"] select {
+    background-color: var(--bg-card);
+    color: var(--text-dark);
+    border-color: var(--border);
+}
+[data-theme="dark"] input:focus, 
+[data-theme="dark"] select:focus {
+    background-color: var(--bg-card);
+    color: var(--text-dark);
 }
 
 /* ── Reset & Base ──────────────────────────────────────── */
