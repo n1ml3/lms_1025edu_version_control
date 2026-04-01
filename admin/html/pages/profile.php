@@ -1,16 +1,16 @@
 <?php
-require_once __DIR__ . '/../../../includes/auth_check.php';
+require_once __DIR__ . '/../../includes/auth_check.php';
 
 // Verify $adminData exists (passed from controller)
 if (!isset($adminData) || !$adminData) {
     die("Dữ liệu không hợp lệ.");
 }
 
-require_once __DIR__ . '/../../layouts/header.php';
-require_once __DIR__ . '/../../layouts/sidebar.php';
+require_once __DIR__ . '/../layouts/header.php';
+require_once __DIR__ . '/../layouts/sidebar.php';
 ?>
 <div class="main-area">
-    <?php require_once __DIR__ . '/../../layouts/topbar.php'; ?>
+    <?php require_once __DIR__ . '/../layouts/topbar.php'; ?>
     <main class="page-content">
         <div class="row g-4">
             <!-- Cập nhật thông tin -->
@@ -131,5 +131,5 @@ $('#formPassword').on('submit', function(e) {
     });
 });
 JS;
-require_once __DIR__ . '/../../layouts/footer.php'; 
+require_once __DIR__ . '/../layouts/footer.php'; 
 ?>
