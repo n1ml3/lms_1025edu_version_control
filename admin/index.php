@@ -25,12 +25,20 @@ try {
 
     // Fetch Branches for Filter
     $branches = $pdo->query("SELECT id, name FROM branches WHERE is_active = 1")->fetchAll();
+    
+    // Fetch Lead Sources for Filter
+    $sourcesList = $pdo->query("SELECT id, name FROM lead_sources")->fetchAll();
+    
+    // Fetch Staff for Filter
+    $staffList = $pdo->query("SELECT id, name FROM admins WHERE is_active = 1")->fetchAll();
 } catch (Exception $e) {
     // Basic fallback data
     $statBranches = 0; $statSources = 0; $statCourses = 0; $statTeachers = 0;
     $statLeads = 0; $statStudents = 0; $statAppts = 0; $statOrders = 0;
     $statRevExpected = 0; $statRevActual = 0;
     $branches = [];
+    $sourcesList = [];
+    $staffList = [];
 }
 
 require_once __DIR__ . '/html/pages/dashboard.php';

@@ -67,9 +67,15 @@ HTML;
                     </select>
                     <select class="form-select form-select-sm" id="filterSource" style="width: auto; min-width: 140px; font-size:13px;">
                         <option value="">Chọn nguồn</option>
+                        <?php foreach ($sourcesList as $src): ?>
+                            <option value="<?= $src['id'] ?>"><?= htmlspecialchars($src['name']) ?></option>
+                        <?php endforeach; ?>
                     </select>
                     <select class="form-select form-select-sm" id="filterStaff" style="width: auto; min-width: 140px; font-size:13px;">
                         <option value="">Chọn nhân viên</option>
+                        <?php foreach ($staffList as $stf): ?>
+                            <option value="<?= $stf['id'] ?>"><?= htmlspecialchars($stf['name']) ?></option>
+                        <?php endforeach; ?>
                     </select>
                     <div class="input-group input-group-sm" style="width: auto; min-width: 240px;">
                         <input type="date" class="form-control" id="filterDateFrom" value="<?= date('Y-m-01') ?>" style="font-size:13px;">
