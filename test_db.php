@@ -9,3 +9,4 @@ foreach ($tables as $table) {
         echo "  " . $col['Field'] . " - " . $col['Type'] . "\n";
     }
 }
+?>
