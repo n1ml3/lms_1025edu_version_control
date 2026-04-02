@@ -46,9 +46,9 @@ window.initDashboardCharts = function (revenueData) {
             plugins: {
                 legend: {
                     position: 'top',
-                    labels: { 
-                        font: { family: 'Inter', size: 12 }, 
-                        boxWidth: 22, 
+                    labels: {
+                        font: { family: 'Inter', size: 12 },
+                        boxWidth: 22,
                         padding: 16,
                         color: document.documentElement.getAttribute('data-theme') === 'dark' ? '#94a3b8' : '#64748b'
                     }
@@ -68,8 +68,8 @@ window.initDashboardCharts = function (revenueData) {
             scales: {
                 x: {
                     grid: { display: false },
-                    ticks: { 
-                        font: { family: 'Inter', size: 12 }, 
+                    ticks: {
+                        font: { family: 'Inter', size: 12 },
                         color: document.documentElement.getAttribute('data-theme') === 'dark' ? '#94a3b8' : '#64748b'
                     }
                 },
@@ -86,17 +86,17 @@ window.initDashboardCharts = function (revenueData) {
     });
 
     // Listen to theme change
-    $(document).on('themeChanged', function(e, theme) {
-        if(window.revenueChartInstance) {
+    $(document).on('themeChanged', function (e, theme) {
+        if (window.revenueChartInstance) {
             const isDark = theme === 'dark';
             const tickColor = isDark ? '#94a3b8' : '#64748b';
             const gridColor = isDark ? '#334155' : '#f1f5f9';
-            
+
             window.revenueChartInstance.options.plugins.legend.labels.color = tickColor;
             window.revenueChartInstance.options.scales.x.ticks.color = tickColor;
             window.revenueChartInstance.options.scales.y.ticks.color = tickColor;
             window.revenueChartInstance.options.scales.y.grid.color = gridColor;
-            
+
             window.revenueChartInstance.update();
         }
     });
@@ -106,11 +106,11 @@ $(function () {
     // Filter AJAX
     $('#btnFilter, #btnRefreshStats').on('click', function () {
         const data = {
-            branch:   $('#filterBranch').val(),
-            source:   $('#filterSource').val(),
-            staff:    $('#filterStaff').val(),
+            branch: $('#filterBranch').val(),
+            source: $('#filterSource').val(),
+            staff: $('#filterStaff').val(),
             dateFrom: $('#filterDateFrom').val(),
-            dateTo:   $('#filterDateTo').val(),
+            dateTo: $('#filterDateTo').val(),
         };
         if (typeof lmsAjax === 'function') {
             lmsAjax('/lms1025edu/admin/api/dashboard_stats.php', data, function (res) {

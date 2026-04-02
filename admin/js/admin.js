@@ -5,8 +5,8 @@
 $(function () {
 
     /* ── Sidebar Toggle ─────────────────────────────────── */
-    const $body    = $('body');
-    const $toggle  = $('#sidebarToggle');
+    const $body = $('body');
+    const $toggle = $('#sidebarToggle');
     const $sidebar = $('#sidebar');
 
     $toggle.on('click', function () {
@@ -33,7 +33,7 @@ $(function () {
     $(document).on('click', '.sidebar-link:not(.sidebar-link-toggle)', function () {
         const scrollTop = $sidebar.scrollTop();
         localStorage.setItem('sidebar-scroll-position', scrollTop);
-        
+
         // Close mobile sidebar if open
         if (window.innerWidth < 992) {
             $body.removeClass('sidebar-open');
@@ -44,10 +44,10 @@ $(function () {
     const savedScrollPosition = localStorage.getItem('sidebar-scroll-position');
     if (savedScrollPosition !== null) {
         // Wait for DOM to be fully ready
-        setTimeout(function() {
+        setTimeout(function () {
             $sidebar.scrollTop(parseInt(savedScrollPosition, 10));
         }, 100);
-        
+
         // Clear the saved position after restoring (one-time use)
         localStorage.removeItem('sidebar-scroll-position');
     }
@@ -55,12 +55,12 @@ $(function () {
     // Keep active link in view - scroll sidebar to show active item
     const $activeLink = $('.sidebar-link.active');
     if ($activeLink.length > 0) {
-        setTimeout(function() {
+        setTimeout(function () {
             const sidebarHeight = $sidebar.outerHeight();
             const linkTop = $activeLink.position().top + $sidebar.scrollTop();
             const linkBottom = linkTop + $activeLink.outerHeight();
             const currentScroll = $sidebar.scrollTop();
-            
+
             // Only scroll if active link is not visible
             if (linkTop < currentScroll || linkBottom > currentScroll + sidebarHeight) {
                 // Center the active link in the sidebar view
@@ -136,7 +136,7 @@ $(function () {
     /* ── Dark Mode Toggle ───────────────────────────────── */
     const $darkModeBtn = $('#darkModeToggle');
     const $darkModeIcon = $darkModeBtn.find('i');
-    
+
     // Set initial icon
     if (document.documentElement.getAttribute('data-theme') === 'dark') {
         $darkModeIcon.removeClass('bx-moon').addClass('bx-sun');
@@ -153,7 +153,7 @@ $(function () {
             localStorage.setItem('lms_theme', 'dark');
             $darkModeIcon.removeClass('bx-moon').addClass('bx-sun');
         }
-        
+
         // Custom event for charts to listen to
         $(document).trigger('themeChanged', [isDark ? 'light' : 'dark']);
     });
