@@ -87,6 +87,12 @@ $navItems = [
         'key'   => 'inst_sources',
         'url'   => ($baseUrl ?? '/lms1025edu/admin') . '/pages/instructors/data-sources.php',
     ],
+    [
+        'label' => 'Học sinh',
+        'icon'  => 'bx-user',
+        'key'   => 'students_list',
+        'url'   => ($baseUrl ?? '/lms1025edu/admin') . '/pages/students/list.php',
+    ],
     [ 'section' => 'MÃ' ],
     [
         'label' => 'Mã khuyến mãi',
