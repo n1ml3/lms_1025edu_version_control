@@ -13,7 +13,7 @@ if (empty($input) && !empty($_POST)) {
 }
 $action = $input['action'] ?? $_GET['action'] ?? '';
 
-$admin_id = $_SESSION['admin']['id'] ?? 0;
+$admin_id = $_SESSION['admin_id'] ?? 0;
 
 try {
     if (!$admin_id) throw new Exception('Không tìm thấy phiên đăng nhập hợp lệ.');
@@ -29,7 +29,7 @@ try {
             $stmt->execute([$name, $phone, $admin_id]);
             
             // Cập nhật session
-            $_SESSION['admin']['name'] = $name;
+            $_SESSION['admin_name'] = $name;
 
             echo json_encode(['success' => true]);
             break;

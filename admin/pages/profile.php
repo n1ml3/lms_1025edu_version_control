@@ -9,7 +9,7 @@ $pageTitle  = 'Hồ sơ cá nhân';
 $activePage = 'profile'; 
 $breadcrumb = [['label' => 'Hồ sơ', 'url' => '']];
 
-$admin_id = $_SESSION['admin']['id'] ?? 0;
+$admin_id = $_SESSION['admin_id'] ?? 0;
 $adminData = null;
 
 try {
