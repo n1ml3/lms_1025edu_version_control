@@ -41,6 +41,14 @@ HTML;
                 <div class="col-6 col-md-3 col-xl-2">
                     <div style="position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--border)">
                         <img src="<?= htmlspecialchars($m['path']) ?>" style="width:100%;height:110px;object-fit:cover" onerror="this.style.display='none'">
+                        <!-- Delete Button Overlay -->
+                        <form method="POST" style="position:absolute; top:5px; right:5px; margin:0;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa ảnh này?');">
+                            <input type="hidden" name="action" value="delete">
+                            <input type="hidden" name="id" value="<?= $m['id'] ?>">
+                            <button type="submit" class="btn btn-danger border-0 p-0 shadow-sm" style="width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; background-color: rgba(220,53,69,0.9);">
+                                <i class='bx bx-x' style="font-size: 16px;"></i>
+                            </button>
+                        </form>
                         <div style="padding:6px 8px;font-size:11px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><?= htmlspecialchars($m['filename']) ?></div>
                     </div>
                 </div>

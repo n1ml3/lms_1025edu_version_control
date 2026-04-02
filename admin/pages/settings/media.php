@@ -13,24 +13,46 @@ $success = $error = '';
 $uploadDir = __DIR__ . '/../../assets/img/uploads/';
 @mkdir($uploadDir, 0755, true);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['media'])) {
-    $file = $_FILES['media'];
-    $allowed = ['image/jpeg','image/png','image/gif','image/webp'];
-    if (!in_array($file['type'], $allowed)) {
-        $error = 'Chỉ chấp nhận file hình ảnh (JPG, PNG, GIF, WebP).';
-    } elseif ($file['size'] > 5 * 1024 * 1024) {
-        $error = 'File không được vượt quá 5MB.';
-    } else {
-        $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
-        $filename = uniqid('media_') . '.' . $ext;
-        if (move_uploaded_file($file['tmp_name'], $uploadDir . $filename)) {
-            try {
-                $stmt = $pdo->prepare("INSERT INTO media (filename, path, size, uploaded_at) VALUES (?, ?, ?, NOW())");
-                $stmt->execute([$filename, '/lms1025edu/admin/assets/img/uploads/' . $filename, $file['size']]);
-            } catch (Exception $e) {}
-            $success = 'Đã tải lên thành công: ' . htmlspecialchars($filename);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['action']) && $_POST['action'] === 'delete' && isset($_POST['id'])) {
+        $deleteId = (int)$_POST['id'];
+        try {
+            $stmt = $pdo->prepare("SELECT * FROM media WHERE id = ?");
+            $stmt->execute([$deleteId]);
+            $media = $stmt->fetch();
+            
+            if ($media) {
+                $filePath = $uploadDir . $media['filename'];
+                if (file_exists($filePath)) {
+                    @unlink($filePath);
+                }
+                $pdo->prepare("DELETE FROM media WHERE id = ?")->execute([$deleteId]);
+                $success = 'Đã xóa file thành công.';
+            } else {
+                $error = 'Không tìm thấy file.';
+            }
+        } catch (Exception $e) {
+            $error = 'Lỗi khi xóa: ' . $e->getMessage();
+        }
+    } elseif (isset($_FILES['media'])) {
+        $file = $_FILES['media'];
+        $allowed = ['image/jpeg','image/png','image/gif','image/webp'];
+        if (!in_array($file['type'], $allowed)) {
+            $error = 'Chỉ chấp nhận file hình ảnh (JPG, PNG, GIF, WebP).';
+        } elseif ($file['size'] > 5 * 1024 * 1024) {
+            $error = 'File không được vượt quá 5MB.';
         } else {
-            $error = 'Không thể lưu file. Kiểm tra quyền thư mục.';
+            $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+            $filename = uniqid('media_') . '.' . $ext;
+            if (move_uploaded_file($file['tmp_name'], $uploadDir . $filename)) {
+                try {
+                    $stmt = $pdo->prepare("INSERT INTO media (filename, path, size, uploaded_at) VALUES (?, ?, ?, NOW())");
+                    $stmt->execute([$filename, '/lms1025edu/admin/assets/img/uploads/' . $filename, $file['size']]);
+                } catch (Exception $e) {}
+                $success = 'Đã tải lên thành công: ' . htmlspecialchars($filename);
+            } else {
+                $error = 'Không thể lưu file. Kiểm tra quyền thư mục.';
+            }
         }
     }
 }
