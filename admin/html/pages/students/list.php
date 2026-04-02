@@ -3,7 +3,9 @@ require_once __DIR__ . '/../../../includes/auth_check.php';
 require_once __DIR__ . '/../../../../config/db.php';
 
 try {
-    $products = $pdo->query("SELECT * FROM products ORDER BY created_at DESC")->fetchAll();
+    $students = $pdo->query("SELECT s.*, 
+                             (SELECT p.name FROM classes c JOIN programs p ON c.program_id = p.id WHERE c.id = s.class_id) as class_name 
+                             FROM students s ORDER BY s.enrolled_at DESC")->fetchAll();
 } catch (PDOException $e) {
     die("Lỗi truy vấn: " . $e->getMessage());
 }
@@ -13,7 +15,7 @@ require_once __DIR__ . '/../../layouts/sidebar.php';
 
 $pageAction = <<<HTML
 <a href="/lms1025edu/admin/pages/students/add.php" class="btn-primary-custom text-decoration-none">
-    <i class='bx bx-plus'></i> Thêm sinh viên
+    <i class='bx bx-plus'></i> Thêm học sinh
 </a>
 HTML;
 ?>
@@ -39,42 +41,38 @@ HTML;
 
         <div class="content-card">
             <div class="table-responsive">
-                <table class="table table-custom" id="productsTable">
+                <table class="table table-custom" id="studentsTable">
                     <thead>
                         <tr>
-                            <th>id</th>
-                            <th>Tên</th>
+                            <th>ID</th>
+                            <th>Tên học sinh</th>
                             <th>Số điện thoại</th>
                             <th>Email</th>
-                            <th>Mã lớp</th>
+                            <th>Lớp</th>
                             <th>Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if ($students): foreach ($students as $i => $p): ?>
+                        <?php if ($students): foreach ($students as $i => $s): ?>
                         <tr>
                             <td class="fs-13 text-muted"><?= $i+1 ?></td>
+                            <td class="fw-semibold"><?= htmlspecialchars($s['name']) ?></td>
+                            <td><?= htmlspecialchars($s['phone'] ?? '-') ?></td>
+                            <td><?= htmlspecialchars($s['email'] ?? '-') ?></td>
                             <td>
-                                <?php if ($p['image']): ?>
-                                <img src="<?= htmlspecialchars($p['image']) ?>" width="44" height="44" style="border-radius:8px;object-fit:cover">
+                                <?php if ($s['class_id']): ?>
+                                    <span class="badge-status badge-success">
+                                        <?= htmlspecialchars($s['class_name'] ?? ('Lớp ID: ' . $s['class_id'])) ?>
+                                    </span>
                                 <?php else: ?>
-                                <div style="width:44px;height:44px;border-radius:8px;background:var(--primary-light);display:flex;align-items:center;justify-content:center">
-                                    <i class='bx bx-image' style="color:var(--primary)"></i>
-                                </div>
+                                    <span class="badge-status badge-secondary text-muted">Chưa xếp lớp</span>
                                 <?php endif; ?>
                             </td>
-                            <td class="fw-semibold"><?= htmlspecialchars($p['name']) ?></td>
-                            <td><?= number_format($p['price']) ?> đ</td>
                             <td>
-                                <span class="badge-status badge-<?= $p['stock'] > 0 ? 'success' : 'danger' ?>">
-                                    <?= number_format($p['stock']) ?>
-                                </span>
-                            </td>
-                            <td>
-                                <a href="/lms1025edu/admin/pages/products/add.php?id=<?= $p['id'] ?>" class="btn-icon">
+                                <a href="/lms1025edu/admin/pages/students/add.php?id=<?= $s['id'] ?>" class="btn-icon">
                                     <i class='bx bx-edit'></i>
                                 </a>
-                                <button class="btn-icon text-danger" onclick="deleteProduct(<?= $p['id'] ?>)">
+                                <button class="btn-icon text-danger" onclick="deleteStudent(<?= $s['id'] ?>)">
                                     <i class='bx bx-trash'></i>
                                 </button>
                             </td>
@@ -91,11 +89,11 @@ HTML;
 
 <?php 
 $inlineScript = <<<JS
-function deleteProduct(id) {
-    if(!confirm('Xóa sản phẩm này?')) return;
-    lmsAjax('/lms1025edu/admin/api/products.php', { action: 'delete', id }, function(res) {
+function deleteStudent(id) {
+    if(!confirm('Xóa học sinh này?')) return;
+    lmsAjax('/lms1025edu/admin/api/students.php', { action: 'delete', id }, function(res) {
         if(res.success) {
-            lmsToast('success', 'Đã xóa sản phẩm!');
+            lmsToast('success', 'Đã xóa học sinh!');
             setTimeout(() => location.reload(), 800);
         }
     });
@@ -103,7 +101,7 @@ function deleteProduct(id) {
 
 $('#tableSearch').on('keyup', function() {
     const val = $(this).val().toLowerCase();
-    $('#productsTable tbody tr').filter(function() {
+    $('#studentsTable tbody tr').filter(function() {
         $(this).toggle($(this).text().toLowerCase().indexOf(val) > -1);
     });
 });
