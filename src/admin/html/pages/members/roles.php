@@ -120,7 +120,7 @@ $('#btnSaveRole').on('click', function() {
     // Serialize
     const data = $('#formRole').serialize() + '&action=' + action;
     
-    lmsAjax('/lms1025edu/admin/api/roles.php', data, function(res) {
+    lmsAjax('/admin/api/roles.php', data, function(res) {
         if(res.success) {
             lmsToast('success', 'Lưu vai trò thành công!');
             $('#modalRole').modal('hide');
@@ -136,7 +136,7 @@ $('.btn-delete-role').on('click', function() {
     const msg = $(this).data('confirm') || 'Bạn có chắc chắn muốn xóa?';
     if(!confirm(msg)) return;
 
-    lmsAjax('/lms1025edu/admin/api/roles.php', { action: 'delete', id: id }, function(res) {
+    lmsAjax('/admin/api/roles.php', { action: 'delete', id: id }, function(res) {
         if(res.success) {
             lmsToast('success', 'Đã xóa vai trò!');
             setTimeout(() => location.reload(), 1000);

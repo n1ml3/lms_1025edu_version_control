@@ -11,7 +11,7 @@ $adminName = $adminVars['name'] ?? 'HVG Admin';
 $adminRole = $adminVars['role'] ?? 'Admin';
 
 // Calculate base URL dynamically to prevent CSS / JS 404s
-$baseUrl = '/lms1025edu/admin';
+$baseUrl = '/admin';
 if (isset($_SERVER['SCRIPT_NAME'])) {
     $scriptPath = $_SERVER['SCRIPT_NAME'];
     $adminPos = strpos($scriptPath, '/admin/');

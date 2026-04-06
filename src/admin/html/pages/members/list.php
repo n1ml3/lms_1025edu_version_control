@@ -215,7 +215,7 @@ $('#formAdmin').on('submit', function(e) {
     $(this).serializeArray().forEach(item => data[item.name] = item.value);
     
     const action = data.id ? 'update' : 'create';
-    lmsAjax('/lms1025edu/admin/api/admins.php', { action, ...data }, function(res) {
+    lmsAjax('/admin/api/admins.php', { action, ...data }, function(res) {
         if(res.success) {
             lmsToast('success', 'Đã lưu tài khoản thành công!');
             setTimeout(() => location.reload(), 1000);
@@ -225,7 +225,7 @@ $('#formAdmin').on('submit', function(e) {
 
 function deleteAdmin(id) {
     if(!confirm('Xác nhận xóa tài khoản này?')) return;
-    lmsAjax('/lms1025edu/admin/api/admins.php', { action: 'delete', id }, function(res) {
+    lmsAjax('/admin/api/admins.php', { action: 'delete', id }, function(res) {
         if(res.success) {
             lmsToast('success', 'Đã xóa tài khoản!');
             setTimeout(() => location.reload(), 800);
@@ -234,7 +234,7 @@ function deleteAdmin(id) {
 }
 
 function toggleAdminStatus(id, status) {
-    lmsAjax('/lms1025edu/admin/api/admins.php', { action: 'toggle_status', id, status: status ? 1 : 0 }, function(res) {
+    lmsAjax('/admin/api/admins.php', { action: 'toggle_status', id, status: status ? 1 : 0 }, function(res) {
         if(!res.success) {
             lmsToast('danger', 'Không thể đổi trạng thái!');
             setTimeout(() => location.reload(), 500);

@@ -121,7 +121,7 @@ $('#formTeacher').on('submit', function(e) {
     $(this).serializeArray().forEach(item => data[item.name] = item.value);
     
     const action = data.id ? 'update' : 'create';
-    lmsAjax('/lms1025edu/admin/api/teachers.php', { action, ...data }, function(res) {
+    lmsAjax('/admin/api/teachers.php', { action, ...data }, function(res) {
         if(res.success) {
             lmsToast('success', 'Đã lưu giáo viên thành công!');
             setTimeout(() => location.reload(), 1000);
@@ -131,7 +131,7 @@ $('#formTeacher').on('submit', function(e) {
 
 function deleteTeacher(id) {
     if(!confirm('Xóa giáo viên này?')) return;
-    lmsAjax('/lms1025edu/admin/api/teachers.php', { action: 'delete', id }, function(res) {
+    lmsAjax('/admin/api/teachers.php', { action: 'delete', id }, function(res) {
         if(res.success) {
             lmsToast('success', 'Đã xóa giáo viên!');
             setTimeout(() => location.reload(), 800);

@@ -121,7 +121,7 @@ $('#formAgent').on('submit', function(e) {
     $(this).serializeArray().forEach(item => data[item.name] = item.value);
     
     const action = data.id ? 'update' : 'create';
-    lmsAjax('/lms1025edu/admin/api/agents.php', { action, ...data }, function(res) {
+    lmsAjax('/admin/api/agents.php', { action, ...data }, function(res) {
         if(res.success) {
             lmsToast('success', 'Đã lưu đại lý thành công!');
             setTimeout(() => location.reload(), 1000);
@@ -131,7 +131,7 @@ $('#formAgent').on('submit', function(e) {
 
 function deleteAgent(id) {
     if(!confirm('Xóa đại lý này?')) return;
-    lmsAjax('/lms1025edu/admin/api/agents.php', { action: 'delete', id }, function(res) {
+    lmsAjax('/admin/api/agents.php', { action: 'delete', id }, function(res) {
         if(res.success) {
             lmsToast('success', 'Đã xóa đại lý!');
             setTimeout(() => location.reload(), 800);

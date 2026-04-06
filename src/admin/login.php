@@ -6,7 +6,7 @@ if (session_status() === PHP_SESSION_NONE) session_start();
 
 // Already logged in → redirect
 if (isset($_SESSION['admin_id'])) {
-    header('Location: /lms1025edu/admin/index.php');
+    header('Location: /admin/index.php');
     exit;
 }
 
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['admin_id']   = $admin['id'];
             $_SESSION['admin_name'] = $admin['name'];
             $_SESSION['admin_role'] = $admin['role_id'];
-            header('Location: /lms1025edu/admin/index.php');
+            header('Location: /admin/index.php');
             exit;
         }
     }
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Đăng Nhập — LMS Admin</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/lms1025edu/admin/images/favicon.png">
+    <link rel="icon" type="image/png" href="/admin/images/favicon.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .login-image {
             display: none;
             flex: 1;
-            background: url('/lms1025edu/admin/images/Group-45936.png') center no-repeat;
+            background: url('/admin/images/Group-45936.png') center no-repeat;
             position: center;
         }
 
@@ -209,7 +209,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="login-right">
         <div class="login-box">
             <div class="login-logo">
-                <img src="/lms1025edu/admin/images/logo-2.png" alt="LMS Admin Logo" style="max-height: 48px; border-radius: 12px; object-fit: contain;">
+                <img src="/admin/images/logo-2.png" alt="LMS Admin Logo" style="max-height: 48px; border-radius: 12px; object-fit: contain;">
             </div>
 
             <h2>Chào mừng trở lại!</h2>

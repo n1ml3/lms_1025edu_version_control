@@ -19,7 +19,7 @@ require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
 
 $pageAction = <<<HTML
-<a href="/lms1025edu/admin/pages/products/list.php" class="btn-outline-custom">
+<a href="/admin/pages/products/list.php" class="btn-outline-custom">
     <i class='bx bx-arrow-back'></i> Quay lại
 </a>
 HTML;
@@ -74,7 +74,7 @@ HTML;
                         <button type="submit" class="btn-primary-custom" id="btnSubmit">
                             <i class='bx bx-save'></i> <?= $product ? 'Cập nhật sản phẩm' : 'Lưu sản phẩm' ?>
                         </button>
-                        <a href="/lms1025edu/admin/pages/products/list.php" class="btn-outline-custom">Hủy</a>
+                        <a href="/admin/pages/products/list.php" class="btn-outline-custom">Hủy</a>
                     </div>
                 </form>
             </div>
@@ -105,7 +105,7 @@ $('#formProduct').on('submit', function(e) {
     $('#btnSubmit').prop('disabled', true).html('<i class="bx bx-loader-alt bx-spin"></i> Đang xử lý...');
 
     $.ajax({
-        url: '/lms1025edu/admin/api/products.php',
+        url: '/admin/api/products.php',
         type: 'POST',
         data: formData,
         processData: false,
@@ -113,7 +113,7 @@ $('#formProduct').on('submit', function(e) {
         success: function(res) {
             if(res.success) {
                 lmsToast('success', 'Đã lưu sản phẩm thành công!');
-                setTimeout(() => location.href = '/lms1025edu/admin/pages/products/list.php', 1000);
+                setTimeout(() => location.href = '/admin/pages/products/list.php', 1000);
             } else {
                 lmsToast('error', res.message || 'Có lỗi xảy ra!');
                 $('#btnSubmit').prop('disabled', false).html('<i class="bx bx-save"></i> Lưu sản phẩm');

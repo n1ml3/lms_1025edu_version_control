@@ -38,7 +38,7 @@
                     <!-- Item 1 -->
                     <div class="notif-item unread">
                         <div class="notif-icon">
-                            <img src="/lms1025edu/admin/images/logo-2.png" alt="Icon">
+                            <img src="/admin/images/logo-2.png" alt="Icon">
                         </div>
                         <div class="notif-content">
                             <a href="#" class="notif-title">Bạn có lịch hỗ trợ học viên</a>
@@ -53,7 +53,7 @@
                     <!-- Item 2 -->
                     <div class="notif-item unread">
                         <div class="notif-icon">
-                            <img src="/lms1025edu/admin/images/logo-2.png" alt="Icon">
+                            <img src="/admin/images/logo-2.png" alt="Icon">
                         </div>
                         <div class="notif-content">
                             <a href="#" class="notif-title">Bạn có lịch hỗ trợ học viên</a>
@@ -68,7 +68,7 @@
                     <!-- Item 3 -->
                     <div class="notif-item unread">
                         <div class="notif-icon">
-                            <img src="/lms1025edu/admin/images/logo-2.png" alt="Icon">
+                            <img src="/admin/images/logo-2.png" alt="Icon">
                         </div>
                         <div class="notif-content">
                             <a href="#" class="notif-title">Bạn có lịch hỗ trợ học viên</a>
@@ -88,17 +88,17 @@
         </div>
         <div class="dropdown">
             <button class="topbar-avatar dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="background: transparent; border: none; padding: 0;">
-                <img src="/lms1025edu/admin/images/person.png" alt="Avatar" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
+                <img src="/admin/images/person.png" alt="Avatar" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
                 <div class="d-none d-sm-block text-start ms-2">
                     <span class="d-block fw-semibold" style="font-size: 13px; color: var(--text-dark); line-height: 1.2;"><?= htmlspecialchars($adminName) ?></span>
                     <span class="d-block text-muted" style="font-size: 11px;"><?= htmlspecialchars($adminRole) ?></span>
                 </div>
             </button>
             <ul class="dropdown-menu dropdown-menu-end shadow-sm">
-                <li><a class="dropdown-item" href="/lms1025edu/admin/pages/profile.php"><i class='bx bx-user me-2'></i>Hồ sơ</a></li>
+                <li><a class="dropdown-item" href="/admin/pages/profile.php"><i class='bx bx-user me-2'></i>Hồ sơ</a></li>
                 <li><a class="dropdown-item" href="#"><i class='bx bx-cog me-2'></i>Cài đặt</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item text-danger" href="/lms1025edu/admin/logout.php"><i class='bx bx-log-out me-2'></i>Đăng xuất</a></li>
+                <li><a class="dropdown-item text-danger" href="/admin/logout.php"><i class='bx bx-log-out me-2'></i>Đăng xuất</a></li>
             </ul>
         </div>
     </div>

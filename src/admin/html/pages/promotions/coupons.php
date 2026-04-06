@@ -150,7 +150,7 @@ $('#formCoupon').on('submit', function(e) {
     $(this).serializeArray().forEach(item => data[item.name] = item.value);
     
     const action = data.id ? 'update' : 'create';
-    lmsAjax('/lms1025edu/admin/api/coupons.php', { action, ...data }, function(res) {
+    lmsAjax('/admin/api/coupons.php', { action, ...data }, function(res) {
         if(res.success) {
             lmsToast('success', 'Đã lưu mã giảm giá thành công!');
             setTimeout(() => location.reload(), 1000);
@@ -160,7 +160,7 @@ $('#formCoupon').on('submit', function(e) {
 
 function deleteCoupon(id) {
     if(!confirm('Xóa mã giảm giá này?')) return;
-    lmsAjax('/lms1025edu/admin/api/coupons.php', { action: 'delete', id }, function(res) {
+    lmsAjax('/admin/api/coupons.php', { action: 'delete', id }, function(res) {
         if(res.success) {
             lmsToast('success', 'Đã xóa mã giảm giá!');
             setTimeout(() => location.reload(), 800);

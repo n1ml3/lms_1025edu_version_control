@@ -14,7 +14,7 @@ require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
 
 $pageAction = <<<HTML
-<a href="/lms1025edu/admin/pages/students/add.php" class="btn-primary-custom text-decoration-none">
+<a href="/admin/pages/students/add.php" class="btn-primary-custom text-decoration-none">
     <i class='bx bx-plus'></i> Thêm học sinh
 </a>
 HTML;
@@ -69,7 +69,7 @@ HTML;
                                 <?php endif; ?>
                             </td>
                             <td>
-                                <a href="/lms1025edu/admin/pages/students/add.php?id=<?= $s['id'] ?>" class="btn-icon">
+                                <a href="/admin/pages/students/add.php?id=<?= $s['id'] ?>" class="btn-icon">
                                     <i class='bx bx-edit'></i>
                                 </a>
                                 <button class="btn-icon text-danger" onclick="deleteStudent(<?= $s['id'] ?>)">
@@ -91,7 +91,7 @@ HTML;
 $inlineScript = <<<JS
 function deleteStudent(id) {
     if(!confirm('Xóa học sinh này?')) return;
-    lmsAjax('/lms1025edu/admin/api/students.php', { action: 'delete', id }, function(res) {
+    lmsAjax('/admin/api/students.php', { action: 'delete', id }, function(res) {
         if(res.success) {
             lmsToast('success', 'Đã xóa học sinh!');
             setTimeout(() => location.reload(), 800);

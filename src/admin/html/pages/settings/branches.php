@@ -123,7 +123,7 @@ $('#formBranch').on('submit', function(e) {
     $(this).serializeArray().forEach(item => data[item.name] = item.value);
     
     const action = data.id ? 'update' : 'create';
-    lmsAjax('/lms1025edu/admin/api/branches.php', { action, ...data }, function(res) {
+    lmsAjax('/admin/api/branches.php', { action, ...data }, function(res) {
         if(res.success) {
             lmsToast('success', 'Lưu cơ sở thành công!');
             setTimeout(() => location.reload(), 1000);
@@ -133,7 +133,7 @@ $('#formBranch').on('submit', function(e) {
 
 function deleteBranch(id) {
     if(!confirm('Bạn có chắc chắn muốn xóa cơ sở này?')) return;
-    lmsAjax('/lms1025edu/admin/api/branches.php', { action: 'delete', id }, function(res) {
+    lmsAjax('/admin/api/branches.php', { action: 'delete', id }, function(res) {
         if(res.success) {
             lmsToast('success', 'Đã xóa cơ sở!');
             setTimeout(() => location.reload(), 800);

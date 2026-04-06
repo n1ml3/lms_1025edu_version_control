@@ -190,7 +190,7 @@ $('#formLead').on('submit', function (e) {
     $(this).serializeArray().forEach(f => data[f.name] = f.value);
     
     const action = data.id ? 'update' : 'create';
-    lmsAjax('/lms1025edu/admin/api/leads.php', { action, ...data }, function (res) {
+    lmsAjax('/admin/api/leads.php', { action, ...data }, function (res) {
         if (res.success) {
             lmsToast('success', 'Đã lưu lead thành công!');
             $('#modalLead').modal('hide');
@@ -201,7 +201,7 @@ $('#formLead').on('submit', function (e) {
 
 function deleteLead(id) {
     if(!confirm('Xóa lead này?')) return;
-    lmsAjax('/lms1025edu/admin/api/leads.php', { action: 'delete', id }, function(res) {
+    lmsAjax('/admin/api/leads.php', { action: 'delete', id }, function(res) {
         if(res.success) {
             lmsToast('success', 'Đã xóa lead!');
             setTimeout(() => location.reload(), 800);

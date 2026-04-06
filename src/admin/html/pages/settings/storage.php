@@ -3,7 +3,7 @@ require_once __DIR__ . '/../../layouts/header.php';
 require_once __DIR__ . '/../../layouts/sidebar.php';
 
 $pageAction = <<<HTML
-<a href="/lms1025edu/admin/pages/settings/media.php" class="btn-primary-custom">
+<a href="/admin/pages/settings/media.php" class="btn-primary-custom">
     <i class='bx bx-images'></i> Media
 </a>
 HTML;
@@ -44,7 +44,7 @@ HTML;
                         </div>
                     </div>
                     <hr>
-                    <a href="/lms1025edu/admin/pages/settings/media.php" class="btn-primary-custom d-inline-flex">
+                    <a href="/admin/pages/settings/media.php" class="btn-primary-custom d-inline-flex">
                         <i class='bx bx-images'></i> Xem tất cả media
                     </a>
                 </div>

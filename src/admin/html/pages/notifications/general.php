@@ -94,7 +94,7 @@ $('#formNotif').on('submit', function(e) {
     const data = {};
     $(this).serializeArray().forEach(item => data[item.name] = item.value);
     
-    lmsAjax('/lms1025edu/admin/api/notifications.php', { action: 'create', type: 'general', ...data }, function(res) {
+    lmsAjax('/admin/api/notifications.php', { action: 'create', type: 'general', ...data }, function(res) {
         if(res.success) {
             lmsToast('success', 'Đã gửi thông báo thành công!');
             setTimeout(() => location.reload(), 1000);

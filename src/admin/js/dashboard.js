@@ -113,7 +113,7 @@ $(function () {
             dateTo: $('#filterDateTo').val(),
         };
         if (typeof lmsAjax === 'function') {
-            lmsAjax('/lms1025edu/admin/api/dashboard_stats.php', data, function (res) {
+            lmsAjax('/admin/api/dashboard_stats.php', data, function (res) {
                 if (typeof lmsToast === 'function') lmsToast('success', 'Đã cập nhật thống kê!');
                 // TODO: update mini stat values from res
             });

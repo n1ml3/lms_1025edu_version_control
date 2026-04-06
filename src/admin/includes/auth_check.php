@@ -9,7 +9,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 if (!isset($_SESSION['admin_id'])) {
-    $loginUrl = '/lms1025edu/admin/login.php';
+    $loginUrl = '/admin/login.php';
     header('Location: ' . $loginUrl);
     exit;
 }

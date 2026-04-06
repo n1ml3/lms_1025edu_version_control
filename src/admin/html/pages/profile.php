@@ -94,7 +94,7 @@ $('#formProfile').on('submit', function(e) {
     $(this).serializeArray().forEach(item => data[item.name] = item.value);
 
     // Sử dụng $.ajax thay vì lmsAjax nếu cần truyền options phức tạp, nhưng lmsAjax đủ tốt
-    lmsAjax('/lms1025edu/admin/api/profile.php', data, function(res) {
+    lmsAjax('/admin/api/profile.php', data, function(res) {
         if(res.success) {
             lmsToast('success', 'Đã cập nhật thông tin thành công!');
             setTimeout(() => location.reload(), 1000);
@@ -119,7 +119,7 @@ $('#formPassword').on('submit', function(e) {
     const data = {};
     $(this).serializeArray().forEach(item => data[item.name] = item.value);
 
-    lmsAjax('/lms1025edu/admin/api/profile.php', data, function(res) {
+    lmsAjax('/admin/api/profile.php', data, function(res) {
         if(res.success) {
             lmsToast('success', 'Mật khẩu đã được thay đổi!');
             $('#formPassword')[0].reset();

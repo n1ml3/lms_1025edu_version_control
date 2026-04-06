@@ -142,7 +142,7 @@ $('#formProgram').on('submit', function(e) {
     $(this).serializeArray().forEach(item => data[item.name] = item.value);
     
     const action = data.id ? 'update' : 'create';
-    lmsAjax('/lms1025edu/admin/api/programs.php', { action, ...data }, function(res) {
+    lmsAjax('/admin/api/programs.php', { action, ...data }, function(res) {
         if(res.success) {
             lmsToast('success', 'Đã lưu chương trình thành công!');
             setTimeout(() => location.reload(), 1000);
@@ -152,7 +152,7 @@ $('#formProgram').on('submit', function(e) {
 
 function deleteProgram(id) {
     if(!confirm('Xóa chương trình này?')) return;
-    lmsAjax('/lms1025edu/admin/api/programs.php', { action: 'delete', id }, function(res) {
+    lmsAjax('/admin/api/programs.php', { action: 'delete', id }, function(res) {
         if(res.success) {
             lmsToast('success', 'Đã xóa chương trình!');
             setTimeout(() => location.reload(), 800);

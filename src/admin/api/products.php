@@ -31,7 +31,7 @@ try {
                 $target = __DIR__ . '/../../images/products/';
                 if (!is_dir($target)) @mkdir($target, 0777, true);
                 if (move_uploaded_file($_FILES['image']['tmp_name'], $target . $filename)) {
-                    $image = '/lms1025edu/images/products/' . $filename;
+                    $image = '/images/products/' . $filename;
                 }
             } else {
                 $image = trim($input['image'] ?? '');
@@ -57,7 +57,7 @@ try {
                 $target = __DIR__ . '/../../images/products/';
                 if (!is_dir($target)) @mkdir($target, 0777, true);
                 if (move_uploaded_file($_FILES['image']['tmp_name'], $target . $filename)) {
-                    $image = '/lms1025edu/images/products/' . $filename;
+                    $image = '/images/products/' . $filename;
                 }
             } else {
                 $image = trim($input['image'] ?? '');

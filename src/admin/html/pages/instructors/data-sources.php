@@ -107,7 +107,7 @@ $('#formSource').on('submit', function(e) {
     $(this).serializeArray().forEach(item => data[item.name] = item.value);
     
     const action = data.id ? 'update' : 'create';
-    lmsAjax('/lms1025edu/admin/api/data-sources.php', { action, ...data }, function(res) {
+    lmsAjax('/admin/api/data-sources.php', { action, ...data }, function(res) {
         if(res.success) {
             lmsToast('success', 'Đã lưu nguồn thành công!');
             setTimeout(() => location.reload(), 1000);
@@ -117,7 +117,7 @@ $('#formSource').on('submit', function(e) {
 
 function deleteSource(id) {
     if(!confirm('Xóa nguồn dữ liệu này?')) return;
-    lmsAjax('/lms1025edu/admin/api/data-sources.php', { action: 'delete', id }, function(res) {
+    lmsAjax('/admin/api/data-sources.php', { action: 'delete', id }, function(res) {
         if(res.success) {
             lmsToast('success', 'Đã xóa nguồn!');
             setTimeout(() => location.reload(), 800);

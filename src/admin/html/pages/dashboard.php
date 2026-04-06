@@ -156,6 +156,6 @@ HTML;
 </div><!-- /.main-area -->
 
 <?php
-$extraScripts = ['/lms1025edu/admin/js/dashboard.js'];
+$extraScripts = ['/admin/js/dashboard.js'];
 require_once __DIR__ . '/../layouts/footer.php';
 ?>

@@ -180,7 +180,7 @@ $('#formAppt').on('submit', function(e) {
     $(this).serializeArray().forEach(item => data[item.name] = item.value);
     
     const action = data.id ? 'update' : 'create';
-    lmsAjax('/lms1025edu/admin/api/appointments.php', { action, ...data }, function(res) {
+    lmsAjax('/admin/api/appointments.php', { action, ...data }, function(res) {
         if(res.success) {
             lmsToast('success', 'Đã lưu lịch hẹn thành công!');
             setTimeout(() => location.reload(), 1000);
@@ -190,7 +190,7 @@ $('#formAppt').on('submit', function(e) {
 
 function deleteAppt(id) {
     if(!confirm('Xóa lịch hẹn này?')) return;
-    lmsAjax('/lms1025edu/admin/api/appointments.php', { action: 'delete', id }, function(res) {
+    lmsAjax('/admin/api/appointments.php', { action: 'delete', id }, function(res) {
         if(res.success) {
             lmsToast('success', 'Đã xóa lịch hẹn!');
             setTimeout(() => location.reload(), 800);

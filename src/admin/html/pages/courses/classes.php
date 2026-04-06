@@ -169,7 +169,7 @@ $('#formClass').on('submit', function(e) {
     $(this).serializeArray().forEach(item => data[item.name] = item.value);
     
     const action = data.id ? 'update' : 'create';
-    lmsAjax('/lms1025edu/admin/api/classes.php', { action, ...data }, function(res) {
+    lmsAjax('/admin/api/classes.php', { action, ...data }, function(res) {
         if(res.success) {
             lmsToast('success', 'Đã lưu lớp học thành công!');
             setTimeout(() => location.reload(), 1000);
@@ -179,7 +179,7 @@ $('#formClass').on('submit', function(e) {
 
 function deleteClass(id) {
     if(!confirm('Xóa lớp học này?')) return;
-    lmsAjax('/lms1025edu/admin/api/classes.php', { action: 'delete', id }, function(res) {
+    lmsAjax('/admin/api/classes.php', { action: 'delete', id }, function(res) {
         if(res.success) {
             lmsToast('success', 'Đã xóa lớp học!');
             setTimeout(() => location.reload(), 800);
