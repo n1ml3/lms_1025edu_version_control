@@ -16,6 +16,8 @@ services:
     image: mariadb:10.6.4
     container_name: lms_db
     restart: always
+    ports:
+      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: lms_user
