@@ -3,6 +3,7 @@
  * Courses — Chương Trình Học
  */
 require_once __DIR__ . '/../../includes/auth_check.php';
+guardPermission('courses');
 require_once __DIR__ . '/../../../config/db.php';
 
 $pageTitle  = 'Chương Trình Học';

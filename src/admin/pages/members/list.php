@@ -3,6 +3,7 @@
  * Members — Quản trị viên
  */
 require_once __DIR__ . '/../../includes/auth_check.php';
+guardPermission('members');
 require_once __DIR__ . '/../../../config/db.php';
 
 $pageTitle  = 'Quản Trị Viên';

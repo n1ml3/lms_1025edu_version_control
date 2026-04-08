@@ -3,6 +3,7 @@
  * CRM — Lịch Hẹn
  */
 require_once __DIR__ . '/../../includes/auth_check.php';
+guardPermission('crm');
 require_once __DIR__ . '/../../../config/db.php';
 
 $pageTitle  = 'Lịch Hẹn';
