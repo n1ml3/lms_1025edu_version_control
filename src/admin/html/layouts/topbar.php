@@ -6,13 +6,16 @@
 
 // Fetch latest notifications
 $notifications = [];
-$notifCount = 0;
+$unreadCount = 0;
 if (isset($pdo)) {
     try {
+        // Fetch latest 5 for display
         $notifStmt = $pdo->prepare("SELECT * FROM notifications ORDER BY created_at DESC LIMIT 5");
         $notifStmt->execute();
         $notifications = $notifStmt->fetchAll();
-        $notifCount = count($notifications); // Total recent or unread count
+
+        // Count only unread for the badge
+        $unreadCount = (int)$pdo->query("SELECT COUNT(*) FROM notifications WHERE is_read = 0")->fetchColumn();
     } catch (Exception $e) {
         // Silently skip if query fails
     }
@@ -38,8 +41,8 @@ if (isset($pdo)) {
         <div class="dropdown">
             <button class="topbar-icon-btn notif-btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                 <i class='bx bx-bell'></i>
-                <?php if ($notifCount > 0): ?>
-                    <span class="notif-badge"><?= $notifCount ?></span>
+                <?php if ($unreadCount > 0): ?>
+                    <span class="notif-badge"><?= $unreadCount ?></span>
                 <?php endif; ?>
             </button>
             <div class="dropdown-menu dropdown-menu-end shadow-sm notif-dropdown">
@@ -48,7 +51,7 @@ if (isset($pdo)) {
                     <button class="btn-close-notif" data-bs-toggle="dropdown"><i class='bx bx-x'></i></button>
                 </div>
                 <div class="notif-actions">
-                    <a href="#" class="notif-mark-read">Đánh dấu tất cả là đã đọc</a>
+                    <a href="javascript:void(0)" class="notif-mark-read" onclick="markAllNotificationsRead()">Đánh dấu tất cả là đã đọc</a>
                 </div>
                 <div class="notif-body">
                     <?php if (empty($notifications)): ?>
@@ -58,17 +61,19 @@ if (isset($pdo)) {
                         </div>
                     <?php else: ?>
                         <?php foreach ($notifications as $n): ?>
-                        <div class="notif-item unread">
+                        <div class="notif-item <?= $n['is_read'] ? '' : 'unread' ?>" id="notif-<?= $n['id'] ?>">
                             <div class="notif-icon">
                                 <img src="/admin/images/logo-2.png" alt="Icon">
                             </div>
                             <div class="notif-content">
-                                <a href="#" class="notif-title"><?= htmlspecialchars($n['title']) ?></a>
+                                <a href="javascript:void(0)" class="notif-title"><?= htmlspecialchars($n['title']) ?></a>
                                 <p class="notif-desc"><?= htmlspecialchars($n['content']) ?></p>
                                 <div class="notif-meta">
                                     <span class="notif-time"><?= date('H:i d/m', strtotime($n['created_at'])) ?></span>
-                                    <span class="notif-sep">|</span>
-                                    <a href="#" class="notif-action-link">Đánh dấu chưa đọc</a>
+                                    <?php if (!$n['is_read']): ?>
+                                        <span class="notif-sep">|</span>
+                                        <a href="javascript:void(0)" class="notif-action-link" onclick="markNotifRead(<?= $n['id'] ?>)">Đánh dấu đã đọc</a>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
@@ -122,3 +127,80 @@ if (isset($pdo)) {
         <?php if (isset($pageAction)) echo $pageAction; ?>
     </div>
 </div>
+
+<script>
+/**
+ * Mark a single notification as read
+ */
+async function markNotifRead(id) {
+    try {
+        const response = await fetch('/admin/api/notifications.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'mark_read', id: id })
+        });
+        const result = await response.json();
+        if (result.success) {
+            // UI Update: remove unread class and the action link
+            const item = document.getElementById(`notif-${id}`);
+            if (item) {
+                item.classList.remove('unread');
+                const actionLink = item.querySelector('.notif-action-link');
+                const sep = item.querySelector('.notif-sep');
+                if (actionLink) actionLink.remove();
+                if (sep) sep.remove();
+            }
+            // Update badge count
+            updateNotifBadge(-1);
+        }
+    } catch (err) {
+        console.error('Failed to mark notification as read:', err);
+    }
+}
+
+/**
+ * Mark all notifications as read
+ */
+async function markAllNotificationsRead() {
+    try {
+        const response = await fetch('/admin/api/notifications.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'mark_all_read' })
+        });
+        const result = await response.json();
+        if (result.success) {
+            // UI Update: remove unread class from all items
+            document.querySelectorAll('.notif-item.unread').forEach(item => {
+                item.classList.remove('unread');
+                const actionLink = item.querySelector('.notif-action-link');
+                const sep = item.querySelector('.notif-sep');
+                if (actionLink) actionLink.remove();
+                if (sep) sep.remove();
+            });
+            // Update badge
+            const badge = document.querySelector('.notif-badge');
+            if (badge) badge.remove();
+        }
+    } catch (err) {
+        console.error('Failed to mark all notifications as read:', err);
+    }
+}
+
+/**
+ * Helper to update badge count safely
+ */
+function updateNotifBadge(delta) {
+    const badge = document.querySelector('.notif-badge');
+    if (!badge) return;
+    
+    let currentCount = parseInt(badge.textContent) || 0;
+    let newCount = currentCount + delta;
+    
+    if (newCount <= 0) {
+        badge.remove();
+    } else {
+        badge.textContent = newCount;
+    }
+}
+</script>

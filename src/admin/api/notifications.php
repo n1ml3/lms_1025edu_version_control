@@ -38,6 +38,18 @@ try {
             echo json_encode(['success' => true]);
             break;
 
+        case 'mark_read':
+            $id = (int)($input['id'] ?? 0);
+            if (!$id) throw new Exception('ID là bắt buộc');
+            $pdo->prepare("UPDATE notifications SET is_read = 1 WHERE id = ?")->execute([$id]);
+            echo json_encode(['success' => true]);
+            break;
+
+        case 'mark_all_read':
+            $pdo->query("UPDATE notifications SET is_read = 1 WHERE is_read = 0");
+            echo json_encode(['success' => true]);
+            break;
+
         default:
             throw new Exception('Action không hợp lệ');
     }
