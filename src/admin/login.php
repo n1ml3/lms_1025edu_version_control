@@ -250,6 +250,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="submit" class="btn-login">
                     Đăng Nhập
                 </button>
+
+                <div class="text-center mt-3">
+                    <span class="text-muted fs-13">Chưa có tài khoản? </span>
+                    <a href="/admin/register.php" class="text-primary fw-600 fs-13" style="text-decoration:none;">Đăng ký ngay</a>
+                </div>
             </form>
 
             <div class="login-footer">
