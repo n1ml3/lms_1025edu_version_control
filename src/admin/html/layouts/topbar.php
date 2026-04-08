@@ -3,6 +3,20 @@
  * Admin Topbar & Dashboard Toolbar
  * Included inside the .main-area wrapper
  */
+
+// Fetch latest notifications
+$notifications = [];
+$notifCount = 0;
+if (isset($pdo)) {
+    try {
+        $notifStmt = $pdo->prepare("SELECT * FROM notifications ORDER BY created_at DESC LIMIT 5");
+        $notifStmt->execute();
+        $notifications = $notifStmt->fetchAll();
+        $notifCount = count($notifications); // Total recent or unread count
+    } catch (Exception $e) {
+        // Silently skip if query fails
+    }
+}
 ?>
 <!-- Topbar -->
 <header class="topbar" id="topbar">
@@ -24,7 +38,9 @@
         <div class="dropdown">
             <button class="topbar-icon-btn notif-btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                 <i class='bx bx-bell'></i>
-                <span class="notif-badge">3</span>
+                <?php if ($notifCount > 0): ?>
+                    <span class="notif-badge"><?= $notifCount ?></span>
+                <?php endif; ?>
             </button>
             <div class="dropdown-menu dropdown-menu-end shadow-sm notif-dropdown">
                 <div class="notif-header">
@@ -35,51 +51,29 @@
                     <a href="#" class="notif-mark-read">Đánh dấu tất cả là đã đọc</a>
                 </div>
                 <div class="notif-body">
-                    <!-- Item 1 -->
-                    <div class="notif-item unread">
-                        <div class="notif-icon">
-                            <img src="/admin/images/logo-2.png" alt="Icon">
+                    <?php if (empty($notifications)): ?>
+                        <div class="p-4 text-center text-muted">
+                            <i class='bx bx-bell-off d-block fs-2 mb-2'></i>
+                            <p class="mb-0 small">Không có thông báo nào</p>
                         </div>
-                        <div class="notif-content">
-                            <a href="#" class="notif-title">Bạn có lịch hỗ trợ học viên</a>
-                            <p class="notif-desc">HV - HVG test - 0900000020 - - Thời gian: 2025-10-30 15:35</p>
-                            <div class="notif-meta">
-                                <span class="notif-time">15:35 30/10</span>
-                                <span class="notif-sep">|</span>
-                                <a href="#" class="notif-action-link">Đánh dấu chưa đọc</a>
+                    <?php else: ?>
+                        <?php foreach ($notifications as $n): ?>
+                        <div class="notif-item unread">
+                            <div class="notif-icon">
+                                <img src="/admin/images/logo-2.png" alt="Icon">
+                            </div>
+                            <div class="notif-content">
+                                <a href="#" class="notif-title"><?= htmlspecialchars($n['title']) ?></a>
+                                <p class="notif-desc"><?= htmlspecialchars($n['content']) ?></p>
+                                <div class="notif-meta">
+                                    <span class="notif-time"><?= date('H:i d/m', strtotime($n['created_at'])) ?></span>
+                                    <span class="notif-sep">|</span>
+                                    <a href="#" class="notif-action-link">Đánh dấu chưa đọc</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Item 2 -->
-                    <div class="notif-item unread">
-                        <div class="notif-icon">
-                            <img src="/admin/images/logo-2.png" alt="Icon">
-                        </div>
-                        <div class="notif-content">
-                            <a href="#" class="notif-title">Bạn có lịch hỗ trợ học viên</a>
-                            <p class="notif-desc">HV - Trịnh Thị Kim Ngọc - 0967565434 - - Thời gian: 2025-10-30 15:24</p>
-                            <div class="notif-meta">
-                                <span class="notif-time">15:24 30/10</span>
-                                <span class="notif-sep">|</span>
-                                <a href="#" class="notif-action-link">Đánh dấu chưa đọc</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Item 3 -->
-                    <div class="notif-item unread">
-                        <div class="notif-icon">
-                            <img src="/admin/images/logo-2.png" alt="Icon">
-                        </div>
-                        <div class="notif-content">
-                            <a href="#" class="notif-title">Bạn có lịch hỗ trợ học viên</a>
-                            <p class="notif-desc">HV - Nguyễn Tuyết Nhung - 0962867598 - - Thời gian: 2025-08-20 10:00</p>
-                            <div class="notif-meta">
-                                <span class="notif-time">22:36 19/08</span>
-                                <span class="notif-sep">|</span>
-                                <a href="#" class="notif-action-link">Đánh dấu chưa đọc</a>
-                            </div>
-                        </div>
-                    </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </div>
                 <div class="notif-footer">
                     <a href="#">Xem tất cả</a>
