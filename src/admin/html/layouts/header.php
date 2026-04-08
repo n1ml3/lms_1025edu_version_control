@@ -6,9 +6,9 @@
 $pageTitle = $pageTitle ?? 'DASHBOARD';
 
 // Retrieve settings or session data
-$adminVars = isset($_SESSION['admin']) ? $_SESSION['admin'] : [];
-$adminName = $adminVars['name'] ?? 'HVG Admin';
-$adminRole = $adminVars['role'] ?? 'Admin';
+$adminVars = $_SESSION['admin'] ?? [];
+$adminName = $adminVars['name'] ?? ($_SESSION['admin_name'] ?? 'HVG Admin');
+$adminRole = $adminVars['role_name'] ?? ($_SESSION['admin_role_name'] ?? 'Admin');
 
 // Calculate base URL dynamically to prevent CSS / JS 404s
 $baseUrl = '/admin';

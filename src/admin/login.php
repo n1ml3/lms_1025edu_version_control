@@ -24,9 +24,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $admin = $stmt->fetch();
 
         if ($admin && password_verify($password, $admin['password_hash'])) {
+            $_SESSION['admin'] = [
+                'id'      => $admin['id'],
+                'name'    => $admin['name'],
+                'role_id' => $admin['role_id']
+            ];
+            
+            // Backward compatibility
             $_SESSION['admin_id']   = $admin['id'];
             $_SESSION['admin_name'] = $admin['name'];
             $_SESSION['admin_role'] = $admin['role_id'];
+
             header('Location: /admin/index.php');
             exit;
         }

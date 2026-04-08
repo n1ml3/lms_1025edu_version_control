@@ -15,21 +15,32 @@ if (!isset($_SESSION['admin_id'])) {
 }
 
 // Convenience variables available to all pages
-$adminId     = $_SESSION['admin_id'];
-$adminName   = $_SESSION['admin_name'] ?? 'Admin';
-$adminRoleId = $_SESSION['admin_role'] ?? 0;
+$adminId     = $_SESSION['admin_id'] ?? ($_SESSION['admin']['id'] ?? 0);
+$adminName   = $_SESSION['admin_name'] ?? ($_SESSION['admin']['name'] ?? 'Admin');
+$adminRoleId = $_SESSION['admin_role'] ?? ($_SESSION['admin']['role_id'] ?? 0);
+
+// Ensure the new structure is populated if it's missing
+if (!isset($_SESSION['admin'])) {
+    $_SESSION['admin'] = [
+        'id'      => $adminId,
+        'name'    => $adminName,
+        'role_id' => $adminRoleId
+    ];
+}
 
 /**
- * Lazy load permissions into session if not exists
+ * Lazy load permissions and role details into session if not exists
  */
-if (!isset($_SESSION['permissions'])) {
+if (!isset($_SESSION['permissions']) || !isset($_SESSION['admin']['role_name'])) {
     require_once __DIR__ . '/../../config/db.php';
-    $stmt = $pdo->prepare("SELECT permissions FROM roles WHERE id = ?");
+    $stmt = $pdo->prepare("SELECT name, permissions FROM roles WHERE id = ?");
     $stmt->execute([$adminRoleId]);
     $role = $stmt->fetch();
     if ($role) {
+        $_SESSION['admin']['role_name'] = $role['name'];
         $_SESSION['permissions'] = json_decode($role['permissions'] ?: '[]', true);
     } else {
+        $_SESSION['admin']['role_name'] = 'Admin';
         $_SESSION['permissions'] = [];
     }
 }

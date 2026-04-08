@@ -30,6 +30,9 @@ try {
             
             // Cập nhật session
             $_SESSION['admin_name'] = $name;
+            if (isset($_SESSION['admin'])) {
+                $_SESSION['admin']['name'] = $name;
+            }
 
             echo json_encode(['success' => true]);
             break;
